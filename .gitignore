@@ -227,6 +227,9 @@ benchmark/challenge/v1/.secrets/
 benchmark/challenge/v1/sealed/
 benchmark/challenge/v1/scratch/
 
+# Local web-research caches
+.firecrawl/
+
 # Visualizer
 viz-web/node_modules/
 viz-web/dist/

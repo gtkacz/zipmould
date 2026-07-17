@@ -1,10 +1,12 @@
-.PHONY: help be fe dev install dev-stop paper-verify paper-smoke paper-run paper-analyze
+.PHONY: help be fe dev install dev-stop paper paper-verify paper-smoke paper-run paper-analyze paper-reproduce paper-figures paper-build paper-check
 
 SHELL := /bin/bash
 BACKEND_HOST ?= 127.0.0.1
 BACKEND_PORT ?= 8000
 FRONTEND_PORT ?= 5173
 PYTHON ?= .venv/bin/python
+TYPST ?= typst
+PAPER_ANALYSIS_OUT ?= /tmp/zipmould-confirmatory-analysis
 
 help:
 	@echo "Available targets:"
@@ -17,6 +19,8 @@ help:
 	@echo "  make paper-smoke  - Run both confirmatory arms on a tiny public-dev subset"
 	@echo "  make paper-run    - FINAL ONLY: execute the tagged, unlocked confirmatory grid"
 	@echo "  make paper-analyze - Analyze the complete frozen confirmatory result"
+	@echo "  make paper-reproduce - Independently regenerate and compare frozen analysis"
+	@echo "  make paper        - Regenerate, compile, and audit the manuscript package"
 	@echo ""
 	@echo "Environment variables:"
 	@echo "  BACKEND_HOST     - Backend host (default: 127.0.0.1)"
@@ -71,4 +75,21 @@ paper-run:
 	$(PYTHON) -m experiments.challenge_v1.run run
 
 paper-analyze:
-	$(PYTHON) -m experiments.challenge_v1.analyze
+	$(PYTHON) -m experiments.challenge_v1.analyze --results paper/results/challenge-v1/results.parquet --out-dir $(PAPER_ANALYSIS_OUT)
+
+paper-reproduce: paper-analyze
+	cmp paper/results/challenge-v1/report.json $(PAPER_ANALYSIS_OUT)/report.json
+	cmp paper/results/challenge-v1/report.md $(PAPER_ANALYSIS_OUT)/report.md
+	cmp paper/results/challenge-v1/puzzle_effects.parquet $(PAPER_ANALYSIS_OUT)/puzzle_effects.parquet
+	cmp paper/results/challenge-v1/primary_bootstrap.parquet $(PAPER_ANALYSIS_OUT)/primary_bootstrap.parquet
+
+paper-figures:
+	$(PYTHON) paper/scripts/make_figures.py
+
+paper-build: paper-figures
+	$(TYPST) compile paper/main.typ paper/main.pdf
+
+paper-check: paper-build paper-reproduce
+	$(PYTHON) paper/scripts/check_manuscript.py
+
+paper: paper-check

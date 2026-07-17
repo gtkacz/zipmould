@@ -1,0 +1,95 @@
+{
+  "analysis_status": "confirmatory",
+  "by_stratum": [
+    {
+      "delta": 0.008888888888888887,
+      "frozen_solve_rate": 0.37,
+      "frozen_solved": 333,
+      "full_solve_rate": 0.3788888888888889,
+      "full_solved": 341,
+      "puzzles": 30,
+      "stratum": "chambered-deceptive/N12",
+      "trials_per_condition": 900
+    },
+    {
+      "delta": 0.030000000000000002,
+      "frozen_solve_rate": 0.6544444444444444,
+      "frozen_solved": 589,
+      "full_solve_rate": 0.6844444444444445,
+      "full_solved": 616,
+      "puzzles": 30,
+      "stratum": "open-deceptive/N14",
+      "trials_per_condition": 900
+    },
+    {
+      "delta": -0.016666666666666666,
+      "frozen_solve_rate": 0.29555555555555557,
+      "frozen_solved": 266,
+      "full_solve_rate": 0.2788888888888889,
+      "full_solved": 251,
+      "puzzles": 30,
+      "stratum": "open-deceptive/N16",
+      "trials_per_condition": 900
+    },
+    {
+      "delta": 0.027777777777777776,
+      "frozen_solve_rate": 0.7255555555555555,
+      "frozen_solved": 653,
+      "full_solve_rate": 0.7533333333333334,
+      "full_solved": 678,
+      "puzzles": 30,
+      "stratum": "sparse-deceptive/N12",
+      "trials_per_condition": 900
+    },
+    {
+      "delta": 0.01444444444444445,
+      "frozen_solve_rate": 0.15555555555555556,
+      "frozen_solved": 140,
+      "full_solve_rate": 0.16999999999999998,
+      "full_solved": 153,
+      "puzzles": 30,
+      "stratum": "sparse-deceptive/N14",
+      "trials_per_condition": 900
+    }
+  ],
+  "config_hash": "208b2ef3dac411a69b3a9a339262796a",
+  "feedback_frozen": {
+    "solve_rate": 0.44022222222222224,
+    "solved": 1981
+  },
+  "full_feedback": {
+    "solve_rate": 0.45311111111111113,
+    "solved": 2039
+  },
+  "git_sha": "06ef8bbfae5de29fe6cd4ebf0175a94f04880e9b",
+  "paired_seed_outcomes": {
+    "both": 1574,
+    "frozen_only": 407,
+    "full_only": 465,
+    "neither": 2054
+  },
+  "primary": {
+    "bootstrap_replicates": 10000,
+    "bootstrap_seed": 20260716,
+    "bootstrap_unit": "puzzle_within_frozen_stratum",
+    "ci_lower": -0.0004444444444444453,
+    "ci_upper": 0.02644444444444444,
+    "classification": "practically equivalent",
+    "confidence_level": 0.95,
+    "estimand": "mean_p(full_seed_solve_rate - frozen_seed_solve_rate)",
+    "estimate": 0.01288888888888889,
+    "interval_method": "empirical_order_statistic_percentile",
+    "practical_effect": 0.05
+  },
+  "puzzle_effect_direction": {
+    "negative": 45,
+    "positive": 57,
+    "zero": 48
+  },
+  "puzzles": 150,
+  "raw_results_sha256": "a899646ef363ad2fd295e704b35f73b22efeb08ad10ebd5dc6429e1d32b1976a",
+  "seeds_per_puzzle": 30,
+  "study_id": "zipmould-challenge-v1-confirmatory",
+  "trials_per_condition": 4500,
+  "validated_solutions": 4020
+}

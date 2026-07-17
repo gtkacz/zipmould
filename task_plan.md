@@ -4,7 +4,7 @@
 Turn the evidence-honest ZipMould mechanism study into a submission-ready paper: complete the frozen confirmatory experiment from a clean tagged release, analyze and archive its evidence, write the manuscript, and verify the reproducibility package.
 
 ## Current Phase
-Phase 12
+Phase 15
 
 ## Phases
 
@@ -73,28 +73,28 @@ Phase 12
 - **Status:** complete
 
 ### Phase 12: Create and execute the clean confirmatory release
-- [ ] Verify all checks and lock commitments from a clean commit
-- [ ] Commit and tag the exact confirmatory code/configuration before opening test
-- [ ] Unlock once, run all 150 puzzles x 30 seeds x 2 paired conditions, and archive raw outputs
-- **Status:** in_progress
+- [x] Verify all checks and lock commitments from a clean commit
+- [x] Commit and tag the exact confirmatory code/configuration before opening test
+- [x] Unlock once, run all 150 puzzles x 30 seeds x 2 paired conditions, and archive raw outputs
+- **Status:** complete
 
 ### Phase 13: Analyze and package confirmatory evidence
-- [ ] Produce the frozen primary estimate, interval, outcome classification, and stratum summaries
-- [ ] Generate publication tables/figures and an immutable run manifest with checksums
-- [ ] Independently validate result completeness, pairing, solution paths, and report regeneration
-- **Status:** pending
+- [x] Produce the frozen primary estimate, interval, outcome classification, and stratum summaries
+- [x] Generate publication tables/figures and an immutable run manifest with checksums
+- [x] Independently validate result completeness, pairing, solution paths, and report regeneration
+- **Status:** complete
 
 ### Phase 14: Write the journal manuscript
-- [ ] Build a defensible related-work corpus and bibliography from primary sources
-- [ ] Draft the complete paper around the frozen claim and actual confirmatory outcome
-- [ ] Add limitations, threats, data/code availability, figures, tables, and appendices
-- **Status:** pending
+- [x] Build a defensible related-work corpus and bibliography from primary sources
+- [x] Draft the complete paper around the frozen claim and actual confirmatory outcome
+- [x] Add limitations, threats, data/code availability, figures, tables, and appendices
+- **Status:** complete
 
 ### Phase 15: Submission-readiness audit
-- [ ] Build the manuscript and run code, data, citation, figure, and claim consistency checks
+- [x] Build the manuscript and run code, data, citation, figure, and claim consistency checks
 - [ ] Verify a clean-clone reproduction workflow and archive/release instructions
 - [ ] Audit every publication requirement and enumerate only genuinely external submission tasks
-- **Status:** pending
+- **Status:** in_progress
 
 ## Key Questions
 1. Is there a coherent, novel, falsifiable contribution supported by the artifacts?
@@ -139,6 +139,26 @@ Phase 12
 | First full preflight found one stale `SolverConfig` import after hash validation moved into the protocol | 1 | Remove the unused import; tests and lock verification already passed, then rerun full lint/type checks. |
 | `make paper-verify` could not acquire the shared uv cache lock while three other uv checks ran concurrently | 1 | Keep parallelization for independent checks but rerun the Make target sequentially after the other uv processes exit. |
 | Sequential `make paper-verify` hit the same read-only uv cache-lock failure | 2 | Stop retrying uv through Make; make scientific targets invoke the already-synced project `.venv/bin/python`, while dependency installation remains `uv sync`. |
+| First annotated-tag command could not write `.git` inside the filesystem sandbox | 1 | Requested the required scoped escalation and created `challenge-v1-confirmatory-v1` successfully before unlock. |
+| Initial figure generator passed execution/types but Ruff found four long lines and one disallowed print | 1 | Wrap SVG/table construction calls and keep the generator silent on success before regenerating figures. |
+| First line-wrap repair left an unterminated f-string at a LaTeX row terminator | 1 | Replace fragile terminal backslash escaping with a single raw `_LATEX_ROW_END` constant reused by every generated row. |
+| Local image viewer could not process SVG directly, and `rsvg-convert` is unavailable | 1 | Use the installed ImageMagick `magick` command to render temporary PNG previews, leaving SVG as the publication artifact. |
+| A broad `sed` read of the Springer chapter exceeded the useful output/context window | 1 | Switched to targeted `rg` patterns and narrow line ranges; exact authors, venue, volume, pages, year, and DOI were recovered without another broad dump. |
+| Initial method inspection assumed flat `src/zipmould/solver.py` and `_kernel.py` paths | 1 | Located the actual package files with `rg --files` and read `solver/api.py`, `solver/_kernel.py`, `solver/_heuristics.py`, and `solver/state.py`. |
+| Initial benchmark-spec inspection assumed `spec.toml` | 1 | Located and read the authoritative `benchmark/challenge/v1/spec.json`. |
+| An overbroad recursive mechanism search included minified frontend assets and thousands of metric matches | 1 | Restricted subsequent reads to exact source files and narrow line ranges. |
+| TeX and Inkscape executables are absent from the environment | 1 | Check for an already-installed alternative document renderer; otherwise keep portable LaTeX source and make the missing engine an explicit external build prerequisite. |
+| First Typst compile rejected the multi-letter math identifier `pos` and warned that Libertinus Mono was unavailable | 1 | Render the operator as math text and use the installed Nimbus Mono PS face for code. |
+| Second Typst compile treated `softplus` as an undefined math symbol | 1 | Typeset the implementation function name explicitly as math text. |
+| Third Typst compile treated mnemonic heuristic subscripts as undefined multi-letter symbols | 1 | Typeset `man`, `warn`, `art`, and `par` as textual subscripts. |
+| A placeholder-marker scan included `paper/README.md` before that file existed | 1 | Created the paper-package README and reran checks against the complete package. |
+| First manuscript-checker lint found hard-coded result constants and a Unicode-minus warning | 1 | Derive all display tokens from the archived JSON and construct the typographic minus by Unicode name. |
+| Directory-wide Pyright could not resolve Polars for the already-validated figure script | 1 | Keep the existing explicit figure-script validation and type-check the new standard-library manuscript checker independently. |
+| Calibration evidence was first read from a stale scratch-style path | 1 | Located and verified the tracked authoritative `benchmark/challenge/v1/calibration.report.json` (229/500, all five strata informative). |
+| A combined Make/README patch missed the exact evidence-README wording | 1 | Split the build-target changes from the narrow evidence-documentation replacement and apply against current text. |
+| Direct Pyright execution was detached from the uv-managed environment and emitted 512 false missing-import errors | 1 | Run the repository check through `uv run pyright`; it reports 0 errors and the expected 11 third-party typing warnings. |
+| `bun run test` invoked Bun's shell `test` because the frontend script is named `test:unit` | 1 | Run `bun run test:unit --run`; all 13 files and 65 tests pass. |
+| A direct pytest process started concurrently with other full audits stopped progressing after 20 tests | 1 | Terminated the stalled audit process and reran sequentially through `uv run pytest -vv`; all 46 tests passed in 0.61 seconds. |
 
 ## Notes
 - External web content belongs in findings.md, not this file.

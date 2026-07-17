@@ -1,0 +1,40 @@
+{
+  "batch_size": 150,
+  "completed_utc": "2026-07-17T01:25:38.393587+00:00",
+  "config_file_sha256": "2fb750270ee3f2693509e5e67f9e2cb42f28947c44d756128f56ef8ce1693718",
+  "config_hash": "208b2ef3dac411a69b3a9a339262796a",
+  "config_path": "configs/challenge/v1-confirmatory.toml",
+  "cpu_model": "AMD Ryzen 9 9950X3D 16-Core Processor",
+  "elapsed_seconds": 145.00033,
+  "failed_rows": 0,
+  "git_dirty": false,
+  "git_sha": "06ef8bbfae5de29fe6cd4ebf0175a94f04880e9b",
+  "head_tags": [
+    "challenge-v1-confirmatory-v1"
+  ],
+  "logical_cpus": 32,
+  "platform": "Linux-7.1.3-201.fc44.x86_64-x86_64-with-glibc2.43",
+  "protocol_path": "experiments/challenge_v1/protocol.toml",
+  "protocol_sha256": "55c9f27f01b3b3b637657cb6009c348de3f1780f80b4d6259c31ad47fd6dbfa8",
+  "required_tag": "challenge-v1-confirmatory-v1",
+  "results_file_sha256": "a899646ef363ad2fd295e704b35f73b22efeb08ad10ebd5dc6429e1d32b1976a",
+  "results_path": "benchmark/challenge/v1/scratch/confirmatory/results.parquet",
+  "rows": 9000,
+  "sealed_material_required": true,
+  "sealed_material_verified": true,
+  "solved_rows": 4020,
+  "started_utc": "2026-07-17T01:23:13.393257+00:00",
+  "study_id": "zipmould-challenge-v1-confirmatory",
+  "test_corpus_sha256": "3ee368923fa0ae785a7591994b5e1e5fa052d2a8f98113ddf7ed3ac8bb0b0fa4",
+  "test_count": 150,
+  "versions": {
+    "cbor2": "5.9.0",
+    "joblib": "1.5.3",
+    "numba": "0.65.1",
+    "numpy": "2.4.4",
+    "polars": "1.40.1",
+    "pydantic": "2.13.3",
+    "python": "3.13.12"
+  },
+  "workers": -1
+}

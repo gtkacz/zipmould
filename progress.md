@@ -199,7 +199,67 @@
   - Phase 11 is complete: the intervention, release manifest, hardware capture, output/checkpoint schema, exact hashes, bootstrap, decision rule, solution validation, tag gate, tests, and human protocol are frozen before test unlock.
 
 ### Phase 12: Create and execute the clean confirmatory release
-- **Status:** in_progress
+- **Status:** complete
 - Actions taken:
   - Began the pre-commit release audit; no sealed test material has been written or inspected.
   - Confirmed the release diff contains only intended scientific pipeline/docs files, has no whitespace errors, keeps secret/scratch artifacts ignored, and still has no `sealed/` directory.
+  - Committed the frozen pipeline as `06ef8bb` and created annotated tag `challenge-v1-confirmatory-v1`; the first sandboxed tag write failed read-only, and the approved scoped retry succeeded.
+  - Reverified the clean tagged release: 46 tests pass, Ruff passes, Pyright has 0 errors/11 third-party warnings, and the sealed corpus commitment verifies without writing data.
+  - Performed the single acknowledged unlock; the final release verifier matched the unlocked corpus and certificate commitments while Git remained clean.
+  - Executed all 9,000 trials in 145.0 seconds with zero failed rows and raw SHA-256 `a899646e...b1976a`.
+  - Ran the frozen analysis for the first time: full 2,039/4,500 (45.31%), frozen 1,981/4,500 (44.02%), Delta +1.29 percentage points, 95% CI [-0.04, +2.64] points, classification `practically equivalent`.
+  - Independently revalidated every one of the 4,020 archived solution paths during analysis.
+  - Independently regenerated report JSON/Markdown, puzzle effects, and all bootstrap replicates into `/tmp`; every artifact was byte-identical.
+  - Created the versioned post-analysis evidence package under `paper/results/challenge-v1/`, including all raw/derived results, the manifest, post-analysis test corpus/certificates, and the revealed seed.
+  - Verified every packaged byte checksum, the revealed seed against its pre-analysis commitment, and exact equality of the archived raw table/test corpus with their run-time sources.
+  - Phase 12 is complete; the test was opened once and the exact complete evidence is now reproducible outside ignored local state.
+
+### Phase 13: Analyze and package confirmatory evidence
+- **Status:** complete
+- Actions taken:
+  - Completed the frozen primary analysis and evidence validation.
+  - Began publication table/figure generation from the immutable result package.
+  - Added a dependency-free vector figure/LaTeX table generator; first execution succeeded and Pyright passed, while five Ruff presentation issues are being repaired.
+  - A first formatting repair broke one LaTeX row's f-string escaping; switched all generated row endings to a shared raw constant before rerunning.
+  - Figure generation now passes Ruff, execution, and Pyright; generated LaTeX rows were inspected and have correct line terminators.
+  - The local viewer does not accept SVG and `rsvg-convert` is absent, so visual QA will use temporary ImageMagick PNG renderings.
+  - Rendered both SVGs to temporary PNGs for visual inspection; the plots are clear, but the primary figure's right-edge values were clipped, so its canvas/plot width is being corrected.
+  - Widened and rerendered the primary SVG; all interval/stratum labels now fit, and both publication figures passed visual QA.
+  - Generated two booktabs-ready LaTeX tables directly from the frozen JSON report.
+  - Phase 13 is complete: immutable raw/derived evidence, manifest, checksums, reproducibility reveal, tables, figures, and independent regeneration checks are all present.
+
+### Phase 14: Write the journal manuscript
+- **Status:** complete
+- Actions taken:
+  - Began primary-source related-work verification and manuscript drafting around the actual practical-equivalence result.
+  - Loaded the Firecrawl research workflow, confirmed authentication/credits, and inventoried eleven existing related-work search caches to avoid redundant web requests.
+  - Added `.firecrawl/` to `.gitignore` and extracted primary-source leads from the existing discrete, graph, routing, and binary SMA caches; exact metadata still needs targeted verification because several cached URLs are truncated.
+  - Completed targeted searches for the original SMA paper, binary SMA, Hamilton paths in grid graphs, and biological adaptive-network design; result metadata will be checked before citation.
+  - Verified exact SIAM and Science DOI records for grid-graph Hamiltonicity and biological adaptive-network design; original/binary SMA metadata still requires page scraping because search URLs are truncated.
+  - Scraped the original SMA Elsevier page, binary-SMA institutional record, PLOS ONE CVRP paper, and SIAM grid-Hamiltonian record for primary metadata extraction.
+  - Extracted exact original-SMA, binary-SMA, and grid-Hamiltonian citation metadata and the precise scope distinction needed for the novelty statement.
+  - Verified exact PLOS ONE metadata and scope for the prior SMA-to-CVRP application, and located a DOI-resolved SMA/ACO hybrid chapter for metadata follow-up.
+  - Ran targeted metadata searches for original Ant System, Efron's bootstrap paper, Lakens' equivalence-testing primer, and the SMA/ACO chapter; the title-only SMA/ACO query returned no result, so its known DOI/publisher page will be used directly.
+  - Scraped the IEEE Ant System record, DOI-resolved Efron paper, PMC equivalence primer, Springer SMA/ACO chapter, and Science Physarum network paper for exact primary metadata.
+  - Verified exact ACO, bootstrap, practical-equivalence, and Physarum network citation metadata and fixed the manuscript terminology: the predeclared interval-inside-band rule is a practical-equivalence classification, not a formal TOST analysis.
+  - A broad Springer-cache read produced excessive output; replaced it with targeted line extraction and recovered the exact Rong et al. (2021) authors, LNCS volume 12689, pages 322--332, and DOI.
+  - Identified direct earlier Physarum graph/ACO precedents from the publisher record, so the novelty claim will be restricted to this ordered grid-Hamiltonian domain and the precise edge-feedback intervention.
+  - Audited the exact constructor, heuristic, fitness, rank-deposit, decay, restart-noise, and frozen-intervention code paths so the Methods section can use equations that match the implementation rather than the earlier presentation shorthand.
+  - Audited the Challenge v1 generator: planted certificate, endpoint-backbite randomization, deceptive waypoint selection, certificate-preserving wall placement, and the five dev-selected frozen strata.
+  - Found no local TeX engine or Inkscape installation; alternative renderers will be checked before treating PDF compilation as an external prerequisite.
+  - Found Typst 0.14.2 and drafted the complete blinded manuscript plus a standard BibTeX database; the first compile reached a narrow math-identifier/font issue now corrected.
+  - Resolved three small Typst math/font issues; the 4,207-word manuscript now compiles without warnings to a tagged nine-page A4 PDF.
+  - Visually inspected the title/abstract, both result figures and tables, discussion, declarations, and reference page; layout, labels, vector plots, DOI links, and pagination are legible with no clipping.
+  - Added a one-command paper build, a manuscript/evidence consistency checker, package documentation, and a submission handoff that separates completed science from author- and venue-dependent tasks.
+  - `make paper` now also performs an independent reanalysis from the archived raw table, revalidates all 4,020 solutions, and byte-compares both reports, the puzzle-effect table, and all 10,000 bootstrap replicates before auditing manuscript claims.
+  - Phase 14 is complete: the primary-source bibliography, full manuscript, limitations/threats, reproducibility statement, figures, tables, blinded declarations, and compiled PDF are present.
+  - Phase 15 has begun; the manuscript build and code/data/citation/figure/claim consistency checks pass, with full repository and clean-clone audits remaining.
+
+### Phase 15: Submission-readiness audit
+- **Status:** in_progress
+- Actions taken:
+  - Verified the complete one-command paper build, raw evidence checksums, byte-identical independent analysis, 4,020-path revalidation, and post-analysis lock verifier.
+  - Full Ruff passes; `uv run pyright` reports 0 errors and 11 third-party typing warnings; the new manuscript checker independently reports 0 Pyright findings.
+  - Sequential Python verification passes all 46 tests, and frontend verification passes all 65 unit tests across 13 files.
+  - A direct Pyright call lacked the uv environment, the first frontend command used the wrong script name, and a concurrently launched direct pytest process stalled; all three were replaced by isolated canonical commands and passed without source changes.
+  - Reviewed the complete release diff and confirmed that the pre-test tag remains fixed at `06ef8bb`; the next step is a post-analysis publication commit followed by clean-clone reproduction.
