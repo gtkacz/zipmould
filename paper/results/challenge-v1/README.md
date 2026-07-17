@@ -63,6 +63,10 @@ compare every derived artifact byte for byte:
 make paper-reproduce
 ```
 
+In a clean clone, this first verifies and copies the archived post-analysis
+test release into the ignored runtime `sealed/` location expected by the frozen
+analysis. Existing sealed files are never overwritten unless byte-identical.
+
 The same independent regeneration performed at release time produced
 byte-identical report, puzzle-effect, and bootstrap artifacts and revalidated
 all archived solved paths.

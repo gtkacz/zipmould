@@ -159,6 +159,9 @@ Phase 15
 | Direct Pyright execution was detached from the uv-managed environment and emitted 512 false missing-import errors | 1 | Run the repository check through `uv run pyright`; it reports 0 errors and the expected 11 third-party typing warnings. |
 | `bun run test` invoked Bun's shell `test` because the frontend script is named `test:unit` | 1 | Run `bun run test:unit --run`; all 13 files and 65 tests pass. |
 | A direct pytest process started concurrently with other full audits stopped progressing after 20 tests | 1 | Terminated the stalled audit process and reran sequentially through `uv run pytest -vv`; all 46 tests passed in 0.61 seconds. |
+| Local `git clone --local` could not hardlink Git objects across the workspace and `/tmp` filesystems | 1 | Created a fresh temporary target and cloned with `--no-local`, which copied objects successfully. |
+| Clean-clone `uv sync --offline` could not write its cache lock inside the sandbox | 1 | Used the approved scoped unsandboxed `rtk uv sync --offline`; the lockfile environment installed entirely from the local cache. |
+| First clean-clone `make paper` lacked the ignored runtime `sealed/` test paths required by the frozen analyzer | 1 | Add an integrity-checked, non-overwriting restoration step from the versioned post-analysis test release before reanalysis. |
 
 ## Notes
 - External web content belongs in findings.md, not this file.

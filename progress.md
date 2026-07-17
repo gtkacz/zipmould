@@ -263,3 +263,6 @@
   - Sequential Python verification passes all 46 tests, and frontend verification passes all 65 unit tests across 13 files.
   - A direct Pyright call lacked the uv environment, the first frontend command used the wrong script name, and a concurrently launched direct pytest process stalled; all three were replaced by isolated canonical commands and passed without source changes.
   - Reviewed the complete release diff and confirmed that the pre-test tag remains fixed at `06ef8bb`; the next step is a post-analysis publication commit followed by clean-clone reproduction.
+  - Created post-analysis publication commit `9e77e06` while leaving `challenge-v1-confirmatory-v1` fixed at `06ef8bb`.
+  - A no-local `/tmp` clone verified the publication commit and every archived checksum, then installed the exact lockfile environment offline against the clone itself.
+  - The first clone paper build exposed one real packaging gap: frozen analysis expects ignored runtime test files. Added a checksum-verified restoration step that refuses to overwrite differing material and runs before archived reanalysis.

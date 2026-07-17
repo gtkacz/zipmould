@@ -20,18 +20,20 @@ Requirements are the synchronized project virtual environment and Typst
 make paper
 ```
 
-That command regenerates figures/tables from the frozen report, independently
-reanalyzes all raw rows and revalidates every solved path, compares all derived
-artifacts byte for byte, compiles `main.typ` to `main.pdf`, checks every
-archived evidence checksum, and verifies that the manuscript's primary counts,
-interval, classification, citations, and figure paths match the frozen
-artifacts.
+That command verifies and restores the released test files to the ignored
+runtime location, regenerates figures/tables from the frozen report,
+independently reanalyzes all raw rows and revalidates every solved path,
+compares all derived artifacts byte for byte, compiles `main.typ` to
+`main.pdf`, checks every archived evidence checksum, and verifies that the
+manuscript's primary counts, interval, classification, citations, and figure
+paths match the frozen artifacts.
 
 The scientific workflow remains available separately:
 
 ```bash
 make paper-verify
 make paper-smoke
+make paper-restore-test
 make paper-analyze
 make paper-reproduce
 ```

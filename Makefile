@@ -1,4 +1,4 @@
-.PHONY: help be fe dev install dev-stop paper paper-verify paper-smoke paper-run paper-analyze paper-reproduce paper-figures paper-build paper-check
+.PHONY: help be fe dev install dev-stop paper paper-verify paper-smoke paper-run paper-restore-test paper-analyze paper-reproduce paper-figures paper-build paper-check
 
 SHELL := /bin/bash
 BACKEND_HOST ?= 127.0.0.1
@@ -18,6 +18,7 @@ help:
 	@echo "  make paper-verify - Verify frozen Challenge v1 protocol without opening test"
 	@echo "  make paper-smoke  - Run both confirmatory arms on a tiny public-dev subset"
 	@echo "  make paper-run    - FINAL ONLY: execute the tagged, unlocked confirmatory grid"
+	@echo "  make paper-restore-test - Restore released test files to the ignored runtime path"
 	@echo "  make paper-analyze - Analyze the complete frozen confirmatory result"
 	@echo "  make paper-reproduce - Independently regenerate and compare frozen analysis"
 	@echo "  make paper        - Regenerate, compile, and audit the manuscript package"
@@ -74,7 +75,10 @@ paper-smoke:
 paper-run:
 	$(PYTHON) -m experiments.challenge_v1.run run
 
-paper-analyze:
+paper-restore-test:
+	$(PYTHON) paper/scripts/restore_test_release.py
+
+paper-analyze: paper-restore-test
 	$(PYTHON) -m experiments.challenge_v1.analyze --results paper/results/challenge-v1/results.parquet --out-dir $(PAPER_ANALYSIS_OUT)
 
 paper-reproduce: paper-analyze
