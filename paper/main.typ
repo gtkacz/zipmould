@@ -40,8 +40,7 @@
   #text(size: 10pt)[Gabriel Mitelman Tkacz#super("1") #orcid("0009-0004-3619-4561")]
   #v(2pt)
   #text(size: 9pt)[
-    Supervisors: Leandro Augusto da Silva#super("2") #orcid("0000-0002-8671-3102")
-    and Gustavo Scalabrini Sampaio#super("2") #orcid("0000-0003-1150-5584")
+    Leandro Augusto da Silva#super("2") #orcid("0000-0002-8671-3102"), Gustavo Scalabrini Sampaio#super("2") #orcid("0000-0003-1150-5584")
   ]
   #v(3pt)
   #text(size: 8pt)[#super("1") School of Engineering, Mackenzie Presbyterian University, São Paulo, SP, Brazil]
@@ -285,22 +284,20 @@ The outcome does not imply that shared edge memory has no research value. Hetero
 
 *No state-of-the-art comparison.* The mechanism question requires a matched constructor ablation, not a leaderboard. This paper therefore does not establish superiority over exact solvers, constraint programming, specialized ACO, or other tuned metaheuristics. Archived legacy baselines are contextual only and are not used for the confirmatory claim.
 
-= Reproducibility and data availability
+// = Reproducibility and data availability
 
-The software, benchmark specification, public train/development corpus, test commitment, frozen protocol, and analysis are included with the artifact. The pre-test release is Git commit #raw("06ef8bbfae5de29fe6cd4ebf0175a94f04880e9b") and annotated tag #raw("challenge-v1-confirmatory-v1"). The post-analysis evidence directory contains all 9,000 raw rows, 4,020 solved coordinate paths, the exact test corpus and certificates, the revealed seed, 10,000 bootstrap replicates, per-puzzle effects, environment and hardware metadata, and SHA-256 checksums.
+// The software, benchmark specification, public train/development corpus, test commitment, frozen protocol, and analysis are included with the artifact. The pre-test release is Git commit #raw("06ef8bbfae5de29fe6cd4ebf0175a94f04880e9b") and annotated tag #raw("challenge-v1-confirmatory-v1"). The post-analysis evidence directory contains all 9,000 raw rows, 4,020 solved coordinate paths, the exact test corpus and certificates, the revealed seed, 10,000 bootstrap replicates, per-puzzle effects, environment and hardware metadata, and SHA-256 checksums.
 
-The raw result SHA-256 is #raw("a899646ef363ad2fd295e704b35f73b22efeb08ad10ebd5dc6429e1d32b1976a"). Execution used Python 3.13.12, NumPy 2.4.4, Numba 0.65.1, and Polars 1.40.1 on an AMD Ryzen 9 9950X3D system with 32 logical CPUs. The complete 9,000-run grid finished in 145.0 seconds with no failed rows; timing is provenance, not a comparative endpoint.
+// The raw result SHA-256 is #raw("a899646ef363ad2fd295e704b35f73b22efeb08ad10ebd5dc6429e1d32b1976a"). Execution used Python 3.13.12, NumPy 2.4.4, Numba 0.65.1, and Polars 1.40.1 on an AMD Ryzen 9 9950X3D system with 32 logical CPUs. The complete 9,000-run grid finished in 145.0 seconds with no failed rows; timing is provenance, not a comparative endpoint.
 
-From the repository root, #raw("make paper-verify") checks the frozen protocol, #raw("make paper-smoke") exercises both arms on public data, #raw("make paper-analyze") regenerates the analysis, and #raw("make paper-figures") regenerates publication displays. For audit from the paper package alone, #raw("paper/scripts/secondary_analysis.py") re-derives the primary interval from the archived per-puzzle effects, reproducing the frozen 10,000-replicate bootstrap byte for byte, and regenerates the post-hoc descriptive quantities (one-sided tail probability, achieved precision, saturation counts, and the informative-puzzle sensitivity) reported above. The evidence package documents seed reconstruction and byte-level verification. Author-identifying repository and archive URLs are omitted from this blinded manuscript and must be inserted in the camera-ready data-availability statement.
+// From the repository root, #raw("make paper-verify") checks the frozen protocol, #raw("make paper-smoke") exercises both arms on public data, #raw("make paper-analyze") regenerates the analysis, and #raw("make paper-figures") regenerates publication displays. For audit from the paper package alone, #raw("paper/scripts/secondary_analysis.py") re-derives the primary interval from the archived per-puzzle effects, reproducing the frozen 10,000-replicate bootstrap byte for byte, and regenerates the post-hoc descriptive quantities (one-sided tail probability, achieved precision, saturation counts, and the informative-puzzle sensitivity) reported above. The evidence package documents seed reconstruction and byte-level verification. The public repository and archive URLs will be added to the data-availability statement upon public release.
 
 = Conclusion
 
 ZipMould's edge-state feedback was tested against the same stochastic constructor with the update frozen, under a sealed and reproducible Challenge v1 protocol. Full feedback improved average solve probability by 1.29 percentage points, with a 95% puzzle-bootstrap interval from −0.04 to +2.64 points. This interval lies within the predeclared ±5-point band, yielding a practically equivalent classification. The evidence therefore supports a narrow conclusion: for this implementation, benchmark, configuration, and budget, adding adaptive edge feedback produced no practically important average gain over the stateless constructor, even though the point estimate and most strata leaned weakly in its favour. Publishing that result, together with the test commitment, raw paths, and exact analysis, provides a firmer basis for future mechanism design than attributing ceiling performance to a biological metaphor.
 
-= Declarations
+// = Declarations
 
-*Ethics approval:* Not applicable; the study uses synthetic benchmark instances and no human or animal participants.
-
-*Author contributions, funding, competing interests, and acknowledgements:* Withheld or to be completed by the authors before non-blinded submission.
+// *Ethics approval:* Not applicable; the study uses synthetic benchmark instances and no human or animal participants.
 
 #bibliography("references.bib", style: "ieee", title: "References")
