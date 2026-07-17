@@ -1,5 +1,5 @@
 #set document(
-  title: "When Does Edge Feedback Help? A Controlled Study of a Slime-Mould–Inspired Constructor for Ordered Hamiltonian Grid Paths",
+  title: "Does Edge Feedback Help? A Controlled Study of a Slime-Mould–Inspired Constructor for Ordered Hamiltonian Grid Paths",
   author: ("Author(s) withheld for blinded review",),
   keywords: (
     "Hamiltonian path",
@@ -26,7 +26,7 @@
 #show raw: set text(font: "Nimbus Mono PS", size: 8.7pt)
 
 #align(center)[
-  #text(size: 17pt, weight: "bold")[When Does Edge Feedback Help?]
+  #text(size: 17pt, weight: "bold")[Does Edge Feedback Help?]
   #v(2pt)
   #text(size: 13pt, weight: "semibold")[A Controlled Study of a Slime-Mould–Inspired Constructor for Ordered Hamiltonian Grid Paths]
   #v(9pt)
@@ -39,7 +39,7 @@
 
   To avoid the ceiling found in a legacy 245-puzzle corpus, we introduce Challenge v1, a deterministic, guaranteed-solvable benchmark with planted Hamiltonian certificates, deceptive ordered waypoints, and open, sparse-wall, and chambered instances. Generator strata were selected using only feedback-frozen train/development performance. Before opening a cryptographically committed 150-puzzle test set, we froze the configuration, 30 paired seeds per puzzle, a budget of 3,392 constructed paths per run, the analysis code, and a practical-effect band of ±5 percentage points.
 
-  Full feedback solved 2,039/4,500 runs (45.31%); frozen feedback solved 1,981/4,500 (44.02%). The puzzle-clustered mean difference was +1.29 percentage points, with a predeclared 95% stratified puzzle-bootstrap interval of [−0.04, +2.64] points. Because the complete interval lies inside the practical-effect band, the outcome is classified as practically equivalent. The result does not show that feedback is universally useless; it shows that this implemented edge-feedback package produced no practically important average improvement under the frozen benchmark, configuration, and budget. The study contributes a mechanism-isolating design, a leakage-controlled benchmark, and a reproducible negative result.
+  Full feedback solved 2,039 of 4,500 per-condition runs (45.31%); frozen feedback solved 1,981 of 4,500 (44.02%). The puzzle-clustered mean difference was +1.29 percentage points, with a predeclared 95% stratified puzzle-bootstrap interval of [−0.04, +2.64] points; the estimate leans toward feedback and 97% of bootstrap replicates are positive, but the interval nearly touches zero, so any benefit is small and statistically borderline. Because the complete interval lies inside the practical-effect band, the predeclared outcome is practically equivalent. We read the estimate and interval rather than the label alone: the result does not show that feedback is universally useless, nor that it is exactly inert, but that this implemented edge-feedback package produced no practically important average improvement—below the ±5-point band—under the frozen benchmark, configuration, and budget. The study contributes a mechanism-isolating design, a leakage-controlled benchmark, and a reproducible near-null result.
 ]
 
 #text(size: 9pt)[*Keywords:* ordered Hamiltonian path; grid graph; slime mould algorithm; stochastic construction; mechanism ablation; practical equivalence]
@@ -58,7 +58,7 @@ The paper makes three contributions:
 
 + It gives an implementation-faithful description of an edge-state, rank-weighted stochastic constructor for ordered Hamiltonian grid paths and isolates the complete edge-feedback update with a matched frozen-state intervention.
 + It introduces Challenge v1, a synthetic and redistribution-safe benchmark with planted solution certificates, public train/development splits, a committed held-out test split, and explicit leakage controls.
-+ It reports the confirmatory result whether favorable or not. Under 150 puzzles, 30 paired seeds, and 3,392 constructed paths per run, feedback changed average solve probability by +1.29 percentage points (95% interval [−0.04, +2.64]), which is practically equivalent under the predeclared ±5-point band.
++ It reports the confirmatory result whether favorable or not. Under 150 puzzles, 30 paired seeds, and 3,392 constructed paths per run, feedback changed average solve probability by +1.29 percentage points (95% interval [−0.04, +2.64])—a small, statistically borderline positive estimate that is practically equivalent under the predeclared ±5-point band.
 
 The claim is deliberately narrow. We do not claim state-of-the-art solver performance, formal equivalence for every instance family, or that edge feedback cannot help under other configurations or budgets. The contribution is the controlled evidence about this mechanism in the frozen study.
 
@@ -78,7 +78,7 @@ The edge-state sampling rule is also close in spirit to ant-colony optimization 
 
 == Practical equivalence and clustered uncertainty
 
-A non-significant difference does not establish that two methods are meaningfully alike. Equivalence analysis instead requires a smallest effect of interest and evidence that the plausible effect is contained within it @lakens2017equivalence. Our frozen rule is not a formal two-one-sided-test procedure. It is a predeclared practical-equivalence classification: a puzzle-cluster bootstrap interval is compared directly with a ±5 percentage-point band. Bootstrap resampling follows the general nonparametric principle introduced by Efron @efron1979bootstrap, with puzzles—not individual seeds—as the independent units.
+A non-significant difference does not establish that two methods are meaningfully alike. Equivalence analysis instead requires a smallest effect of interest and evidence that the plausible effect is contained within it @lakens2017equivalence. Our frozen rule is not a formal two-one-sided-test procedure. It is a predeclared practical-equivalence classification: a puzzle-cluster bootstrap interval is compared directly with a ±5 percentage-point band. A reader who prefers a size-controlled equivalence test can apply two one-sided tests to the same interval; we report the interval itself so that this remains possible. Bootstrap resampling follows the general nonparametric principle introduced by Efron @efron1979bootstrap, with puzzles—not individual seeds—as the independent units.
 
 = Problem formulation
 
@@ -181,7 +181,7 @@ For puzzle $p$, let $s_F(p)$ and $s_0(p)$ be the proportions of its 30 seeds sol
 
 $ Delta = 1/150 sum_(p=1)^150 (s_F(p) - s_0(p)). $
 
-Uncertainty was computed with 10,000 stratified cluster-bootstrap replicates. Within each of the five frozen strata, 30 puzzles were sampled with replacement; the paired per-puzzle condition difference was retained, and the 150 sampled effects were averaged. The bootstrap used a local SplitMix64 stream with seed 20260716. The 95% endpoints were the prespecified empirical order statistics at indices $floor(0.025B)$ and $ceil(0.975B)-1$ for $B=10,000$.
+Uncertainty was computed with 10,000 stratified cluster-bootstrap replicates. Within each of the five frozen strata, 30 puzzles were sampled with replacement; the paired per-puzzle condition difference was retained, and the 150 sampled effects were averaged. The bootstrap used a local SplitMix64 stream with seed 20260716. The 95% endpoints were the prespecified empirical order statistics at indices $floor(0.025B)$ and $ceil(0.975B)-1$ for $B=10,000$. The bootstrap resamples puzzles and carries each selected puzzle's observed 30-seed difference, so the interval reflects between-puzzle variation—inclusive of the realized within-puzzle seed sampling noise—rather than separately resampling seeds. No formal power or precision target was predeclared; the sample size followed the calibration design of five strata, 30 test puzzles per stratum, and 30 seeds per puzzle. The achieved 95% interval half-width was 1.34 percentage points, comfortably finer than the ±5-point band, so the design proved decisive at this precision; a materially wider interval would instead have fallen under the inconclusive label.
 
 Before test unlock, ±5 percentage points was declared the smallest practically important average effect. The outcome labels were:
 
@@ -198,7 +198,7 @@ Analysis required the exact 150×30×2 grid, without duplicate or failed rows. E
 
 = Results
 
-Full feedback solved 2,039 of 4,500 trials (45.31%), compared with 1,981 of 4,500 (44.02%) for frozen feedback (@tab-primary). The primary mean full-minus-frozen difference was +0.01289, or +1.29 percentage points. Its 95% stratified puzzle-bootstrap interval was [−0.00044,+0.02644], equivalent to [−0.04,+2.64] percentage points (@fig-primary). The entire interval lies inside the predeclared ±5-point practical-effect band; the confirmatory classification is therefore *practically equivalent*.
+Full feedback solved 2,039 of 4,500 trials (45.31%), compared with 1,981 of 4,500 (44.02%) for frozen feedback (@tab-primary). The primary mean full-minus-frozen difference was +0.01289, or +1.29 percentage points. Its 95% stratified puzzle-bootstrap interval was [−0.00044,+0.02644], equivalent to [−0.04,+2.64] percentage points (@fig-primary). The entire interval lies inside the predeclared ±5-point practical-effect band; the confirmatory classification is therefore *practically equivalent*. As a post-hoc description of where the interval sits, 97.1% of the 10,000 bootstrap replicates were positive (one-sided tail probability 0.029 for $Delta <= 0$), so the small positive estimate is statistically borderline rather than clearly nonzero; this characterizes the interval and does not change the predeclared classification.
 
 #figure(
   table(
@@ -216,7 +216,7 @@ Full feedback solved 2,039 of 4,500 trials (45.31%), compared with 1,981 of 4,50
   caption: [Full-minus-frozen solve-probability effects. The overall interval is the prespecified stratified puzzle-bootstrap interval. Stratum intervals are not inferential claims; stratum point estimates are descriptive. The shaded band marks ±5 percentage points.],
 ) <fig-primary>
 
-The five descriptive stratum effects ranged from −1.67 points for open 16×16 to +3.00 points for open 14×14 (@tab-strata). No stratum point estimate crossed either practical boundary. These estimates were not separately powered or multiplicity-adjusted and should not be read as evidence of family-specific benefit.
+The five descriptive stratum effects ranged from −1.67 points for open 16×16 to +3.00 points for open 14×14 (@tab-strata). No stratum point estimate crossed either practical boundary. These estimates were not separately powered or multiplicity-adjusted and should not be read as evidence of family-specific benefit. Descriptively, the larger positive estimates fell in strata with mid-to-high base solve rates (open 14×14 and sparse 12×12, near 0.67 and 0.74), while the hardest strata (open 16×16 and sparse 14×14, near 0.29 and 0.16) showed a small negative and a small positive estimate; this is consistent with feedback helping modestly only where the base constructor has room to improve, but the design is not powered to support such a claim.
 
 #figure(
   table(
@@ -232,7 +232,7 @@ The five descriptive stratum effects ranged from −1.67 points for open 16×16 
   caption: [Predeclared descriptive results by generator stratum. Each row contains 30 puzzles, 30 seeds per puzzle, and 900 trials per condition.],
 ) <tab-strata>
 
-Across the 4,500 paired puzzle-seed combinations, both arms solved 1,574, only full feedback solved 465, only frozen feedback solved 407, and neither solved 2,054. At puzzle level, full feedback had a higher seed solve rate on 57 puzzles, the arms tied on 48, and frozen feedback was higher on 45. The distribution of per-puzzle effects is heterogeneous but centered near zero (@fig-puzzles); the secondary displays do not alter the primary classification.
+Across the 4,500 paired puzzle-seed combinations, both arms solved 1,574, only full feedback solved 465, only frozen feedback solved 407, and neither solved 2,054. At puzzle level, full feedback had a higher seed solve rate on 57 puzzles, the arms tied on 48, and frozen feedback was higher on 45. The distribution of per-puzzle effects is heterogeneous but centered near zero (@fig-puzzles); the secondary displays do not alter the primary classification. Thirty-six of the 150 puzzles were solved identically by both arms on every seed—13 by neither arm and 23 by both—so their per-puzzle difference is necessarily zero and cannot contribute to the estimand; restricting the mean to the remaining 114 puzzles raises the point estimate to +1.70 percentage points, still well inside the practical band. This is a post-hoc descriptive sensitivity, not a redefinition of the primary estimand.
 
 #figure(
   image("figures/challenge-puzzle-effects.svg", width: 100%),
@@ -245,7 +245,7 @@ The controlled result is negative in the scientifically useful sense: the implem
 
 The result clarifies the legacy ceiling. On the original test corpus, the tuned full constructor solved 1,110/1,110 trials, and a post-hoc same-configuration frozen diagnostic also solved 1,110/1,110. Challenge v1 lowered both methods into an informative success regime, yet the average contrast remained small. Together, these observations suggest that the constraint-aware constructor—not its adaptive edge state—is the dominant source of performance in the studied settings.
 
-Several mechanisms could explain the small contrast. First, hard residual-connectivity pruning is powerful: it removes moves that would make Hamiltonian completion impossible. Second, the onward-degree heuristic directly encodes a classic constructive principle, while waypoint legality and parity balance further narrow the choice set. Third, the relatively high edge-replacement probability ($z=0.3879$ independently per edge per update) can disrupt accumulated state as well as diversify it. Finally, 64 iterations may be sufficient for the constructor to sample many useful paths but too short, too long, or otherwise mismatched for stable edge learning. The present intervention intentionally does not decide among these explanations.
+Several mechanisms could explain the small contrast. First, hard residual-connectivity pruning is powerful: it removes moves that would make Hamiltonian completion impossible. Second, the onward-degree heuristic directly encodes a classic constructive principle, while waypoint legality and parity balance further narrow the choice set. Third, the relatively high edge-replacement probability ($z=0.3879$ independently per edge per update) can disrupt accumulated state as well as diversify it. Finally, 64 iterations may be sufficient for the constructor to sample many useful paths but too short, too long, or otherwise mismatched for stable edge learning. The present intervention intentionally does not decide among these explanations. In particular, because $z$ and $tau_max$ were fixed by legacy full-feedback tuning—where they were only weakly identified—and were never optimized for the Challenge contrast, the near-null result cannot separate an intrinsically inert feedback signal from a real but miscalibrated one that a different replacement rate, clip, or iteration cap might render useful. The ablation answers whether this configured update helps, not whether edge feedback can be made to help.
 
 Methodologically, the study illustrates why mechanism ablations should preserve the surrounding algorithm. A separate “heuristic baseline” with a different population or budget cannot identify the effect of feedback. Freezing a zero-initialized state inside the same implementation removes a much narrower component. Likewise, a hard benchmark selected because the proposed method wins can bias the treatment contrast. Challenge v1 used only frozen-arm difficulty for calibration and concealed the confirmatory split until the analysis was immutable.
 
@@ -275,7 +275,7 @@ The software, benchmark specification, public train/development corpus, test com
 
 The raw result SHA-256 is #raw("a899646ef363ad2fd295e704b35f73b22efeb08ad10ebd5dc6429e1d32b1976a"). Execution used Python 3.13.12, NumPy 2.4.4, Numba 0.65.1, and Polars 1.40.1 on an AMD Ryzen 9 9950X3D system with 32 logical CPUs. The complete 9,000-run grid finished in 145.0 seconds with no failed rows; timing is provenance, not a comparative endpoint.
 
-From the repository root, #raw("make paper-verify") checks the frozen protocol, #raw("make paper-smoke") exercises both arms on public data, #raw("make paper-analyze") regenerates the analysis, and #raw("make paper-figures") regenerates publication displays. The evidence package documents seed reconstruction and byte-level verification. Author-identifying repository and archive URLs are omitted from this blinded manuscript and must be inserted in the camera-ready data-availability statement.
+From the repository root, #raw("make paper-verify") checks the frozen protocol, #raw("make paper-smoke") exercises both arms on public data, #raw("make paper-analyze") regenerates the analysis, and #raw("make paper-figures") regenerates publication displays. For audit from the paper package alone, #raw("paper/scripts/secondary_analysis.py") re-derives the primary interval from the archived per-puzzle effects—reproducing the frozen 10,000-replicate bootstrap byte for byte—and regenerates the post-hoc descriptive quantities (one-sided tail probability, achieved precision, saturation counts, and the informative-puzzle sensitivity) reported above. The evidence package documents seed reconstruction and byte-level verification. Author-identifying repository and archive URLs are omitted from this blinded manuscript and must be inserted in the camera-ready data-availability statement.
 
 = Conclusion
 

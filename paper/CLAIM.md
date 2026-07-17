@@ -2,7 +2,7 @@
 
 ## Working title
 
-**When Does Edge Feedback Help? A Controlled Study of a Slime-Mould–Inspired
+**Does Edge Feedback Help? A Controlled Study of a Slime-Mould–Inspired
 Constructor for Ordered Hamiltonian Grid Paths**
 
 ## Honest contribution claim

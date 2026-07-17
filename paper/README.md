@@ -3,7 +3,7 @@
 This directory contains the blinded manuscript and the complete Challenge v1
 evidence package for:
 
-> **When Does Edge Feedback Help? A Controlled Study of a Slime-Mould–Inspired
+> **Does Edge Feedback Help? A Controlled Study of a Slime-Mould–Inspired
 > Constructor for Ordered Hamiltonian Grid Paths**
 
 The confirmatory result is a predeclared **practically equivalent** outcome:
