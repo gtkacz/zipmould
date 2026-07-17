@@ -55,3 +55,15 @@ uv run python benchmark/scripts/challenge.py verify-test-lock
 ```
 
 Do not run `unlock-test` until the final clean confirmatory release is frozen.
+
+The frozen confirmatory workflow is documented in `paper/PROTOCOL.md`. Before
+unlock, exercise both arms only on public dev data:
+
+```bash
+uv run python -m experiments.challenge_v1.run verify
+uv run python -m experiments.challenge_v1.run smoke --workers 2
+```
+
+Final execution is guarded by the exact release tag and the unlocked corpus
+commitments. The final-only commands are exposed through the `paper-run` and
+`paper-analyze` Make targets; do not invoke them during development.

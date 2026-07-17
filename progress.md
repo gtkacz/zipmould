@@ -171,3 +171,35 @@
 | Public corpus identity | Canonical SHA-256 `229e6dca...c803e44` | Pass |
 | Sealed test integrity | 150 puzzles; canonical SHA-256 `3ee36892...b0b0fa4`; no material written | Pass |
 | Leakage boundaries | Secret mode 0600; secret/scratch/sealed paths gitignored; sealed output absent | Pass |
+
+## Session: 2026-07-16 — Confirmatory study and manuscript
+
+### Phase 11: Freeze the confirmatory experiment pipeline
+- **Status:** in_progress
+- Actions taken:
+  - Re-read the scientific planning workflow and restored the complete audit context.
+  - Verified the worktree is clean at commit `8b1a8d1` and contains the benchmark release.
+  - Found no tag at `HEAD` and no Challenge v1 confirmatory runner or predeclared analysis implementation; the sealed test therefore remains unopened.
+  - Expanded the plan through confirmatory execution, evidence packaging, manuscript drafting, and submission audit.
+  - Audited the legacy Stage 4 dispatcher and solver API; confirmed the solver already supports a same-config paired `freeze_pheromone` intervention and records the provenance fields needed by the new runner.
+  - Determined that confirmatory output must stay under the pre-existing ignored scratch boundary during execution so per-run Git provenance remains clean.
+  - Fixed the intervention semantics: paired initial seeds with no claim of synchronized post-intervention RNG streams, because stochastic feedback updates themselves consume randomness.
+  - Added the frozen final config, typed protocol, release verifier, public smoke/final checkpointed runner, solution validator, and predeclared primary analysis.
+  - Release verification confirms config hash `208b2ef3dac411a69b3a9a339262796a`, the expected 150-puzzle lock, and that the current implementation tree is correctly dirty/untagged before release.
+  - Initial targeted static checks exposed eight style findings and 13 strict typing errors at TOML/third-party data boundaries; targeted repairs are in progress before any smoke run.
+  - Reached clean targeted Ruff and zero targeted Pyright errors (one joblib typing warning remains).
+  - The first public smoke dispatch failed before accessing test or executing trials because loky cannot deserialize module-level `lru_cache` wrappers when the runner is launched with `python -m`; the worker boundary will be made explicitly picklable.
+  - Removed the unpicklable cache wrappers; the public-only 8-job smoke grid now completes with both conditions, zero failures, and `test_material_accessed=false`.
+  - Added four regression tests covering protocol drift, frozen RNG/decision behavior, stratified bootstrap behavior, complete paired-grid validation, and independent validation of every archived solved path in a synthetic analysis run; all four pass.
+  - Added the exact release-tag gate and checkpoint provenance validator; the confirmatory regression file now contains five passing tests.
+  - Full preflight reached 46 passing tests and a verified unopened 150-puzzle lock; lint/type checks found only one stale analysis import, now removed.
+  - Full Ruff is clean, Pyright has zero errors (11 dependency/joblib warnings), and `git diff --check` passes; the Make preflight alone collided with concurrent uv cache locking and will be rerun sequentially.
+  - Sequential Make reproduced the uv cache restriction, so scientific Make targets now use the synchronized project virtualenv directly rather than touching the user cache.
+  - Both `make paper-verify` and the 8-job public-only `make paper-smoke` now pass through the documented one-command workflow.
+  - Phase 11 is complete: the intervention, release manifest, hardware capture, output/checkpoint schema, exact hashes, bootstrap, decision rule, solution validation, tag gate, tests, and human protocol are frozen before test unlock.
+
+### Phase 12: Create and execute the clean confirmatory release
+- **Status:** in_progress
+- Actions taken:
+  - Began the pre-commit release audit; no sealed test material has been written or inspected.
+  - Confirmed the release diff contains only intended scientific pipeline/docs files, has no whitespace errors, keeps secret/scratch artifacts ignored, and still has no `sealed/` directory.

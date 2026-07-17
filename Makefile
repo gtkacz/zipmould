@@ -1,9 +1,10 @@
-.PHONY: help be fe dev install dev-stop
+.PHONY: help be fe dev install dev-stop paper-verify paper-smoke paper-run paper-analyze
 
 SHELL := /bin/bash
 BACKEND_HOST ?= 127.0.0.1
 BACKEND_PORT ?= 8000
 FRONTEND_PORT ?= 5173
+PYTHON ?= .venv/bin/python
 
 help:
 	@echo "Available targets:"
@@ -12,6 +13,10 @@ help:
 	@echo "  make dev         - Run both backend and frontend concurrently"
 	@echo "  make dev-stop    - Stop any lingering background processes"
 	@echo "  make install     - Install dependencies for both BE and FE"
+	@echo "  make paper-verify - Verify frozen Challenge v1 protocol without opening test"
+	@echo "  make paper-smoke  - Run both confirmatory arms on a tiny public-dev subset"
+	@echo "  make paper-run    - FINAL ONLY: execute the tagged, unlocked confirmatory grid"
+	@echo "  make paper-analyze - Analyze the complete frozen confirmatory result"
 	@echo ""
 	@echo "Environment variables:"
 	@echo "  BACKEND_HOST     - Backend host (default: 127.0.0.1)"
@@ -55,3 +60,15 @@ install:
 	@echo "✓ Setup complete!"
 	@echo ""
 	@echo "Run 'make dev' to start both backend and frontend"
+
+paper-verify:
+	$(PYTHON) -m experiments.challenge_v1.run verify
+
+paper-smoke:
+	$(PYTHON) -m experiments.challenge_v1.run smoke --workers 2
+
+paper-run:
+	$(PYTHON) -m experiments.challenge_v1.run run
+
+paper-analyze:
+	$(PYTHON) -m experiments.challenge_v1.analyze

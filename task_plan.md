@@ -1,10 +1,10 @@
 # Task Plan: Publication evidence redevelopment
 
 ## Goal
-Freeze an evidence-honest paper claim, implement a provenance-safe hard-instance generator, and create a cryptographically committed test set that remains sealed from tuning.
+Turn the evidence-honest ZipMould mechanism study into a submission-ready paper: complete the frozen confirmatory experiment from a clean tagged release, analyze and archive its evidence, write the manuscript, and verify the reproducibility package.
 
 ## Current Phase
-Phase 10
+Phase 12
 
 ## Phases
 
@@ -66,6 +66,36 @@ Phase 10
 - [x] Document use, forbidden pre-analysis actions, and final study decision rule
 - **Status:** complete
 
+### Phase 11: Freeze the confirmatory experiment pipeline
+- [x] Define the immutable seed schedule, configuration, manifest, hardware capture, and output schema
+- [x] Implement the full-versus-frozen runner and predeclared stratified cluster-bootstrap analysis
+- [x] Add scientific regression tests and a one-command dry-run verification path
+- **Status:** complete
+
+### Phase 12: Create and execute the clean confirmatory release
+- [ ] Verify all checks and lock commitments from a clean commit
+- [ ] Commit and tag the exact confirmatory code/configuration before opening test
+- [ ] Unlock once, run all 150 puzzles x 30 seeds x 2 paired conditions, and archive raw outputs
+- **Status:** in_progress
+
+### Phase 13: Analyze and package confirmatory evidence
+- [ ] Produce the frozen primary estimate, interval, outcome classification, and stratum summaries
+- [ ] Generate publication tables/figures and an immutable run manifest with checksums
+- [ ] Independently validate result completeness, pairing, solution paths, and report regeneration
+- **Status:** pending
+
+### Phase 14: Write the journal manuscript
+- [ ] Build a defensible related-work corpus and bibliography from primary sources
+- [ ] Draft the complete paper around the frozen claim and actual confirmatory outcome
+- [ ] Add limitations, threats, data/code availability, figures, tables, and appendices
+- **Status:** pending
+
+### Phase 15: Submission-readiness audit
+- [ ] Build the manuscript and run code, data, citation, figure, and claim consistency checks
+- [ ] Verify a clean-clone reproduction workflow and archive/release instructions
+- [ ] Audit every publication requirement and enumerate only genuinely external submission tasks
+- **Status:** pending
+
 ## Key Questions
 1. Is there a coherent, novel, falsifiable contribution supported by the artifacts?
 2. Can an independent reviewer reproduce the central results?
@@ -101,7 +131,16 @@ Phase 10
 | The public-certificate regression test introduced one Ruff magic-number finding and three Pyright errors at the JSON boundary | 1 | Added a named corpus-size constant and explicit typed conversion of certificate rows; targeted tests, Ruff, and Pyright then passed. |
 | Final calibration hash check first targeted `report.json`, but the runner names split-specific reports | 1 | Located and verified `calibration64-selected/dev_report.json`; its SHA-256 matches the documented `aa427108...7fe2` anchor. |
 | An `rg` completion search parsed the leading-dash pattern as an option | 1 | Re-ran with the `--` option terminator and confirmed only the final audit checkbox remained. |
+| Initial architecture inspection targeted nonexistent `experiments/common.py` | 1 | Use the self-contained Stage 4 dispatcher and the actual solver/IO modules as references for the new Challenge v1 pipeline. |
+| First confirmatory static checks found eight Ruff findings and 13 strict-Pyright errors | 1 | Replace untyped TOML scalar conversions with checked helpers, name frozen constants, simplify comprehensions/return annotations, and remove the stale lint suppression before rerunning. |
+| First public smoke run failed because loky could not unpickle `lru_cache` wrappers from a `python -m` `__main__` module | 1 | Remove module-level cache wrappers from serialized worker functions, verify multiprocessing, then optimize with explicitly picklable batch workers if needed. |
+| First regression-test lint run found import ordering and one magic-number assertion | 1 | Apply Ruff's mechanical import organization and replace the literal with a named expected-solution count. |
+| Combined checkpoint/test patch missed the import context after Ruff reorganized it | 1 | Re-read both exact regions and apply the release-resume guard and tag-gate test against current text. |
+| First full preflight found one stale `SolverConfig` import after hash validation moved into the protocol | 1 | Remove the unused import; tests and lock verification already passed, then rerun full lint/type checks. |
+| `make paper-verify` could not acquire the shared uv cache lock while three other uv checks ran concurrently | 1 | Keep parallelization for independent checks but rerun the Make target sequentially after the other uv processes exit. |
+| Sequential `make paper-verify` hit the same read-only uv cache-lock failure | 2 | Stop retrying uv through Make; make scientific targets invoke the already-synced project `.venv/bin/python`, while dependency installation remains `uv sync`. |
 
 ## Notes
 - External web content belongs in findings.md, not this file.
-- The user explicitly authorized development work and changes to gitignored experiment artifacts for Phases 6–10.
+- The user explicitly authorized development work and changes to gitignored experiment artifacts for Phases 6–15.
+- The user reports the prior seed backup/commit/freeze prerequisites are done; current-state checks remain authoritative before test unlock.

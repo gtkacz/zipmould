@@ -7,6 +7,19 @@
 - Decide and record the paper's honest claim before seeing a new confirmatory test result.
 - Create provenance-safe new instances that avoid the current ceiling.
 - Create a locked test set that is fixed and verifiable but unavailable to tuning/evaluation until deliberately unlocked.
+- Complete a clean, tagged, reproducible confirmatory run and use its actual outcome to write a submission-ready mechanism-study manuscript.
+
+## Confirmatory Pipeline Audit
+- Commit `8b1a8d1` is clean and contains the challenge benchmark, but no tag currently points at `HEAD`.
+- No Challenge v1 confirmatory runner or implementation of the frozen stratified cluster bootstrap exists yet, so the locked test must remain sealed while those artifacts are built and tested.
+- The legacy Stage 4 dispatcher is reusable only as a structural reference: it loads the legacy corpus/split implicitly and dispatches unrelated baselines, while Challenge v1 needs an explicit sealed corpus, exactly two paired conditions, immutable seeds `0..29`, result completeness checks, and release-manifest capture.
+- `solve()` already exposes the required `freeze_pheromone` flag and records configuration hash, Git SHA, dirty status, timing, fitness, solution, and iteration count. The final runner can therefore use the identical `SolverConfig` and seed with only the frozen/full flag changed.
+- The project already depends on Polars and joblib, which are sufficient for the raw result table and parallel execution; no new analysis dependency is required for a deterministic NumPy bootstrap.
+- Challenge output must be written under an already-ignored path before confirmatory workers start; otherwise `RunResult.git_dirty` would correctly mark the release dirty merely because the result directory is untracked. The existing `benchmark/challenge/v1/scratch/` boundary is suitable.
+- The final configuration needs its own tracked `v1-confirmatory.toml`; the current file is explicitly labelled a calibration configuration even though its 53 x 64 construction budget is the frozen study budget.
+- RNG pairing will mean identical puzzle, solver configuration, global seed, and run seed. It is not a common-random-number design after the intervention: full feedback executes stochastic edge updates while the frozen condition does not, so subsequent RNG consumption may diverge. This is part of the defined algorithmic intervention and must be disclosed.
+- A valid raw result needs enough information for later independent checks: complete 150 x 30 x 2 pairing, condition/freeze flag, family/size stratum, config hash, Git SHA/dirty flag, solve outcome, path budget/use, iteration/time/fitness, and the returned solution path (or an equally auditable encoding).
+- The pre-commit release audit shows only the intended protocol/config/runner/analysis/tests/docs/planning files as non-ignored changes. The seed and smoke output remain ignored, and `benchmark/challenge/v1/sealed/` is still absent.
 
 ## Frozen Claim
 - **Contribution claim:** ZipMould introduces and openly evaluates an edge-state, rank-weighted feedback operator for stochastic construction of ordered Hamiltonian grid paths; the contribution is the controlled mechanism study and reproducible benchmark, not an a priori assertion of superiority.
