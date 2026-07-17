@@ -1,0 +1,14 @@
+{
+  "certificate_sha256": "ac78aeaa78b0a72a20ef588fe17155bd438a8302b6c536a71521bcd462667c81",
+  "corpus_sha256": "229e6dca5b52cec2594fcbc5d8ddf6ca0ae1883c6eef21e9f9e735c74c803e44",
+  "counts": {
+    "dev": 100,
+    "test": "sealed",
+    "train": 200
+  },
+  "format_version": 1,
+  "generator_version": "zipmould-challenge-v1",
+  "metrics_sha256": "3906404def6cadbcda2689c5dfa4cd97149f8fc178d86912eab84f8db70f5294",
+  "spec_sha256": "4eeeb31dc8b1ed13dbe8fd1e2fd3e04a3adeeef7bbe7040f687cd27e4db030a4",
+  "test_lock": "../test.lock.json"
+}

@@ -1,0 +1,74 @@
+{
+  "by_condition": [
+    {
+      "condition": "feedback-frozen",
+      "median_iters": 61.0,
+      "median_wall_ms": 379.2366894958832,
+      "n": 500,
+      "solve_rate": 0.458,
+      "solved": 229
+    }
+  ],
+  "by_family_size": [
+    {
+      "N": 12,
+      "condition": "feedback-frozen",
+      "family": "chambered-deceptive",
+      "median_iters": 61.0,
+      "n": 100,
+      "solve_rate": 0.39,
+      "solved": 39
+    },
+    {
+      "N": 14,
+      "condition": "feedback-frozen",
+      "family": "open-deceptive",
+      "median_iters": 23.5,
+      "n": 100,
+      "solve_rate": 0.74,
+      "solved": 74
+    },
+    {
+      "N": 16,
+      "condition": "feedback-frozen",
+      "family": "open-deceptive",
+      "median_iters": 61.0,
+      "n": 100,
+      "solve_rate": 0.23,
+      "solved": 23
+    },
+    {
+      "N": 12,
+      "condition": "feedback-frozen",
+      "family": "sparse-deceptive",
+      "median_iters": 15.5,
+      "n": 100,
+      "solve_rate": 0.78,
+      "solved": 78
+    },
+    {
+      "N": 14,
+      "condition": "feedback-frozen",
+      "family": "sparse-deceptive",
+      "median_iters": 61.0,
+      "n": 100,
+      "solve_rate": 0.15,
+      "solved": 15
+    }
+  ],
+  "difficulty_target_met": true,
+  "feedback_frozen_solve_rate": 0.458,
+  "informative_strata": 5,
+  "informative_strata_fraction": 1.0,
+  "required_informative_strata_fraction": 0.8,
+  "selection_guard": "generator difficulty may use feedback-frozen rates only; never full-minus-frozen effect",
+  "target_feedback_frozen_solve_rate": [
+    0.15,
+    0.85
+  ],
+  "target_feedback_frozen_stratum_solve_rate": [
+    0.15,
+    0.85
+  ],
+  "total_strata": 5
+}

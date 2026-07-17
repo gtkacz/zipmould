@@ -1,0 +1,28 @@
+{
+  "certificate_sha256": "5cbfd756cbf63c67267a156ade1b78267d2ec6135ed7be4628302e8bfb0dc293",
+  "corpus_sha256": "3ee368923fa0ae785a7591994b5e1e5fa052d2a8f98113ddf7ed3ac8bb0b0fa4",
+  "family_counts": {
+    "chambered-deceptive": 30,
+    "open-deceptive": 60,
+    "sparse-deceptive": 60
+  },
+  "format_version": 1,
+  "generator_version": "zipmould-challenge-v1",
+  "sealed": true,
+  "seed_commitment_sha256": "96863e761391a8198d4f3f2ab7a6f7a52f1ce4d85d123d094e1cba101b10f494",
+  "size_counts": {
+    "12": 60,
+    "14": 60,
+    "16": 30
+  },
+  "spec_sha256": "4eeeb31dc8b1ed13dbe8fd1e2fd3e04a3adeeef7bbe7040f687cd27e4db030a4",
+  "stratum_counts": {
+    "chambered-deceptive/N12": 30,
+    "open-deceptive/N14": 30,
+    "open-deceptive/N16": 30,
+    "sparse-deceptive/N12": 30,
+    "sparse-deceptive/N14": 30
+  },
+  "test_count": 150,
+  "unlock_policy": "final-analysis-only"
+}

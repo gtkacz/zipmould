@@ -31,3 +31,27 @@ uv run zipmould viz serve
 
 See `docs/superpowers/specs/2026-04-26-solver-visualizer-design.md` for
 the full design.
+
+## Research benchmark
+
+The publication study uses the fully synthetic, guaranteed-solvable
+`Challenge v1` benchmark under `benchmark/challenge/v1/`. Its public corpus has
+200 train and 100 dev puzzles. A further 150-puzzle test set is fixed by
+cryptographic commitments but remains sealed behind a gitignored 256-bit seed.
+
+The frozen paper question is whether edge feedback helps the otherwise
+identical constraint-aware constructor—not whether ZipMould is superior by
+assumption. See:
+
+- `paper/CLAIM.md` for the claim, primary estimand, and interpretation rules;
+- `benchmark/challenge/v1/README.md` for generation and lock handling;
+- `benchmark/challenge/v1/CALIBRATION.md` for the dev-only selection record.
+
+Generate or verify public artifacts with:
+
+```bash
+uv run python benchmark/scripts/challenge.py generate-public
+uv run python benchmark/scripts/challenge.py verify-test-lock
+```
+
+Do not run `unlock-test` until the final clean confirmatory release is frozen.

@@ -23,5 +23,5 @@ def test_pack_removes_walled_edges_from_adjacency() -> None:
 
     left = 0
     right = 1
-    assert right not in set(int(c) for c in state.adjacency[left] if c >= 0)
-    assert left not in set(int(c) for c in state.adjacency[right] if c >= 0)
+    assert right not in {int(c) for c in state.adjacency[left] if c >= 0}
+    assert left not in {int(c) for c in state.adjacency[right] if c >= 0}

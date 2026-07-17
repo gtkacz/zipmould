@@ -437,31 +437,40 @@ $$\eta_{c'} = \mathrm{softplus}(h_m)^{\gamma_m} \cdot \mathrm{softplus}(h_w)^{\g
 
 ---
 
+<!-- _class: dense -->
+
 ## Etapa 2: atualização do feromônio no estilo SMA
 
 ```python
 progress = float(t) / float(I_max)
-v_b = math.tanh(1.0 - progress)        # inspirado em Li, LIMITADO (cf. arctanh)
-v_c = 1.0 - progress                   # Li 2.4 literal
+v_b = math.tanh(1.0 - progress)        # adaptação limitada de Li
+v_c = 1.0 - progress                   # decaimento linear
 
-# Pesos assinados por ordenação ∈ [-1, +1]: melhor agente = +1, pior = −1, mediana ≈ 0
-denom = float(N - 1)
-weights[i] = (float(N) - 2.0 * float(r) + 1.0) / denom
+# ranking r = 1..n: melhor = +1, pior = -1, mediana ~= 0
+w_i = (float(n) - 2.0 * float(r) + 1.0) / float(n - 1)
+deposit[s, e] += w_i
 
-# Atualização por aresta, análogo da Eq. (2.7) de Li
-new_val = v_c * tau[s, e] + v_b * deposit[s, e]
+new_val = v_c * tau[s, e] + v_b * deposit[s, e]  # por aresta
 
-# ζ-branch ANÁLOGA (não literal): aplicada ao FEROMÔNIO,
-# não à posição do agente como em Li
+# ζ-branch análoga: ruído no feromônio, não restart do agente
 if zeta > 0.0 and np.random.random() < zeta:
     new_val = np.random.normal(0.0, tau_max / 4.0)
 ```
 
 <div class="ribbon">
 
-O peso **assinado** por *ranking* é o análogo discreto do $W$ de Li: *walkers* da metade superior *depositam* feromônio; os da metade inferior *evaporam* nas mesmas arestas.
+$$
+\tau_{\text{novo}} = v_c \cdot \tau_{\text{atual}} + v_b \cdot \text{deposit},
+\quad
+v_b = \tanh(1 - \frac{t}{I_{\max}}), \quad v_c = 1 - \frac{t}{I_{\max}}
+$$
 
 </div>
+
+- Li usa $v_b \sim \mathcal{U}(-a,a)$, $a=\mathrm{arctanh}(1-\frac{t}{I_{\max}})$: em $t=0$, $a \to \infty$.
+- Aqui $v_b \in [0,\tanh 1]$: saturado por escolha consciente, estável para depósitos discretos.
+- $\text{deposit}$ soma os pesos dos *walkers* que usaram a aresta; metade superior deposita, metade inferior evapora.
+- O peso é linear, não logarítmico como Li: $w_i = (n - 2r + 1)/(n-1)$, análogo direto do $W$.
 <!-- 
 <p class="citation">ZipMould adota $\zeta = 0.05$ por <em>default</em> (<code>config.py</code>); Li recomenda $\zeta = 0.03$ a partir do <em>sweep</em> §3.4 sobre $F_1$–$F_{13}$ contínuos. A diferença é uma escolha experimental para o domínio discreto, não uma transcrição.</p> -->
 

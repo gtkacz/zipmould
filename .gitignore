@@ -222,6 +222,11 @@ experiments/stage4/out/results.parquet
 experiments/stage4/out/aggregate.parquet
 experiments/stage4/out/traces/
 
+# Challenge-v1 sealed-test secrets and local calibration outputs
+benchmark/challenge/v1/.secrets/
+benchmark/challenge/v1/sealed/
+benchmark/challenge/v1/scratch/
+
 # Visualizer
 viz-web/node_modules/
 viz-web/dist/
