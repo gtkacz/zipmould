@@ -17,8 +17,14 @@ Requirements are the synchronized project virtual environment and Typst
 0.14.2 or compatible.
 
 ```bash
+uv sync
 make paper
 ```
+
+Use `uv sync --extra viz` when also running the complete repository test and
+type-check suites. The PDF creation timestamp is fixed to the archived run's
+completion second, so rebuilding with the same Typst/font environment is
+byte-reproducible rather than dirtying a clean clone with metadata-only drift.
 
 That command verifies and restores the released test files to the ignored
 runtime location, regenerates figures/tables from the frozen report,

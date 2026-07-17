@@ -6,6 +6,7 @@ BACKEND_PORT ?= 8000
 FRONTEND_PORT ?= 5173
 PYTHON ?= .venv/bin/python
 TYPST ?= typst
+TYPST_CREATION_TIMESTAMP ?= 1784251538
 PAPER_ANALYSIS_OUT ?= /tmp/zipmould-confirmatory-analysis
 
 help:
@@ -59,7 +60,7 @@ dev-stop:
 # Install dependencies for both backend and frontend
 install:
 	@echo "Installing backend dependencies..."
-	uv sync
+	uv sync --extra viz
 	@echo "Installing frontend dependencies..."
 	cd viz-web && bun install
 	@echo "✓ Setup complete!"
@@ -91,7 +92,7 @@ paper-figures:
 	$(PYTHON) paper/scripts/make_figures.py
 
 paper-build: paper-figures
-	$(TYPST) compile paper/main.typ paper/main.pdf
+	$(TYPST) compile --creation-timestamp $(TYPST_CREATION_TIMESTAMP) paper/main.typ paper/main.pdf
 
 paper-check: paper-build paper-reproduce
 	$(PYTHON) paper/scripts/check_manuscript.py

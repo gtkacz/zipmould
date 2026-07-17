@@ -266,3 +266,5 @@
   - Created post-analysis publication commit `9e77e06` while leaving `challenge-v1-confirmatory-v1` fixed at `06ef8bb`.
   - A no-local `/tmp` clone verified the publication commit and every archived checksum, then installed the exact lockfile environment offline against the clone itself.
   - The first clone paper build exposed one real packaging gap: frozen analysis expects ignored runtime test files. Added a checksum-verified restoration step that refuses to overwrite differing material and runs before archived reanalysis.
+  - After restoring test material, the clean-clone `make paper` audit passes. Installing the lockfile's `viz` extra also yields 46 passing tests and Pyright 0 errors/11 third-party warnings in the clone.
+  - Fixed the Typst creation timestamp to the archived run-completion second and corrected `make install` to include the visualizer extra, eliminating metadata-only PDF drift and missing optional dependencies in full clean-clone validation.

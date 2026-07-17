@@ -162,6 +162,8 @@ Phase 15
 | Local `git clone --local` could not hardlink Git objects across the workspace and `/tmp` filesystems | 1 | Created a fresh temporary target and cloned with `--no-local`, which copied objects successfully. |
 | Clean-clone `uv sync --offline` could not write its cache lock inside the sandbox | 1 | Used the approved scoped unsandboxed `rtk uv sync --offline`; the lockfile environment installed entirely from the local cache. |
 | First clean-clone `make paper` lacked the ignored runtime `sealed/` test paths required by the frozen analyzer | 1 | Add an integrity-checked, non-overwriting restoration step from the versioned post-analysis test release before reanalysis. |
+| Base `uv sync` omits the optional FastAPI/uvicorn visualizer dependencies needed by the full repository tests and Pyright | 1 | Document and use `uv sync --extra viz` for whole-repository validation; the paper build itself remains valid with the base locked environment. |
+| Recompiling the tracked PDF changed only its automatic creation timestamp | 1 | Pass Typst the archived run-completion UNIX timestamp, making PDF generation byte-reproducible in the same font/tool environment. |
 
 ## Notes
 - External web content belongs in findings.md, not this file.
