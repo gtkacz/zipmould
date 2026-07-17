@@ -29,7 +29,7 @@
 #show link: set text(fill: rgb("245a7a"))
 #show raw: set text(font: "Nimbus Mono PS", size: 8.7pt)
 #let orcid(id) = link("https://orcid.org/" + id)[
-  #image("orcid.svg", height: 1.1em)
+  #box(image("orcid.svg", height: 0.9em))
 ]
 
 #align(center)[
@@ -37,12 +37,16 @@
   #v(2pt)
   #text(size: 13pt, weight: "semibold")[A Controlled Study of a Slime-Mould–Inspired Constructor for Ordered Hamiltonian Grid Paths]
   #v(9pt)
-  #text(size: 10pt)[Gabriel Mitelman Tkacz #orcid("0009-0004-3619-4561")]
+  #text(size: 10pt)[Gabriel Mitelman Tkacz#super("1") #orcid("0009-0004-3619-4561")]
   #v(2pt)
   #text(size: 9pt)[
-    Supervisors: Leandro Augusto da Silva #orcid("0000-0002-8671-3102")
-    and Gustavo Scalabrini Sampaio #orcid("0000-0003-1150-5584")
+    Supervisors: Leandro Augusto da Silva#super("2") #orcid("0000-0002-8671-3102")
+    and Gustavo Scalabrini Sampaio#super("2") #orcid("0000-0003-1150-5584")
   ]
+  #v(3pt)
+  #text(size: 8pt)[#super("1") School of Engineering, Mackenzie Presbyterian University, São Paulo, SP, Brazil]
+  #v(1pt)
+  #text(size: 8pt)[#super("2") Faculty of Computing and Informatics, Mackenzie Presbyterian University, São Paulo, SP, Brazil]
 ]
 
 #v(8pt)
