@@ -27,6 +27,7 @@
 #set table(inset: 4pt, stroke: (x: none, y: 0.35pt + luma(190)))
 #show table.cell.where(y: 0): set text(weight: "bold")
 #show link: set text(fill: rgb("245a7a"))
+#show cite: set text(fill: rgb("245a7a"))
 #show raw: set text(font: "Nimbus Mono PS", size: 8.7pt)
 #let orcid(id) = link("https://orcid.org/" + id)[
   #box(image("orcid.svg", height: 0.9em))
