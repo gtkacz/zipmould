@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 72 72" role="img" aria-label="ORCID">
+  <circle cx="36" cy="36" r="36" fill="#a6ce39"/>
+  <circle cx="22" cy="20" r="4.5" fill="#fff"/>
+  <path fill="#fff" d="M17.5 28h9v26h-9zm15 0h8.5c9 0 14 5.1 14 13s-5 13-14 13H32.5zm8.2 7.5v11H41c3.4 0 5.5-2.2 5.5-5.5S44.4 35.5 41 35.5z"/>
+</svg>

@@ -11,7 +11,7 @@ ZipMould introduces an edge-state, rank-weighted feedback operator for
 stochastic construction of ordered Hamiltonian grid paths and evaluates that
 operator against the *identical* constraint-aware constructor with feedback
 frozen. The scientific contribution is the controlled mechanism study, the
-procedural benchmark, and the reproducible evidence—not an advance assertion
+procedural benchmark, and the reproducible evidence, not an advance assertion
 that the feedback operator is superior.
 
 The original 245-puzzle corpus is reported as a ceiling regime: after tuning,
