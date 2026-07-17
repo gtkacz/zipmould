@@ -146,6 +146,12 @@
 |----------|-----------|
 | Treat build success as necessary but not sufficient | Executable artifacts do not by themselves establish scientific validity or novelty. |
 
+## Updated Publication Verdict After Confirmatory Study
+- The earlier “not submission-ready” verdict below is superseded. The causal evidence gap, ceiling benchmark, missing raw data, dirty-run provenance, absent manuscript, and missing reproduction path were addressed in Phases 6--15.
+- The repository now contains a defensible journal-neutral research manuscript and complete reproducibility package. The claim is a controlled negative mechanism result, not algorithmic superiority: +1.29 percentage points with 95% interval [-0.04,+2.64], classified practically equivalent inside the predeclared +/-5-point band.
+- A fresh no-local clone can install the exact locked environment offline, regenerate the paper, restore only checksum-matching released test material, revalidate 4,020 paths, reproduce every derived artifact byte for byte, and remain Git-clean.
+- The work is ready for author/venue adaptation. It is not literally uploadable until the authors choose a journal, supply identity and legal declarations, select data/code licenses, create a durable archive DOI, and apply the venue's current template and portal requirements.
+
 ## Initial Publication Verdict (superseded after Phases 6--15)
 - **Not submission-ready as a research paper, even for a small reputable journal.** This is not mainly a writing problem: the current benchmark and ablations do not support the SMA-specific performance claim.
 - **Promising paper foundation:** the implementation, corpus, experiment scaffolding, visualizer, and initial replicated runs are substantial. With major experimental redevelopment and a manuscript, a modest applied algorithms/optimization venue is plausible.

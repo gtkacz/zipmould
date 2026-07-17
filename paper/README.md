@@ -62,3 +62,5 @@ trials.
 The pre-test release is commit
 `06ef8bbfae5de29fe6cd4ebf0175a94f04880e9b`, tagged
 `challenge-v1-confirmatory-v1`. Do not move that tag to a post-analysis commit.
+The audited post-analysis manuscript/evidence package is tagged separately as
+`challenge-v1-paper-v1`.

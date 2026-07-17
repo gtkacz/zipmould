@@ -4,7 +4,7 @@
 Turn the evidence-honest ZipMould mechanism study into a submission-ready paper: complete the frozen confirmatory experiment from a clean tagged release, analyze and archive its evidence, write the manuscript, and verify the reproducibility package.
 
 ## Current Phase
-Phase 15
+Complete
 
 ## Phases
 
@@ -92,9 +92,9 @@ Phase 15
 
 ### Phase 15: Submission-readiness audit
 - [x] Build the manuscript and run code, data, citation, figure, and claim consistency checks
-- [ ] Verify a clean-clone reproduction workflow and archive/release instructions
-- [ ] Audit every publication requirement and enumerate only genuinely external submission tasks
-- **Status:** in_progress
+- [x] Verify a clean-clone reproduction workflow and archive/release instructions
+- [x] Audit every publication requirement and enumerate only genuinely external submission tasks
+- **Status:** complete
 
 ## Key Questions
 1. Is there a coherent, novel, falsifiable contribution supported by the artifacts?

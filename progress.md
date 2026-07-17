@@ -256,7 +256,7 @@
   - Phase 15 has begun; the manuscript build and code/data/citation/figure/claim consistency checks pass, with full repository and clean-clone audits remaining.
 
 ### Phase 15: Submission-readiness audit
-- **Status:** in_progress
+- **Status:** complete
 - Actions taken:
   - Verified the complete one-command paper build, raw evidence checksums, byte-identical independent analysis, 4,020-path revalidation, and post-analysis lock verifier.
   - Full Ruff passes; `uv run pyright` reports 0 errors and 11 third-party typing warnings; the new manuscript checker independently reports 0 Pyright findings.
@@ -268,3 +268,6 @@
   - The first clone paper build exposed one real packaging gap: frozen analysis expects ignored runtime test files. Added a checksum-verified restoration step that refuses to overwrite differing material and runs before archived reanalysis.
   - After restoring test material, the clean-clone `make paper` audit passes. Installing the lockfile's `viz` extra also yields 46 passing tests and Pyright 0 errors/11 third-party warnings in the clone.
   - Fixed the Typst creation timestamp to the archived run-completion second and corrected `make install` to include the visualizer extra, eliminating metadata-only PDF drift and missing optional dependencies in full clean-clone validation.
+  - Final audit clone at publication commit `a95f6ae` installed the locked environment with the visualizer extra entirely from cache, ran `make paper`, and remained Git-clean after the build.
+  - The same fresh clone passed 46 Python tests, full Ruff, and Pyright with 0 errors/11 third-party warnings; the rebuilt tagged nine-page PDF has stable SHA-256 `59787d05...b59f9`.
+  - Phase 15 is complete. All scientific, manuscript, artifact, and local release work is done; only author identity/declarations, venue-template selection, archive DOI/license decisions, and submission-portal materials remain external.

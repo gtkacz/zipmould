@@ -30,3 +30,7 @@
 
 These tasks depend on author identity, legal declarations, archive ownership,
 or a venue decision. They must not be guessed inside the blinded manuscript.
+
+The locally audited publication package is marked by tag
+`challenge-v1-paper-v1`; the pre-analysis confirmatory tag remains separate and
+unchanged.
