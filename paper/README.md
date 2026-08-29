@@ -1,6 +1,6 @@
 # Paper package
 
-This directory contains the blinded manuscript and the complete Challenge v1
+This directory contains the manuscript and the complete Challenge v1
 evidence package for:
 
 > **Does Edge Feedback Help? A Controlled Study of a Slime-Mould–Inspired
@@ -50,7 +50,7 @@ trials.
 
 ## Important files
 
-- `main.typ` / `main.pdf`: blinded manuscript source and compiled PDF;
+- `main.typ` / `main.pdf`: manuscript source and compiled PDF;
 - `references.bib`: standard BibTeX bibliography;
 - `CLAIM.md`: frozen contribution and prohibited overclaims;
 - `PROTOCOL.md`: human-readable confirmatory protocol;

@@ -1,5 +1,31 @@
 # Progress Log
 
+## Session: 2026-07-22 — Reader-oriented paper summary
+- **Status:** complete
+- Loaded the workspace instructions, ARS paper-analysis guidance, and the prior project history.
+- Added Phase 17 for a fresh, read-only summary of the current `paper/` package.
+- Read the complete manuscript, frozen claim/protocol, package documentation, results report, run manifest, secondary analysis, bibliography outline, and both figures.
+- Cross-checked headline claims against the evidence artifacts and verified all archived checksums.
+- Prepared a plain-language summary that separates the paper's evidence, interpretation, and stated limitations.
+
+
+## Session: 2026-07-20 — Supervisor-review and provenance audit
+
+### Phase 16: Supervisor-review and provenance audit
+- **Status:** complete
+- Actions taken:
+  - Restored the completed publication-development context and started a fresh current-state audit rather than relying on the previous readiness conclusion.
+  - Scoped the review to the current `paper/` package, reproducibility evidence, dataset provenance, and the wording of the Challenge v1 inspiration statement.
+  - Verified the live worktree and inventoried the full paper package; no pre-existing manuscript edits are present in the working tree.
+  - Ran the complete `make paper` audit successfully; it reproduced the scientific artifacts and compiled a 10-page PDF, while exposing that the tracked PDF was not byte-identical after the documented rebuild.
+  - Re-ran the Python suite (46/46 pass) and repository Ruff; Ruff now reports eight findings in the recently added secondary-analysis script.
+  - Completed the rendered-PDF, code-to-method, statistical-language, bibliography, benchmark-characterization, release/tag, licensing, and current novelty audits.
+  - Identified the legacy clone source as `zip.nmmsoft.com`; verified exact hash-code matches, no public data license/terms, and all 245 records marked non-community.
+  - Verified the appropriate inspiration source is LinkedIn's official Zip help page and separated game inspiration from Challenge v1 dataset provenance.
+  - Captured exact source/PDF locations for every material readiness finding so the final handoff can distinguish evidence from recommendations.
+  - Restored the audit-generated `paper/main.pdf` modification to its exact pre-audit state after recording the deterministic-build mismatch.
+  - Completed the requirement-by-requirement audit and prepared separate supervisor-review and journal-submission verdicts, plus direct answers and suggested provenance wording for both Zip questions.
+
 ## Session: 2026-07-16
 
 ### Phase 1: Inventory and requirements

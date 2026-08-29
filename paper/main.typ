@@ -2,8 +2,8 @@
   title: "Does Edge Feedback Help? A Controlled Study of a Slime-Mould–Inspired Constructor for Ordered Hamiltonian Grid Paths",
   author: (
     "Gabriel Mitelman Tkacz",
-    "Leandro Augusto da Silva (Supervisor)",
-    "Gustavo Scalabrini Sampaio (Supervisor)",
+    "Leandro Augusto da Silva",
+    "Gustavo Scalabrini Sampaio",
   ),
   keywords: (
     "Hamiltonian path",
@@ -29,6 +29,11 @@
 #show link: set text(fill: rgb("245a7a"))
 #show cite: set text(fill: rgb("245a7a"))
 #show raw: set text(font: "Nimbus Mono PS", size: 8.7pt)
+// Hayagriva strips leading zeros from article-number page fields; restore the
+// two affected article numbers at render time (the bare strings never occur
+// elsewhere in the document, including inside the DOIs).
+#show "e280512": "e0280512"
+#show "p. 51801": "p. 051801"
 #let orcid(id) = link("https://orcid.org/" + id)[
   #box(image("orcid.svg", height: 0.9em))
 ]
@@ -53,9 +58,9 @@
 #block(fill: luma(246), inset: 10pt, radius: 2pt)[
   *Abstract.* Bio-inspired metaheuristics often combine a constructive search policy with a shared adaptive state, making it difficult to identify which component produces observed performance. We study this question for ZipMould, a stochastic constructor for ordered Hamiltonian paths on square grid graphs. Its constraint-aware policy combines waypoint legality, residual-connectivity pruning, onward degree, Manhattan proximity, and checkerboard parity with a nonnegative edge state updated from rank-weighted populations. We compare the complete algorithm with the identical constructor under a single intervention: the edge-state update is frozen at its zero initialization.
 
-  To avoid the ceiling found in a legacy 245-puzzle corpus, we introduce Challenge v1, a deterministic, guaranteed-solvable benchmark with planted Hamiltonian certificates, deceptive ordered waypoints, and open, sparse-wall, and chambered instances. Generator strata were selected using only feedback-frozen train/development performance. Before opening a cryptographically committed 150-puzzle test set, we froze the configuration, 30 paired seeds per puzzle, a budget of 3,392 constructed paths per run, the analysis code, and a practical-effect band of ±5 percentage points.
+  To avoid the ceiling found in a legacy 245-puzzle corpus, we introduce Challenge v1, a deterministic, guaranteed-solvable benchmark with planted Hamiltonian certificates, deceptive ordered waypoints, and open, sparse-wall, and chambered instances. Generator strata were selected using only feedback-frozen development performance. Before opening a cryptographically committed 150-puzzle test set, we froze the configuration, 30 paired seeds per puzzle, a budget of 3,392 constructed paths per run, the analysis code, and a practical-effect band of ±5 percentage points.
 
-  Full feedback solved 2,039 of 4,500 per-condition runs (45.31%); frozen feedback solved 1,981 of 4,500 (44.02%). The puzzle-clustered mean difference was +1.29 percentage points, with a predeclared 95% stratified puzzle-bootstrap interval of [−0.04, +2.64] points; the estimate leans toward feedback and 97% of bootstrap replicates are positive, but the interval nearly touches zero, so any benefit is small and statistically borderline. Because the complete interval lies inside the practical-effect band, the predeclared outcome is practically equivalent. We read the estimate and interval rather than the label alone: the result does not show that feedback is universally useless, nor that it is exactly inert, but that this implemented edge-feedback package produced no practically important average improvement (below the ±5-point band) under the frozen benchmark, configuration, and budget. The study contributes a mechanism-isolating design, a leakage-controlled benchmark, and a reproducible near-null result.
+  Full feedback solved 2,039 of 4,500 per-condition runs (45.31%); frozen feedback solved 1,981 of 4,500 (44.02%). The puzzle-clustered mean difference was +1.29 percentage points, with a predeclared 95% stratified puzzle-bootstrap interval of [−0.04, +2.64] points. Because the complete interval lies inside the practical-effect band, the predeclared outcome is practically equivalent: this implemented edge-feedback package produced no practically important average improvement under the frozen benchmark, configuration, and budget, although the interval does not exclude a small positive effect. The study contributes a mechanism-isolating design, a leakage-controlled benchmark, and a reproducible near-null result.
 ]
 
 #text(size: 9pt)[*Keywords:* ordered Hamiltonian path; grid graph; slime mould algorithm; stochastic construction; mechanism ablation; practical equivalence]
@@ -64,11 +69,11 @@
 
 Adaptive population metaheuristics are frequently evaluated as indivisible algorithms. A method may combine a strong constructive policy, feasibility filters, tuned domain heuristics, population sampling, and a shared memory update, yet performance is attributed to the bio-inspired update as a whole. This makes a basic causal question surprisingly hard to answer: does the adaptive state improve the probability of solving the target problem, or does the constructor already do the work?
 
-This question matters for slime-mould–inspired optimization. Biological _Physarum_ networks adapt their transport structure in response to flow and resource conditions @tero2010network. The continuous Slime Mould Algorithm (SMA) translated related ideas into an adaptive stochastic optimizer with time-varying positive and negative weights @li2020sma. Subsequent work extended SMA to binary feature selection @abdelbasset2021binary, vehicle routing @zhang2023cvrp, graph problems @zhang2016graph, and hybrids with ant-colony search @rong2021smfaco. Consequently, the scientific value of another discrete adaptation cannot rest on the biological metaphor or on a broad claim of being the first combinatorial SMA. It must identify the implemented mechanism and test what that mechanism adds.
+This question matters for slime-mould–inspired optimization. Biological _Physarum_ networks adapt their transport structure in response to flow and resource conditions @tero2010network. The continuous Slime Mould Algorithm (SMA) translated related ideas into an adaptive stochastic optimizer with time-varying positive and negative weights @li2020sma. Subsequent work extended SMA to binary feature selection @abdelbasset2021binary, vehicle routing @zhang2023cvrp, graph problems @zhang2016graph, and hybrids with ant-colony search @rong2021smfaco. Consequently, the scientific value of another discrete adaptation cannot rest on the biological metaphor or on a broad claim of being the first combinatorial SMA. It must identify the implemented mechanism and test what that mechanism adds—the component-level rigor that critiques of metaphor-based metaheuristics have repeatedly demanded @sorensen2015metaphor @aranha2022metaphor.
 
 We examine ZipMould, a stochastic constructor for an ordered Hamiltonian grid-path problem. A population of walkers builds self-avoiding paths using hard waypoint and residual-connectivity constraints plus four local heuristics. Between iterations, paths deposit signed rank weights on edges; the resulting edge state decays, receives stochastic edge replacement, and is clipped to a nonnegative range. The central experiment disables that update while holding the constructor and its complete configuration fixed. Because the initial edge state is zero, the comparison asks specifically whether the implemented feedback package changes solve probability.
 
-An earlier 245-puzzle corpus could not answer this question: the tuned full constructor and a same-configuration frozen diagnostic both solved all 1,110 test trials. We therefore treat that corpus as a ceiling diagnostic, not as evidence for feedback. Challenge v1 was built before the confirmatory comparison to obtain nontrivial success rates without selecting instances on a favorable treatment contrast. Its test seed and canonical corpus were cryptographically committed while hidden; code, configuration, paired seed schedule, estimand, bootstrap, and decision rule were frozen at a clean tagged commit before a single acknowledged unlock.
+An earlier 245-puzzle corpus#footnote[The ordered Hamiltonian puzzle studied here is motivated by LinkedIn's Zip logic puzzle. The legacy corpus consists of third-party levels obtained from an independent free online implementation of that game; because authorship and reuse rights for those layouts could not be established, they are excluded from the confirmatory evidence and are not redistributed. Challenge v1 contains only synthetic instances generated by our own code.] could not answer this question: the tuned full constructor and a same-configuration frozen diagnostic both solved all 1,110 test trials. We therefore treat that corpus as a ceiling diagnostic, not as evidence for feedback. Challenge v1 was built before the confirmatory comparison to obtain nontrivial success rates without selecting instances on a favorable treatment contrast. Its test seed and canonical corpus were cryptographically committed while hidden; code, configuration, paired seed schedule, estimand, bootstrap, and decision rule were frozen at a clean tagged commit before a single acknowledged unlock.
 
 The paper makes three contributions:
 
@@ -88,13 +93,13 @@ Discrete SMA predates this work. Abdel-Basset et al. proposed a binary SMA for f
 
 == Hamiltonian grid paths and constructive memory
 
-Hamiltonian paths in grid graphs are computationally difficult in general; Itai, Papadimitriou, and Szwarcfiter established NP-completeness for relevant grid-graph variants @itai1982grid. The ordered-waypoint requirement studied here adds precedence constraints: designated vertices must appear in a fixed sequence along a path that visits every free vertex once. The present work evaluates a stochastic heuristic and does not propose a new complexity result or exact algorithm.
+Hamiltonian paths in grid graphs are computationally difficult in general; Itai, Papadimitriou, and Szwarcfiter established NP-completeness for relevant grid-graph variants @itai1982grid. The ordered-waypoint requirement studied here adds precedence constraints: designated vertices must appear in a fixed sequence along a path that visits every free vertex once. Recent complexity work addresses such partially ordered Hamiltonian path problems directly, including parameterized results on grid graphs @beisegel2025partialorder. The present work evaluates a stochastic heuristic and does not propose a new complexity result or exact algorithm.
 
 The edge-state sampling rule is also close in spirit to ant-colony optimization (ACO), where construction probabilities depend on shared pheromone and heuristic desirability. The Ant System of Dorigo, Maniezzo, and Colorni is the canonical example @dorigo1996antsystem. ZipMould differs in its constraint-specific policy, symmetric rank deposits, time-dependent update coefficients, and per-edge replacement noise. We therefore use “slime-mould–inspired” as design provenance, while recognizing ACO as a neighboring algorithmic family.
 
 == Practical equivalence and clustered uncertainty
 
-A non-significant difference does not establish that two methods are meaningfully alike. Equivalence analysis instead requires a smallest effect of interest and evidence that the plausible effect is contained within it @lakens2017equivalence. Our frozen rule is not a formal two-one-sided-test procedure. It is a predeclared practical-equivalence classification: a puzzle-cluster bootstrap interval is compared directly with a ±5 percentage-point band. A reader who prefers a size-controlled equivalence test can apply two one-sided tests to the same interval; we report the interval itself so that this remains possible. Bootstrap resampling follows the general nonparametric principle introduced by Efron @efron1979bootstrap, with puzzles, not individual seeds, as the independent units.
+A non-significant difference does not establish that two methods are meaningfully alike. Equivalence analysis instead requires a smallest effect of interest and evidence that the plausible effect is contained within it @lakens2017equivalence. Our frozen rule is not a formal two-one-sided-test procedure. It is a predeclared practical-equivalence classification: a puzzle-cluster bootstrap interval is compared directly with a ±5 percentage-point band. Containment of a two-sided 95% interval in the band corresponds to two one-sided tests at level 0.025 each, which is more conservative than the conventional TOST convention of a 90% interval at level 0.05; we report the interval itself so that either reading remains possible. Bootstrap resampling follows the general nonparametric principle introduced by Efron @efron1979bootstrap, with puzzles, not individual seeds, as the independent units.
 
 = Problem formulation
 
@@ -129,7 +134,7 @@ where $j$ indexes the four heuristics. With edge state $tau_e$, the sampling log
 
 $ ell(e) = alpha tau_e + beta log eta(e), $
 
-and the next edge is drawn from the softmax over legal candidates. Unified feedback is used in the confirmatory configuration, so one edge-state field is shared across waypoint segments.
+and the next edge is drawn from the softmax over legal candidates. Because disconnecting candidates are rejected outright, the residual-connectivity term takes the same constant value for every surviving candidate and cancels in the softmax; in this configuration, $gamma_("art")$ therefore does not alter sampling probabilities, and residual connectivity acts purely as the hard filter described above. Unified feedback is used in the confirmatory configuration, so one edge-state field is shared across waypoint segments.
 
 Completed and partial paths are ranked by the fitness
 
@@ -171,7 +176,7 @@ The feedback-frozen intervention skips the entire update. Since $tau_0=0$, its e
 
 == Guaranteed-solvable generation
 
-Challenge v1 contains only synthetic content. For each instance, the generator begins with a serpentine Hamiltonian path on the complete $N times N$ grid and applies $12N^2$ randomized endpoint-backbite moves. These moves alter the certificate while preserving its Hamiltonian property. Ordered waypoints are sampled along the resulting certificate. Interior waypoints preferentially maximize a ratio of certificate distance to Manhattan distance, creating long required segments whose endpoints appear geometrically close.
+Challenge v1 contains only synthetic content. For each instance, the generator begins with a serpentine Hamiltonian path on the complete $N times N$ grid and applies $12N^2$ randomized endpoint-backbite moves @oberdorf2006backbite. These moves alter the certificate while preserving its Hamiltonian property; the fixed move budget is a randomization heuristic and carries no claim of uniform sampling over Hamiltonian paths. Ordered waypoints are sampled along the resulting certificate. Interior waypoints preferentially maximize a ratio of certificate distance to Manhattan distance, creating long required segments whose endpoints appear geometrically close.
 
 Walls are then sampled only from edges absent from the certificate, so the planted path always remains feasible. Three generator families control topology: open instances contain no walls; sparse instances independently remove noncertificate edges with probability 0.12; chambered instances add sparse walls and remove most noncertificate edges crossing periodic room boundaries. Certificates are stored separately and used to validate every generated puzzle.
 
@@ -214,7 +219,7 @@ Analysis required the exact 150×30×2 grid, without duplicate or failed rows. E
 
 = Results
 
-Full feedback solved 2,039 of 4,500 trials (45.31%), compared with 1,981 of 4,500 (44.02%) for frozen feedback (@tab-primary). The primary mean full-minus-frozen difference was +0.01289, or +1.29 percentage points. Its 95% stratified puzzle-bootstrap interval was [−0.00044,+0.02644], equivalent to [−0.04,+2.64] percentage points (@fig-primary). The entire interval lies inside the predeclared ±5-point practical-effect band; the confirmatory classification is therefore *practically equivalent*. As a post-hoc description of where the interval sits, 97.1% of the 10,000 bootstrap replicates were positive (one-sided tail probability 0.029 for $Delta <= 0$), so the small positive estimate is statistically borderline rather than clearly nonzero; this characterizes the interval and does not change the predeclared classification.
+Full feedback solved 2,039 of 4,500 trials (45.31%), compared with 1,981 of 4,500 (44.02%) for frozen feedback (@tab-primary). The primary mean full-minus-frozen difference was +0.01289, or +1.29 percentage points. Its 95% stratified puzzle-bootstrap interval was [−0.00044,+0.02644], equivalent to [−0.04,+2.64] percentage points (@fig-primary). The entire interval lies inside the predeclared ±5-point practical-effect band; the confirmatory classification is therefore *practically equivalent*. As a post-hoc description of where the interval sits, 97.1% of the 10,000 bootstrap replicates were positive (2.9% at or below zero), so the small positive estimate is statistically borderline rather than clearly nonzero; this bootstrap-sign summary characterizes the replicate distribution, is not a calibrated hypothesis-test p-value, and does not change the predeclared classification.
 
 #figure(
   table(
@@ -232,7 +237,7 @@ Full feedback solved 2,039 of 4,500 trials (45.31%), compared with 1,981 of 4,50
   caption: [Full-minus-frozen solve-probability effects. The overall interval is the prespecified stratified puzzle-bootstrap interval. Stratum intervals are not inferential claims; stratum point estimates are descriptive. The shaded band marks ±5 percentage points.],
 ) <fig-primary>
 
-The five descriptive stratum effects ranged from −1.67 points for open 16×16 to +3.00 points for open 14×14 (@tab-strata). No stratum point estimate crossed either practical boundary. These estimates were not separately powered or multiplicity-adjusted and should not be read as evidence of family-specific benefit. Descriptively, the larger positive estimates fell in strata with mid-to-high base solve rates (open 14×14 and sparse 12×12, near 0.67 and 0.74), while the hardest strata (open 16×16 and sparse 14×14, near 0.29 and 0.16) showed a small negative and a small positive estimate; this is consistent with feedback helping modestly only where the base constructor has room to improve, but the design is not powered to support such a claim.
+The five descriptive stratum effects ranged from −1.67 points for open 16×16 to +3.00 points for open 14×14 (@tab-strata). No stratum point estimate crossed either practical boundary. These estimates were not separately powered or multiplicity-adjusted and should not be read as evidence of family-specific benefit. Descriptively, the larger positive estimates fell in strata with mid-to-high base solve rates (open 14×14 and sparse 12×12, near 0.67 and 0.74), while the hardest strata (open 16×16 and sparse 14×14, near 0.29 and 0.16) showed a small negative and a small positive estimate.
 
 #figure(
   table(
@@ -285,20 +290,20 @@ The outcome does not imply that shared edge memory has no research value. Hetero
 
 *No state-of-the-art comparison.* The mechanism question requires a matched constructor ablation, not a leaderboard. This paper therefore does not establish superiority over exact solvers, constraint programming, specialized ACO, or other tuned metaheuristics. Archived legacy baselines are contextual only and are not used for the confirmatory claim.
 
-// = Reproducibility and data availability
+= Reproducibility and data availability
 
-// The software, benchmark specification, public train/development corpus, test commitment, frozen protocol, and analysis are included with the artifact. The pre-test release is Git commit #raw("06ef8bbfae5de29fe6cd4ebf0175a94f04880e9b") and annotated tag #raw("challenge-v1-confirmatory-v1"). The post-analysis evidence directory contains all 9,000 raw rows, 4,020 solved coordinate paths, the exact test corpus and certificates, the revealed seed, 10,000 bootstrap replicates, per-puzzle effects, environment and hardware metadata, and SHA-256 checksums.
+The software, benchmark specification, public train/development corpus, test commitment, frozen protocol, and analysis are included with the artifact. The pre-test release is Git commit #raw("06ef8bbfae5de29fe6cd4ebf0175a94f04880e9b") and annotated tag #raw("challenge-v1-confirmatory-v1"). The post-analysis evidence directory contains all 9,000 raw rows, 4,020 solved coordinate paths, the exact test corpus and certificates, the revealed seed, 10,000 bootstrap replicates, per-puzzle effects, environment and hardware metadata, and SHA-256 checksums.
 
-// The raw result SHA-256 is #raw("a899646ef363ad2fd295e704b35f73b22efeb08ad10ebd5dc6429e1d32b1976a"). Execution used Python 3.13.12, NumPy 2.4.4, Numba 0.65.1, and Polars 1.40.1 on an AMD Ryzen 9 9950X3D system with 32 logical CPUs. The complete 9,000-run grid finished in 145.0 seconds with no failed rows; timing is provenance, not a comparative endpoint.
+The raw result SHA-256 is #raw("a899646ef363ad2fd295e704b35f73b22efeb08ad10ebd5dc6429e1d32b1976a"). Execution used Python 3.13.12, NumPy 2.4.4, Numba 0.65.1, and Polars 1.40.1 on an AMD Ryzen 9 9950X3D system with 32 logical CPUs. The complete 9,000-run grid finished in 145.0 seconds with no failed rows; timing is provenance, not a comparative endpoint.
 
-// From the repository root, #raw("make paper-verify") checks the frozen protocol, #raw("make paper-smoke") exercises both arms on public data, #raw("make paper-analyze") regenerates the analysis, and #raw("make paper-figures") regenerates publication displays. For audit from the paper package alone, #raw("paper/scripts/secondary_analysis.py") re-derives the primary interval from the archived per-puzzle effects, reproducing the frozen 10,000-replicate bootstrap byte for byte, and regenerates the post-hoc descriptive quantities (one-sided tail probability, achieved precision, saturation counts, and the informative-puzzle sensitivity) reported above. The evidence package documents seed reconstruction and byte-level verification. The public repository and archive URLs will be added to the data-availability statement upon public release.
+From the repository root, #raw("make paper-verify") checks the frozen protocol, #raw("make paper-smoke") exercises both arms on public data, #raw("make paper-analyze") regenerates the analysis, and #raw("make paper-figures") regenerates publication displays. For audit from the paper package alone, #raw("paper/scripts/secondary_analysis.py") re-derives the primary interval from the archived per-puzzle effects, reproducing the frozen 10,000-replicate bootstrap byte for byte, and regenerates the post-hoc descriptive quantities (bootstrap sign share, achieved precision, saturation counts, and the informative-puzzle sensitivity) reported above. The evidence package documents seed reconstruction and byte-level verification. The public repository is available at #link("https://github.com/gtkacz/zipmould"), and a durable archive DOI will be added to this statement upon acceptance.
 
 = Conclusion
 
 ZipMould's edge-state feedback was tested against the same stochastic constructor with the update frozen, under a sealed and reproducible Challenge v1 protocol. Full feedback improved average solve probability by 1.29 percentage points, with a 95% puzzle-bootstrap interval from −0.04 to +2.64 points. This interval lies within the predeclared ±5-point band, yielding a practically equivalent classification. The evidence therefore supports a narrow conclusion: for this implementation, benchmark, configuration, and budget, adding adaptive edge feedback produced no practically important average gain over the stateless constructor, even though the point estimate and most strata leaned weakly in its favour. Publishing that result, together with the test commitment, raw paths, and exact analysis, provides a firmer basis for future mechanism design than attributing ceiling performance to a biological metaphor.
 
-// = Declarations
+= Declarations
 
-// *Ethics approval:* Not applicable; the study uses synthetic benchmark instances and no human or animal participants.
+*Ethics approval:* Not applicable; the study uses synthetic benchmark instances and no human or animal participants.
 
 #bibliography("references.bib", style: "ieee", title: "References")

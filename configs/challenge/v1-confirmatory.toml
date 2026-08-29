@@ -1,7 +1,8 @@
 # Frozen confirmatory configuration for Challenge v1.
 #
-# This is the exact 53-walker x 64-iteration configuration selected using
-# feedback-frozen train/dev outcomes only. Both confirmatory conditions use
+# Heuristic/feedback hyperparameters are inherited unchanged from the legacy
+# tuned winner; only the 53-walker x 64-iteration budget was set from
+# feedback-frozen Challenge dev difficulty. Both confirmatory conditions use
 # this same file; the intervention is solely whether pheromone updates execute.
 
 [solver]

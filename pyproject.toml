@@ -64,6 +64,7 @@ ignore = [
 [tool.ruff.lint.per-file-ignores]
 "benchmark/scripts/*.py" = ["T201"]
 "experiments/**/*.py" = ["T201"]
+"paper/scripts/*.py" = ["T201"]
 
 [tool.ruff.format]
 quote-style = "double"

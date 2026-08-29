@@ -192,7 +192,7 @@ def main() -> int:
     )
     for row in strata.to_dicts():
         print(
-            f"  {str(row['stratum']):26s} base={float(cast('float', row['base_rate'])) * 100:5.1f}%  "
+            f"  {row['stratum']!s:26s} base={float(cast('float', row['base_rate'])) * 100:5.1f}%  "
             f"delta={float(cast('float', row['delta'])) * 100:+.2f} pp"
         )
     return 0

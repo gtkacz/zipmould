@@ -17,9 +17,9 @@
 
 1. Select the journal and apply its current template, word limit, reference
    style, figure-placement rules, and anonymization policy.
-2. Replace the blinded author line with author names, affiliations, emails, and
-   ORCIDs; complete contributions, funding, competing interests, and
-   acknowledgements from author-supplied facts.
+2. Author names, affiliations, and ORCIDs are now in the byline; still add the
+   corresponding author's email, and complete contributions (CRediT), funding,
+   competing interests, and acknowledgements from author-supplied facts.
 3. Create a durable public archive release (for example, a versioned DOI) and
    insert its URL/DOI plus the public repository URL into Data Availability.
 4. Confirm the repository and evidence-package license, including an explicit
