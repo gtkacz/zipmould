@@ -4,9 +4,9 @@ This script is deliberately self-contained: it reproduces the frozen primary
 bootstrap interval from the archived per-puzzle effects alone, so the central
 inferential number can be audited from the paper package without importing the
 main repository's analysis module. It then computes the descriptive quantities
-reported in the manuscript's Results and Discussion (one-sided bootstrap tail
-probability, achieved interval precision, structural saturation, the
-informative-puzzle sensitivity, and the stratum base-rate/effect pattern).
+reported in the manuscript's Results and Discussion (achieved interval
+precision, observed saturation, the outcome-selected subset calculation,
+and the stratum base-rate/effect pattern).
 
 None of these quantities replace or redefine the predeclared primary estimand;
 they characterise where the frozen interval sits and are labelled post hoc in
@@ -18,7 +18,6 @@ from __future__ import annotations
 import json
 import math
 from pathlib import Path
-from statistics import fmean
 from typing import cast
 
 import polars as pl
@@ -106,22 +105,16 @@ def main() -> int:
     effects = pl.read_parquet(RESULTS / "puzzle_effects.parquet")
 
     deltas_by_puzzle = [
-        (str(row["puzzle_id"]), str(row["stratum"]), float(cast("float", row["delta"])))
-        for row in effects.to_dicts()
+        (str(row["puzzle_id"]), str(row["stratum"]), float(cast("float", row["delta"]))) for row in effects.to_dicts()
     ]
-    replicates = stratified_cluster_bootstrap(
-        deltas_by_puzzle, replicates=BOOTSTRAP_REPLICATES, seed=BOOTSTRAP_SEED
-    )
+    replicates = stratified_cluster_bootstrap(deltas_by_puzzle, replicates=BOOTSTRAP_REPLICATES, seed=BOOTSTRAP_SEED)
     lower, upper = percentile_interval(replicates, CONFIDENCE_LEVEL)
 
     # Self-containment proof: the interval regenerated here must equal the frozen one.
     ci_lower = float(cast("float", primary["ci_lower"]))
     ci_upper = float(cast("float", primary["ci_upper"]))
     if abs(lower - ci_lower) > TOLERANCE or abs(upper - ci_upper) > TOLERANCE:
-        msg = (
-            f"regenerated interval [{lower}, {upper}] does not match frozen "
-            f"[{ci_lower}, {ci_upper}]"
-        )
+        msg = f"regenerated interval [{lower}, {upper}] does not match frozen " f"[{ci_lower}, {ci_upper}]"
         raise SystemExit(msg)
 
     archived = pl.read_parquet(RESULTS / "primary_bootstrap.parquet")["delta"].to_list()
@@ -131,7 +124,6 @@ def main() -> int:
         raise SystemExit("regenerated replicates do not match the archived bootstrap")
 
     estimate = float(cast("float", primary["estimate"]))
-    one_sided_leq_zero = fmean(1.0 if value <= 0.0 else 0.0 for value in archived)
     half_width = (ci_upper - ci_lower) / 2.0
 
     full = effects["full_solved"].to_list()
@@ -141,14 +133,12 @@ def main() -> int:
         1 for f, z in zip(full, frozen, strict=True) if f == SEEDS_PER_PUZZLE and z == SEEDS_PER_PUZZLE
     )
     saturated = floor_puzzles + ceiling_puzzles
-    informative = effects.height - saturated
+    nonsaturated = effects.height - saturated
     delta_sum = float(effects["delta"].sum())
-    informative_estimate = delta_sum / informative if informative else float("nan")
+    nonsaturated_estimate = delta_sum / nonsaturated if nonsaturated else float("nan")
 
     strata = (
-        effects.with_columns(
-            ((pl.col("full_solve_rate") + pl.col("frozen_solve_rate")) / 2.0).alias("base_rate")
-        )
+        effects.with_columns(((pl.col("full_solve_rate") + pl.col("frozen_solve_rate")) / 2.0).alias("base_rate"))
         .group_by("stratum")
         .agg(pl.col("base_rate").mean(), pl.col("delta").mean())
         .sort("base_rate")
@@ -159,15 +149,16 @@ def main() -> int:
         "matches_frozen_interval": True,
         "matches_archived_replicates": True,
         "estimate": estimate,
-        "one_sided_bootstrap_p_delta_le_0": one_sided_leq_zero,
-        "share_positive_replicates": 1.0 - one_sided_leq_zero,
         "interval_half_width": half_width,
         "practical_effect": PRACTICAL_EFFECT,
         "floor_puzzles": floor_puzzles,
         "ceiling_puzzles": ceiling_puzzles,
         "saturated_puzzles": saturated,
-        "informative_puzzles": informative,
-        "estimate_over_informative_puzzles": informative_estimate,
+        "nonsaturated_puzzles": nonsaturated,
+        "estimate_over_nonsaturated_puzzles": nonsaturated_estimate,
+        "subset_interpretation": (
+            "Outcome-selected descriptive subset; changes target population; no equivalence inference."
+        ),
         "stratum_base_rate_vs_delta": strata.to_dicts(),
     }
     GENERATED.mkdir(parents=True, exist_ok=True)
@@ -177,17 +168,13 @@ def main() -> int:
 
     print(f"regenerated interval matches frozen report: [{lower:+.5f}, {upper:+.5f}]")
     print(f"estimate: {estimate * 100:+.2f} pp")
-    print(
-        f"one-sided bootstrap P(delta<=0): {one_sided_leq_zero:.4f} "
-        f"({(1.0 - one_sided_leq_zero) * 100:.1f}% of replicates positive)"
-    )
     print(f"achieved 95% interval half-width: {half_width * 100:.2f} pp (band {PRACTICAL_EFFECT * 100:.0f} pp)")
     print(
         f"saturated puzzles: {saturated} (floor {floor_puzzles}, ceiling {ceiling_puzzles}); "
-        f"informative: {informative}"
+        f"nonsaturated: {nonsaturated}"
     )
     print(
-        f"estimate over informative puzzles only: {informative_estimate * 100:+.2f} pp "
+        f"estimate over nonsaturated puzzles only: {nonsaturated_estimate * 100:+.2f} pp "
         f"(vs {estimate * 100:+.2f} pp over all {effects.height})"
     )
     for row in strata.to_dicts():

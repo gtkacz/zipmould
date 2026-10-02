@@ -1,20 +1,18 @@
 {
   "ceiling_puzzles": 23,
   "estimate": 0.01288888888888889,
-  "estimate_over_informative_puzzles": 0.016959064327485382,
+  "estimate_over_nonsaturated_puzzles": 0.016959064327485382,
   "floor_puzzles": 13,
-  "informative_puzzles": 114,
   "interval_half_width": 0.013444444444444443,
   "matches_archived_replicates": true,
   "matches_frozen_interval": true,
-  "one_sided_bootstrap_p_delta_le_0": 0.0289,
+  "nonsaturated_puzzles": 114,
   "practical_effect": 0.05,
   "regenerated_interval": [
     -0.0004444444444444453,
     0.02644444444444444
   ],
   "saturated_puzzles": 36,
-  "share_positive_replicates": 0.9711,
   "stratum_base_rate_vs_delta": [
     {
       "base_rate": 0.1627777777777778,
@@ -41,5 +39,6 @@
       "delta": 0.027777777777777776,
       "stratum": "sparse-deceptive/N12"
     }
-  ]
+  ],
+  "subset_interpretation": "Outcome-selected descriptive subset; changes target population; no equivalence inference."
 }

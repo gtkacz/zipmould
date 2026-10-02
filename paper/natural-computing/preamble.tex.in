@@ -1,0 +1,21 @@
+% Generated from paper/main.typ; regenerate with make paper-journal.
+\documentclass[pdflatex,sn-basic]{sn-jnl}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{amsmath,amssymb}
+\usepackage{booktabs}
+\usepackage{xurl}
+\raggedbottom
+\begin{document}
+\title[Does Edge Feedback Help?]{Does Edge Feedback Help? A Controlled Study of a Slime-Mould--Inspired Constructor for Ordered Hamiltonian Grid Paths}
+\author*[1]{\fnm{Gabriel Mitelman} \sur{Tkacz}}\email{gabriel@gtka.cz}
+\author[2]{\fnm{Leandro Augusto} \sur{da Silva}}\email{leandroaugusto.silva@mackenzie.br}
+\author[2]{\fnm{Gustavo Scalabrini} \sur{Sampaio}}\email{gustavo.sampaio@mackenzie.br}
+\affil*[1]{\orgdiv{School of Engineering}, \orgname{Mackenzie Presbyterian University}, \orgaddress{\city{S\~ao Paulo}, \state{SP}, \country{Brazil}}}
+\affil[2]{\orgdiv{Faculty of Computing and Informatics}, \orgname{Mackenzie Presbyterian University}, \orgaddress{\city{S\~ao Paulo}, \state{SP}, \country{Brazil}}}
+\abstract{@@ABSTRACT@@}
+\keywords{ordered Hamiltonian path, grid graph, slime mould algorithm, stochastic construction, mechanism ablation, practical equivalence}
+\pacs[MSC 2020]{68T20, 68R10}
+\maketitle
+\noindent\textbf{ORCIDs:} Gabriel Mitelman Tkacz: \url{https://orcid.org/0009-0004-3619-4561}; Leandro Augusto da Silva: \url{https://orcid.org/0000-0002-8671-3102}; Gustavo Scalabrini Sampaio: \url{https://orcid.org/0000-0003-1150-5584}.
+

@@ -1,0 +1,29 @@
+{
+  "status": "local_metadata_draft_not_an_archive_record",
+  "title": "ZipMould Challenge v1: code and evidence for a controlled edge-feedback study",
+  "resource_type": "dataset",
+  "description": "Synthetic Challenge v1 benchmark and reproducibility package for Does Edge Feedback Help? Includes the pre-test protocol and code snapshot, 150 released test puzzles with Hamiltonian certificates, 9000 trial rows, 4020 returned solutions, 10000 bootstrap replicates, and the manuscript source. The primary full-minus-frozen solve-probability difference is +1.29 percentage points, with a 95% stratified puzzle-bootstrap interval of [-0.04, +2.64] points. The predeclared classification is practically equivalent under a +/-5-point band. Third-party legacy puzzle data are excluded.",
+  "creators": [
+    {
+      "name": "Tkacz, Gabriel Mitelman",
+      "orcid": "0009-0004-3619-4561",
+      "affiliation": "School of Engineering, Mackenzie Presbyterian University"
+    },
+    {
+      "name": "da Silva, Leandro Augusto",
+      "orcid": "0000-0002-8671-3102",
+      "affiliation": "Faculty of Computing and Informatics, Mackenzie Presbyterian University"
+    },
+    {
+      "name": "Sampaio, Gustavo Scalabrini",
+      "orcid": "0000-0003-1150-5584",
+      "affiliation": "Faculty of Computing and Informatics, Mackenzie Presbyterian University"
+    }
+  ],
+  "keywords": ["Hamiltonian path", "grid graph", "slime mould algorithm", "mechanism ablation", "practical equivalence"],
+  "repository": "https://github.com/gtkacz/zipmould",
+  "pretest_commit": "06ef8bbfae5de29fe6cd4ebf0175a94f04880e9b",
+  "software_license": "MIT",
+  "data_license": null,
+  "doi": null
+}

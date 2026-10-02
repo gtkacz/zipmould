@@ -1,4 +1,4 @@
-.PHONY: help be fe dev install dev-stop paper paper-verify paper-smoke paper-run paper-restore-test paper-analyze paper-reproduce paper-figures paper-build paper-check
+.PHONY: help be fe dev install dev-stop paper paper-verify paper-smoke paper-run paper-restore-test paper-analyze paper-reproduce paper-figures paper-build paper-check paper-journal paper-package
 
 SHELL := /bin/bash
 BACKEND_HOST ?= 127.0.0.1
@@ -98,3 +98,13 @@ paper-check: paper-build paper-reproduce
 	$(PYTHON) paper/scripts/check_manuscript.py
 
 paper: paper-check
+
+paper-journal: paper-check
+	$(PYTHON) paper/scripts/secondary_analysis.py
+	$(PYTHON) paper/scripts/export_natural_computing.py
+	cd paper/natural-computing && latexmk -pdf -interaction=nonstopmode -halt-on-error -outdir=build main.tex
+	cp paper/natural-computing/build/main.pdf paper/natural-computing/main.pdf
+	$(PYTHON) paper/scripts/check_journal.py
+
+paper-package: paper-journal
+	$(PYTHON) paper/scripts/package_submission.py

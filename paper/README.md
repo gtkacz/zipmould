@@ -13,6 +13,14 @@ lies inside the frozen `[-5, +5]` point practical-effect band.
 
 ## Build and audit
 
+For the Natural Computing submission version, run `make paper-package`.
+It retains this Typst source as the manuscript master, exports editable
+LaTeX into `natural-computing/`, compiles its PDF with the official Springer
+class, and assembles source and evidence ZIPs in `paper/dist/`.
+Additional requirements are pdfLaTeX/BibTeX (`latexmk`) and `rsvg-convert`.
+See `SUBMISSION.md` for unresolved author facts and `archive/README.md` for
+the durable-deposit handoff. Package creation does not publish or submit it.
+
 Requirements are the synchronized project virtual environment and Typst
 0.14.2 or compatible.
 
@@ -58,6 +66,10 @@ trials.
 - `results/challenge-v1/`: raw rows, paths, manifest, test release, bootstrap,
   per-puzzle effects, and checksums;
 - `SUBMISSION.md`: remaining author- and venue-dependent submission work.
+- `natural-computing/main.tex` / `main.pdf`: generated journal source and PDF;
+- `natural-computing/COVER_LETTER.md`: journal cover-letter draft;
+- `archive/`: deposit metadata and author-input record;
+- `dist/`: locally built ZIP files, checksums, and package status (ignored).
 
 The pre-test release is commit
 `06ef8bbfae5de29fe6cd4ebf0175a94f04880e9b`, tagged
