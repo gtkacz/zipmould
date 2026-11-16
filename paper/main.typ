@@ -308,11 +308,19 @@ ZipMould's edge-state feedback was tested against the same stochastic constructo
 
 = Statements and Declarations
 
-*Ethics approval:* Not applicable; the study uses synthetic benchmark instances and no human or animal participants.
+*Ethics approval and consent to participate:* Not applicable; the study uses synthetic benchmark instances and no human or animal participants.
+
+*Consent for publication:* Not applicable.
 
 *Funding:* This study was financed in part by the Coordenação de Aperfeiçoamento de Pessoal de Nível Superior -- Brasil (CAPES) -- Finance Code 001, and in part by the Conselho Nacional de Desenvolvimento Científico e Tecnológico -- Brasil (CNPq). The work received no dedicated project funding beyond these graduate scholarships.
 
 *Competing interests:* The authors declare that they have no competing interests.
+
+*Data availability:* The benchmark, raw trial rows, returned solution paths, and analysis artifacts are provided in the evidence package described in the section on reproducibility and data availability.
+
+*Materials availability:* Not applicable.
+
+*Code availability:* The source code is publicly available at #link("https://github.com/gtkacz/zipmould"). The pre-test release is identified in the section on reproducibility and data availability.
 
 *Acknowledgements:* This work was developed as part of the first author's Master of Engineering at Mackenzie Presbyterian University.
 
