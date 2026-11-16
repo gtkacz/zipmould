@@ -22,6 +22,7 @@ JOURNAL_FILES = (
     "sn-jnl.cls",
     "sn-basic.bst",
     "threeparttable.sty",
+    "xurl.sty",
     "Fig1.pdf",
     "Fig2.pdf",
     "Fig1.eps",
