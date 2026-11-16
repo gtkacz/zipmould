@@ -115,6 +115,13 @@ def figure(block: str) -> str:
                 [converter, "--format", fmt, "--output", str(OUT / f"{name}.{extension}"), str(svg_path)],
                 check=True,
             )
+        eps = OUT / f"{name}.eps"
+        # cairo honours SOURCE_DATE_EPOCH for PDF but not for this DSC comment
+        eps.write_bytes(
+            b"".join(
+                line for line in eps.read_bytes().splitlines(keepends=True) if not line.startswith(b"%%CreationDate")
+            )
+        )
         return "\n".join(
             [
                 r"\begin{figure}[htbp]",

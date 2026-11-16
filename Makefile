@@ -99,6 +99,9 @@ paper-check: paper-build paper-reproduce
 
 paper: paper-check
 
+# pdfTeX and cairo stamp the wall clock into tracked PDFs unless the date is pinned
+paper-journal: export SOURCE_DATE_EPOCH := $(TYPST_CREATION_TIMESTAMP)
+paper-journal: export FORCE_SOURCE_DATE := 1
 paper-journal: paper-check
 	$(PYTHON) paper/scripts/secondary_analysis.py
 	$(PYTHON) paper/scripts/export_soft_computing.py
