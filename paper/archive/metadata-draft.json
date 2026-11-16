@@ -24,6 +24,6 @@
   "repository": "https://github.com/gtkacz/zipmould",
   "pretest_commit": "06ef8bbfae5de29fe6cd4ebf0175a94f04880e9b",
   "software_license": "MIT",
-  "data_license": null,
+  "data_license": "CC-BY-4.0",
   "doi": null
 }

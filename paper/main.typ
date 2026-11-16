@@ -316,14 +316,16 @@ ZipMould's edge-state feedback was tested against the same stochastic constructo
 
 *Competing interests:* The authors declare that they have no competing interests.
 
-*Data availability:* The benchmark, raw trial rows, returned solution paths, and analysis artifacts are provided in the evidence package described in the section on reproducibility and data availability.
+*Data availability:* The benchmark, raw trial rows, returned solution paths, and analysis artifacts are provided in the evidence package described in the section on reproducibility and data availability, under the Creative Commons Attribution 4.0 International license.
 
 *Materials availability:* Not applicable.
 
 *Code availability:* The source code is publicly available at #link("https://github.com/gtkacz/zipmould"). The pre-test release is identified in the section on reproducibility and data availability.
 
+*Author contribution:* Gabriel Mitelman Tkacz: conceptualization, methodology, software, formal analysis, investigation, data curation, visualization, and writing (original draft). Leandro Augusto da Silva and Gustavo Scalabrini Sampaio: supervision and writing (review and editing). All authors approved the final manuscript.
+
 *Acknowledgements:* This work was developed as part of the first author's Master of Engineering at Mackenzie Presbyterian University.
 
-*AI assistance:* OpenAI Codex assisted with manuscript assessment, statistical wording revisions, LaTeX conversion, and submission-package preparation. The underlying confirmatory results were retained, and the archived analysis was regenerated to check consistency.
+*AI assistance:* OpenAI Codex assisted with manuscript assessment, statistical wording revisions, LaTeX conversion, and submission-package preparation. The underlying confirmatory results were retained, and the archived analysis was regenerated to check consistency. Anthropic Claude assisted with retargeting the LaTeX package, the declaration headings, and the submission documents.
 
 #bibliography("references.bib", style: "springer-basic-author-date", title: "References")

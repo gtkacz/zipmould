@@ -3,12 +3,27 @@
   "article_type": "research article",
   "cnpq_process_number": null,
   "credit_roles": {
-    "Gabriel Mitelman Tkacz": null,
-    "Leandro Augusto da Silva": null,
-    "Gustavo Scalabrini Sampaio": null
+    "Gabriel Mitelman Tkacz": [
+      "Conceptualization",
+      "Methodology",
+      "Software",
+      "Formal analysis",
+      "Investigation",
+      "Data curation",
+      "Visualization",
+      "Writing - original draft"
+    ],
+    "Leandro Augusto da Silva": [
+      "Supervision",
+      "Writing - review & editing"
+    ],
+    "Gustavo Scalabrini Sampaio": [
+      "Supervision",
+      "Writing - review & editing"
+    ]
   },
-  "additional_ai_use": null,
-  "synthetic_data_license": null,
+  "additional_ai_use": "Anthropic Claude assisted with retargeting the LaTeX package, the declaration headings, and the submission documents (2026-11-16).",
+  "synthetic_data_license": "CC-BY-4.0",
   "archive_record_url": null,
   "archive_doi": null,
   "all_authors_approved": false,

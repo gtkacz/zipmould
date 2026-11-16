@@ -17,10 +17,10 @@ notices; they are not relicensed as project code.
 
 ## Before depositing
 
-Complete `author-inputs.json` from author-supplied facts. No roles, grant number,
-license selection, or approval should be inferred. Software remains MIT under
-the root `LICENSE`. An explicit synthetic-data license is awaiting the author's
-choice; `metadata-draft.json` deliberately has no selected data license or DOI.
+Complete `author-inputs.json` from author-supplied facts. No grant number or
+approval should be inferred. Software remains MIT under the root `LICENSE`.
+The corresponding author chose CC BY 4.0 for the synthetic Challenge v1 data
+and evidence on 2026-11-16; `metadata-draft.json` still has no DOI.
 
 In Zenodo (or the chosen durable archive), create a dataset record owned by the
 authors, use `metadata-draft.json` as the field-entry reference, choose the
