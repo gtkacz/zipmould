@@ -1,7 +1,12 @@
-# Natural Computing submission handoff
+# Soft Computing submission handoff
 
-Preparation date: 2026-10-01. Status: local package prepared; author inputs
+Preparation date: 2026-11-16. Status: local package prepared; author inputs
 and archival publication remain unresolved. No journal submission has occurred.
+
+Soft Computing (Springer, ISSN 1433-7479) replaces Natural Computing as the
+target because it is on the PPGEEC list of journals adherent to CAPES
+Engenharias IV for 2021–2024 and Natural Computing is not. The Natural
+Computing package remains in Git history at commit `517e1a1`.
 
 ## Completed preparation
 
@@ -12,14 +17,18 @@ and archival publication remain unresolved. No journal submission has occurred.
 - Retained the frozen estimand, configuration, interval, ±5-point band, and
   practical-equivalence classification.
 - Shortened the abstract to 217 words and applied author–year references.
-- Created `soft-computing/main.tex` with the official Springer Nature class,
-  MSC codes, numbered equations/tables/figures, author details, and declarations.
+- Created `soft-computing/main.tex` with the official Springer Nature class in
+  the two-column `iicol` layout that Soft Computing requests, numbered
+  equations/tables/figures, author details, and declarations.
 - Supplied vector PDF/EPS figures with larger labels and position-based
-  interpretation independent of color.
-- Added a disclosure of the AI assistance known from this editing session.
+  interpretation independent of color; both span the two columns.
+- Added a disclosure of the AI assistance known from the 2026-10-01 editing
+  session.
 - Prepared a journal cover-letter draft and reproducible source/evidence ZIP
   builders. The evidence bundle excludes third-party legacy puzzle data and
   includes a selected snapshot of the exact pre-test code.
+- Pinned the build date so that rebuilding leaves every tracked artifact
+  byte-identical.
 
 Run `make paper-package` to regenerate and verify the manuscript, independently
 reanalyze all raw rows and returned paths, compile both formats, and create
@@ -30,14 +39,42 @@ the ZIP files and checksums in `paper/dist/`.
 Record these in `archive/author-inputs.json` and update the manuscript/metadata:
 
 1. CNPq process number (or an explicit statement that no identifier applies).
-2. CRediT contributions for each author. Roles have not been invented.
-3. Any earlier AI use in research or manuscript preparation so the disclosure
-   covers the full workflow. The current paragraph describes this session only.
+2. CRediT contributions for each author. Roles have not been invented. Soft
+   Computing collects author contributions in the submission interface.
+3. Any AI use before or after the 2026-10-01 session, including the Soft
+   Computing retargeting, so the disclosure covers the full workflow. The
+   current paragraph describes the 2026-10-01 session only.
 4. Explicit license for synthetic Challenge v1 data/evidence. The existing
    software MIT license is retained; no new data license has been asserted.
 5. Archive record URL and DOI. A local ZIP is not a durable public deposit.
 6. Approval of the final manuscript and declarations by all authors, and
-   confirmation that the paper is not under consideration elsewhere.
+   confirmation that the paper is not under consideration elsewhere,
+   including at any earlier target journal.
+7. Confirmation, in a browser, of the requirement rows in
+   `soft-computing/COMPLIANCE.md`. The journal pages could not be opened
+   directly during preparation; reference style, length limit, declaration
+   headings, and the section list are the unconfirmed items.
+8. The section to select at submission. The cover letter proposes Optimization.
+
+## Open access under the CAPES agreement
+
+Soft Computing is a hybrid journal and is row 1601 of the Springer portfolio
+list for the CAPES–Springer Nature agreement (list updated 2025-12-31;
+agreement valid for articles accepted from 2026-01-01 to 2028-12-31; CC BY).
+The article processing charge is covered only if the corresponding author is
+eligible on the submission date under Portaria CAPES nº 120/2024. Before
+submitting, the corresponding author should confirm that:
+
+- Mackenzie Presbyterian University is a participating institution;
+- the ORCID in the byline is linked to “Meus Dados CAPES”;
+- the affiliation and e-mail given at submission identify the institution.
+  The byline currently uses a personal-domain address for the corresponding
+  author, and the agreement checks institutional e-mail and affiliation.
+
+Sources: https://www.springernature.com/br/open-science/oa-agreements/brazil/capes
+and the eligible-journal spreadsheet linked from that page. The IEEE
+spreadsheet in the PPGEEC folder lists IEEE titles only and does not cover
+this journal. Publishing under the subscription model needs none of this.
 
 ## Archive and submission
 
