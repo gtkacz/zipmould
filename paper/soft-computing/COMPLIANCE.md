@@ -33,6 +33,7 @@ row before upload; the last table lists what could not be confirmed at all.
 | Source with all style files and figures, plus a PDF of the compiled output | flat `paper/dist/soft-computing-source.zip` and `main.pdf` |
 | Abstract of 150 to 250 words, no undefined abbreviations or unspecified references | 217 words, unstructured; the export fails outside 150–250 |
 | 4 to 6 keywords | six keywords |
+| “Cite references in the text by name and year in parentheses”; list only cited, published or accepted works | Springer Basic author–year (`sn-basic`); the journal check fails on any uncited or unknown key |
 | Single-blind review | identified byline, affiliations, and e-mails retained |
 | Data availability statement for original research, stating where the data can be found | Section “Reproducibility and data availability”; the archive DOI is still pending |
 | Author contributions entered in the submission interface | pending author input; no roles have been invented |
@@ -41,7 +42,6 @@ row before upload; the last table lists what could not be confirmed at all.
 
 | Not confirmed from the journal page | Choice made here |
 | --- | --- |
-| Reference style | Springer Basic author–year (`sn-basic`), the template's default for Springer journals |
 | Page or word limit | none applied |
 | Exact declaration headings and which are mandatory | Ethics approval, Funding, Competing interests, Acknowledgements, AI assistance are present; Informed consent and Author contributions are not |
 | Mathematics Subject Classification | omitted; the class does not print `\pacs` in the two-column layout |

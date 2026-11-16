@@ -52,8 +52,8 @@ Record these in `archive/author-inputs.json` and update the manuscript/metadata:
    including at any earlier target journal.
 7. Confirmation, in a browser, of the requirement rows in
    `soft-computing/COMPLIANCE.md`. The journal pages could not be opened
-   directly during preparation; reference style, length limit, declaration
-   headings, and the section list are the unconfirmed items.
+   directly during preparation; length limit, declaration headings, and
+   the section list are the unconfirmed items.
 8. The section to select at submission. The cover letter proposes Optimization.
 
 ## Open access under the CAPES agreement
