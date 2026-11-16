@@ -39,6 +39,6 @@ This record describes tool checks, not author approval or independent peer revie
 Not checked: the journal's instructions page could not be opened directly; see
 `COMPLIANCE.md` for what was and was not confirmed.
 
-Neither an archive upload nor a journal submission was performed. Data-license
-selection, contributions, the CNPq identifier, complete AI-use history, and
-author approval remain unresolved in `../archive/author-inputs.json`.
+Neither an archive upload nor a journal submission was performed. The CNPq
+identifier, the archive DOI, and author approval remain unresolved in
+`../archive/author-inputs.json`.

@@ -39,26 +39,27 @@ the ZIP files and checksums in `paper/dist/`.
 
 ## Information still needed from the authors
 
-Record these in `archive/author-inputs.json` and update the manuscript/metadata:
+The corresponding author supplied three inputs on 2026-11-16, now recorded in
+`archive/author-inputs.json` and in the manuscript: the CRediT roles, the
+sentence disclosing the AI assistance used for the Soft Computing retargeting,
+and CC BY 4.0 as the license for the synthetic Challenge v1 data and evidence.
+
+Still open; record these in `archive/author-inputs.json` and update the
+manuscript/metadata:
 
 1. CNPq process number (or an explicit statement that no identifier applies).
-2. CRediT contributions for each author. Roles have not been invented. Soft
-   Computing collects author contributions in the submission interface; add
-   an “Author contribution” declaration to `main.typ` from the same roles.
-3. Any AI use before or after the 2026-10-01 session, including the Soft
-   Computing retargeting, so the disclosure covers the full workflow. The
-   current paragraph describes the 2026-10-01 session only.
-4. Explicit license for synthetic Challenge v1 data/evidence. The existing
-   software MIT license is retained; no new data license has been asserted.
-5. Archive record URL and DOI. A local ZIP is not a durable public deposit.
-6. Approval of the final manuscript and declarations by all authors, and
+2. Any AI use before the 2026-10-01 session that the disclosure does not yet
+   cover.
+3. Archive record URL and DOI. A local ZIP is not a durable public deposit.
+4. Approval of the final manuscript and declarations by all authors, and
    confirmation that the paper is not under consideration elsewhere,
-   including at any earlier target journal.
-7. Confirmation, in a browser, of the requirement rows in
-   `soft-computing/COMPLIANCE.md`. The journal pages could not be opened
-   directly during preparation; length limit, whether the standardised
-   declarations are mandatory, and the section list are the unconfirmed items.
-8. The section to select at submission. The cover letter proposes Optimization.
+   including at any earlier target journal. The Author contribution
+   declaration states that all authors approved the final manuscript; that
+   sentence must be true on the day of upload.
+5. A last look, in a browser, at the instructions page. No page or word limit
+   appeared in any extract of it, which is not proof that none exists.
+6. Enter the same contributions in the submission interface and select the
+   Optimization section there.
 
 ## Open access under the CAPES agreement
 

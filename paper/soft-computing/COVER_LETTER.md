@@ -40,8 +40,7 @@ gabriel@gtka.cz
 Working draft: before sending, confirm approval from every coauthor and the
 institution, originality/exclusive-submission status, and the final archival
 DOI. Those declarations have deliberately not been asserted without author
-confirmation. Also confirm the section name in the submission form and the
-current Editor-in-Chief on the journal's editorial-board page (search extracts
-on 2026-11-16 named Raffaele Cerulli, with Monica Gentili as Area Editor for
-Optimization) before addressing the letter by name. Remove this preparation
-note only after these points are resolved.
+confirmation. Extracts of the journal's editorial-board page on 2026-11-16
+named Raffaele Cerulli as Editor-in-Chief and Monica Gentili as Area Editor
+for Optimization, should you prefer to address the letter by name. Remove
+this preparation note only after these points are resolved.
