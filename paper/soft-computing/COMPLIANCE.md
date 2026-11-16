@@ -35,6 +35,11 @@ official pages on 2026-11-16. Open the instructions page in a browser and
 confirm each row before upload; the last table lists what could not be
 confirmed at all.
 
+On 2026-11-16 the corresponding author accepted the extract-based rows and
+the unconfirmed ones as sufficient for preparing the package, and will check
+the page at upload. The author also chose to keep the archival deposit and
+its DOI as a personal step before upload.
+
 Three points were confirmed from the publisher's own template package
 (`sn-article.tex` and `user-manual.pdf`, December 2024):
 
