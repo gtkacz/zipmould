@@ -1,7 +1,7 @@
 {
   "target_journal": "Soft Computing",
   "article_type": "research article",
-  "cnpq_process_number": null,
+  "cnpq_process_number": "No process identifier applies",
   "credit_roles": {
     "Gabriel Mitelman Tkacz": [
       "Conceptualization",
@@ -26,6 +26,6 @@
   "synthetic_data_license": "CC-BY-4.0",
   "archive_record_url": null,
   "archive_doi": null,
-  "all_authors_approved": false,
-  "exclusive_submission_confirmed": false
+  "all_authors_approved": true,
+  "exclusive_submission_confirmed": true
 }

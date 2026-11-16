@@ -29,6 +29,10 @@ already encodes strong problem-specific constraints.
 The public repository is https://github.com/gtkacz/zipmould. The accompanying
 evidence package includes all 9,000 trial rows and 4,020 returned solutions.
 
+The manuscript is original, has not been published or submitted elsewhere, and
+is not under consideration by another journal. All authors have approved this
+submission.
+
 Sincerely,
 
 Gabriel Mitelman Tkacz, corresponding author  
@@ -37,10 +41,9 @@ gabriel@gtka.cz
 
 ---
 
-Working draft: before sending, confirm approval from every coauthor and the
-institution, originality/exclusive-submission status, and the final archival
-DOI. Those declarations have deliberately not been asserted without author
-confirmation. Extracts of the journal's editorial-board page on 2026-11-16
+Working draft: before sending, publish the archival deposit and add its DOI to
+the manuscript. Coauthor approval and exclusive submission were confirmed by
+the corresponding author on 2026-11-16. Extracts of the journal's editorial-board page on 2026-11-16
 named Raffaele Cerulli as Editor-in-Chief and Monica Gentili as Area Editor
 for Optimization, should you prefer to address the letter by name. Remove
-this preparation note only after these points are resolved.
+this preparation note once the DOI is in place.

@@ -39,26 +39,29 @@ the ZIP files and checksums in `paper/dist/`.
 
 ## Information still needed from the authors
 
-The corresponding author supplied three inputs on 2026-11-16, now recorded in
-`archive/author-inputs.json` and in the manuscript: the CRediT roles, the
-sentence disclosing the AI assistance used for the Soft Computing retargeting,
-and CC BY 4.0 as the license for the synthetic Challenge v1 data and evidence.
+The corresponding author supplied these inputs on 2026-11-16, now recorded in
+`archive/author-inputs.json` and, where they apply, in the manuscript:
 
-Still open; record these in `archive/author-inputs.json` and update the
-manuscript/metadata:
+- the CRediT roles;
+- the sentence disclosing the AI assistance used for the Soft Computing
+  retargeting;
+- CC BY 4.0 as the license for the synthetic Challenge v1 data and evidence;
+- that no CNPq process identifier applies;
+- that both coauthors approved this version;
+- that the paper was never submitted to another venue and is not under
+  consideration elsewhere.
 
-1. CNPq process number (or an explicit statement that no identifier applies).
+Still open:
+
+1. Archive record URL and DOI. A local ZIP is not a durable public deposit.
+   The corresponding author will publish the deposit; record the DOI in
+   `archive/author-inputs.json` and in the Data Availability paragraph, then
+   rebuild.
 2. Any AI use before the 2026-10-01 session that the disclosure does not yet
    cover.
-3. Archive record URL and DOI. A local ZIP is not a durable public deposit.
-4. Approval of the final manuscript and declarations by all authors, and
-   confirmation that the paper is not under consideration elsewhere,
-   including at any earlier target journal. The Author contribution
-   declaration states that all authors approved the final manuscript; that
-   sentence must be true on the day of upload.
-5. A last look, in a browser, at the instructions page. No page or word limit
+3. A last look, in a browser, at the instructions page. No page or word limit
    appeared in any extract of it, which is not proof that none exists.
-6. Enter the same contributions in the submission interface and select the
+4. Enter the same contributions in the submission interface and select the
    Optimization section there.
 
 ## Open access under the CAPES agreement
@@ -97,7 +100,7 @@ identities or absence-of-conflict declarations have been fabricated.
 
 The official requirements and template provenance are recorded in
 `soft-computing/COMPLIANCE.md`. The cover letter remains marked as a working
-draft until author approval and exclusive-submission status are confirmed.
+draft until the archival DOI is in place.
 
 ## Frozen evidence integrity
 

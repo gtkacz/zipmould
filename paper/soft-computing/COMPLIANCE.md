@@ -83,9 +83,10 @@ position relative to zero as well as color, and the figures remain readable
 when rendered in grayscale.
 
 Author contribution and competing-interest information must also be entered
-in the submission interface. Confirm coauthor approval, funding identifiers,
-the complete AI-use statement, data licensing, and the archival DOI before
-upload. None of these confirmations is implied by successful compilation.
+in the submission interface. The corresponding author confirmed coauthor
+approval, the funding identifier, the AI-use sentence, and data licensing on
+2026-11-16; the archival DOI is still required before upload and is not
+implied by successful compilation.
 
 The cover letter is a working draft. The manuscript and evidence are prepared
 locally; neither a journal submission nor an archive publication has occurred.
