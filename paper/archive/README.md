@@ -2,7 +2,7 @@
 
 `make paper-package` creates these local deliverables under `paper/dist/`:
 
-- `natural-computing-source.zip`: flat publisher-source package;
+- `soft-computing-source.zip`: flat publisher-source package;
 - `zipmould-evidence.zip`: allowlisted source, synthetic public/test data,
   protocol, frozen results, current manuscripts, and a frozen pre-test code
   snapshot, with per-file SHA-256 checksums;

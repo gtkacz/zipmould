@@ -101,9 +101,9 @@ paper: paper-check
 
 paper-journal: paper-check
 	$(PYTHON) paper/scripts/secondary_analysis.py
-	$(PYTHON) paper/scripts/export_natural_computing.py
-	cd paper/natural-computing && latexmk -pdf -interaction=nonstopmode -halt-on-error -outdir=build main.tex
-	cp paper/natural-computing/build/main.pdf paper/natural-computing/main.pdf
+	$(PYTHON) paper/scripts/export_soft_computing.py
+	cd paper/soft-computing && latexmk -pdf -interaction=nonstopmode -halt-on-error -outdir=build main.tex
+	cp paper/soft-computing/build/main.pdf paper/soft-computing/main.pdf
 	$(PYTHON) paper/scripts/check_journal.py
 
 paper-package: paper-journal

@@ -22,7 +22,7 @@ No journal-specific article page limit was identified in the instructions.
 The published instructions request author information; this is an identified
 initial submission, not an assertion about reviewer identity disclosure.
 
-`main.tex` is generated from `../main.typ` by `../scripts/export_natural_computing.py`.
+`main.tex` is generated from `../main.typ` by `../scripts/export_soft_computing.py`.
 Edit the Typst manuscript and regenerate; do not maintain divergent text copies.
 The publisher class controls layout without margin/font overrides.
 The final source ZIP is flat and can be compiled with pdfLaTeX and BibTeX.

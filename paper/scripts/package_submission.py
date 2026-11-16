@@ -59,8 +59,8 @@ def archive(path: Path, files: dict[str, bytes]) -> None:
 
 def main() -> None:
     DIST.mkdir(exist_ok=True)
-    journal = {name: (PAPER / "natural-computing" / name).read_bytes() for name in JOURNAL_FILES}
-    archive(DIST / "natural-computing-source.zip", journal)
+    journal = {name: (PAPER / "soft-computing" / name).read_bytes() for name in JOURNAL_FILES}
+    archive(DIST / "soft-computing-source.zip", journal)
     files: dict[str, bytes] = {}
     fixed = ("LICENSE", "README.md", "pyproject.toml", "uv.lock", "Makefile")
     trees = (
@@ -84,9 +84,9 @@ def main() -> None:
     selected.extend(PAPER.glob("*.typ"))
     selected.extend(PAPER.glob("*.bib"))
     selected.extend([PAPER / "main.pdf", PAPER / "orcid.svg"])
-    selected.extend(PAPER / "natural-computing" / name for name in JOURNAL_FILES)
-    selected.extend((PAPER / "natural-computing").glob("*.md"))
-    selected.extend([PAPER / "natural-computing/main.pdf", PAPER / "natural-computing/preamble.tex.in"])
+    selected.extend(PAPER / "soft-computing" / name for name in JOURNAL_FILES)
+    selected.extend((PAPER / "soft-computing").glob("*.md"))
+    selected.extend([PAPER / "soft-computing/main.pdf", PAPER / "soft-computing/preamble.tex.in"])
     for path in selected:
         if path.is_symlink():
             raise SystemExit(f"Refusing symlink: {path}")
@@ -129,7 +129,7 @@ def main() -> None:
     (DIST / "SHA256SUMS").write_text(
         "".join(
             f"{digest((DIST / name).read_bytes())}  {name}\n"
-            for name in ("natural-computing-source.zip", "zipmould-evidence.zip")
+            for name in ("soft-computing-source.zip", "zipmould-evidence.zip")
         )
     )
     print(f"Built source and evidence ZIPs ({len(files)} evidence members); unresolved inputs: {len(pending)}")

@@ -12,7 +12,7 @@ and archival publication remain unresolved. No journal submission has occurred.
 - Retained the frozen estimand, configuration, interval, ±5-point band, and
   practical-equivalence classification.
 - Shortened the abstract to 217 words and applied author–year references.
-- Created `natural-computing/main.tex` with the official Springer Nature class,
+- Created `soft-computing/main.tex` with the official Springer Nature class,
   MSC codes, numbered equations/tables/figures, author details, and declarations.
 - Supplied vector PDF/EPS figures with larger labels and position-based
   interpretation independent of color.
@@ -46,15 +46,15 @@ record. Reserve the real DOI, insert it in Data Availability, rebuild the
 bundle, and publish the archive or obtain its supported reviewer-access link.
 The manuscript no longer defers this work until acceptance.
 
-Upload `paper/dist/natural-computing-source.zip` and the corresponding
-`natural-computing/main.pdf` through the journal portal. Enter the author
+Upload `paper/dist/soft-computing-source.zip` and the corresponding
+`soft-computing/main.pdf` through the journal portal. Enter the author
 contribution and competing-interest information in the portal as well as
 the manuscript, following the checked journal instructions. Complete any
 reviewer suggestions from the authors' knowledge of conflicts; no reviewer
 identities or absence-of-conflict declarations have been fabricated.
 
 The official requirements and template provenance are recorded in
-`natural-computing/COMPLIANCE.md`. The cover letter remains marked as a working
+`soft-computing/COMPLIANCE.md`. The cover letter remains marked as a working
 draft until author approval and exclusive-submission status are confirmed.
 
 ## Frozen evidence integrity

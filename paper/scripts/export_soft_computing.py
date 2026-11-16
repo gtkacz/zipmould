@@ -8,7 +8,7 @@ import subprocess
 from pathlib import Path
 
 PAPER = Path(__file__).resolve().parents[1]
-OUT = PAPER / "natural-computing"
+OUT = PAPER / "soft-computing"
 ABSTRACT_MIN = 150
 ABSTRACT_MAX = 250
 
@@ -151,7 +151,7 @@ def export() -> None:
     source = (PAPER / "main.typ").read_text()
     abstract = source.split("*Abstract.*", 1)[1].split("\n]", 1)[0].strip()
     if not ABSTRACT_MIN <= len(abstract.split()) <= ABSTRACT_MAX:
-        raise ValueError("Abstract outside Natural Computing word limit")
+        raise ValueError("Abstract outside Soft Computing word limit")
     body = "= Introduction" + source.split("= Introduction", 1)[1]
     body = body.split("#bibliography(", 1)[0].strip()
     figures: dict[str, str] = {}
@@ -194,7 +194,7 @@ def export() -> None:
         raise ValueError("Unconverted source markup")
     (OUT / "main.tex").write_text(result)
     shutil.copyfile(PAPER / "references.bib", OUT / "references.bib")
-    print(f"Exported Natural Computing manuscript; abstract: {len(abstract.split())} words")
+    print(f"Exported Soft Computing manuscript; abstract: {len(abstract.split())} words")
 
 
 if __name__ == "__main__":

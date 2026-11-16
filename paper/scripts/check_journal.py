@@ -8,7 +8,7 @@ from pathlib import Path
 from check_manuscript import _verify_claims
 
 PAPER = Path(__file__).resolve().parents[1]
-JOURNAL = PAPER / "natural-computing"
+JOURNAL = PAPER / "soft-computing"
 
 
 def main() -> None:
