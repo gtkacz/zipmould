@@ -1,4 +1,6 @@
 % Generated from paper/main.typ; regenerate with make paper-journal.
+% \path otherwise drops the space in shell commands such as `make paper-verify`
+\PassOptionsToPackage{obeyspaces}{url}
 \documentclass[pdflatex,sn-basic,iicol]{sn-jnl}
 \usepackage[T1]{fontenc}
 \usepackage{graphicx}

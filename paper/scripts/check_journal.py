@@ -27,6 +27,8 @@ def main() -> None:
     for filename in re.findall(r"\\includegraphics\[[^]]*\]\{([^}]+)\}", source):
         if not (JOURNAL / filename).is_file():
             raise SystemExit(f"Missing figure: {filename}")
+    if re.search(r"\\path\{[^}]* ", source) and "{obeyspaces}{url}" not in source:
+        raise SystemExit("\\path drops spaces unless url is loaded with obeyspaces")
     if (JOURNAL / "references.bib").read_text() != bib:
         raise SystemExit("Exported bibliography is stale")
     log = (JOURNAL / "build/main.log").read_text()
