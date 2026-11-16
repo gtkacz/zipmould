@@ -1,8 +1,8 @@
-Dear Editors of Natural Computing,
+Dear Editors of Soft Computing,
 
 Please consider “Does Edge Feedback Help? A Controlled Study of a
 Slime-Mould–Inspired Constructor for Ordered Hamiltonian Grid Paths” as a
-research article.
+research article. We propose the Optimization section.
 
 The manuscript asks whether adaptive edge state improves a constraint-aware
 stochastic constructor when the surrounding algorithm and construction budget
@@ -18,11 +18,12 @@ band yields a practically equivalent result for this implementation,
 configuration, benchmark, and budget. The paper makes no claim of universal
 equivalence or state-of-the-art solver performance.
 
-We believe the study fits Natural Computing's experimental scope by providing
-controlled evidence about a nature-inspired adaptive mechanism. The contribution
-combines the mechanism study, the synthetic benchmark, and the released protocol,
-raw outcomes, returned solution paths, and reproducible analysis. It addresses
-the attribution of performance to adaptive feedback when the constructor itself
+We believe the study fits Soft Computing's coverage of metaheuristic
+optimization methodologies by providing controlled evidence about a
+population-based adaptive mechanism. The contribution combines the mechanism
+study, the synthetic benchmark, and the released protocol, raw outcomes,
+returned solution paths, and reproducible analysis. It addresses the
+attribution of performance to adaptive feedback when the constructor itself
 already encodes strong problem-specific constraints.
 
 The public repository is https://github.com/gtkacz/zipmould. The accompanying
@@ -39,4 +40,8 @@ gabriel@gtka.cz
 Working draft: before sending, confirm approval from every coauthor and the
 institution, originality/exclusive-submission status, and the final archival
 DOI. Those declarations have deliberately not been asserted without author
-confirmation. Remove this preparation note only after they are resolved.
+confirmation. Also confirm the section name in the submission form and the
+current Editor-in-Chief on the journal's editorial-board page (search extracts
+on 2026-11-16 named Raffaele Cerulli, with Monica Gentili as Area Editor for
+Optimization) before addressing the letter by name. Remove this preparation
+note only after these points are resolved.
