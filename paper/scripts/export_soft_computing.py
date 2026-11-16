@@ -196,7 +196,7 @@ def export() -> None:
             blocks.append(text(block))
     preamble = (OUT / "preamble.tex.in").read_text()
     result = preamble.replace("@@ABSTRACT@@", text(" ".join(abstract.split())))
-    result += "\n\n".join(blocks) + "\n\n\\bibliography{references}\n\\end{document}\n"
+    result += "\n\n".join(blocks) + "\n\n\\orcidnote\n\n\\bibliography{references}\n\\end{document}\n"
     if re.search(r"#(?:raw|link|figure|footnote)|(?<![A-Za-z0-9.])@[A-Za-z]|ZZTOKEN|FIGUREBLOCK", result):
         raise ValueError("Unconverted source markup")
     (OUT / "main.tex").write_text(result)

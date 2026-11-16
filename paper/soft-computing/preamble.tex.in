@@ -8,6 +8,8 @@
 \usepackage{booktabs}
 \usepackage{xurl}
 \raggedbottom
+% set after the declarations: under the two-column title it strands on page 1
+\newcommand{\orcidnote}{\textbf{ORCIDs:} Gabriel Mitelman Tkacz: \url{https://orcid.org/0009-0004-3619-4561}; Leandro Augusto da Silva: \url{https://orcid.org/0000-0002-8671-3102}; Gustavo Scalabrini Sampaio: \url{https://orcid.org/0000-0003-1150-5584}.}
 \begin{document}
 \title[Does Edge Feedback Help?]{Does Edge Feedback Help? A Controlled Study of a Slime-Mould--Inspired Constructor for Ordered Hamiltonian Grid Paths}
 \author*[1]{\fnm{Gabriel Mitelman} \sur{Tkacz}}\email{gabriel@gtka.cz}
@@ -18,5 +20,4 @@
 \abstract{@@ABSTRACT@@}
 \keywords{ordered Hamiltonian path, grid graph, slime mould algorithm, stochastic construction, mechanism ablation, practical equivalence}
 \maketitle
-\noindent\textbf{ORCIDs:} Gabriel Mitelman Tkacz: \url{https://orcid.org/0009-0004-3619-4561}; Leandro Augusto da Silva: \url{https://orcid.org/0000-0002-8671-3102}; Gustavo Scalabrini Sampaio: \url{https://orcid.org/0000-0003-1150-5584}.
 

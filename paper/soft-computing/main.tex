@@ -8,6 +8,8 @@
 \usepackage{booktabs}
 \usepackage{xurl}
 \raggedbottom
+% set after the declarations: under the two-column title it strands on page 1
+\newcommand{\orcidnote}{\textbf{ORCIDs:} Gabriel Mitelman Tkacz: \url{https://orcid.org/0009-0004-3619-4561}; Leandro Augusto da Silva: \url{https://orcid.org/0000-0002-8671-3102}; Gustavo Scalabrini Sampaio: \url{https://orcid.org/0000-0003-1150-5584}.}
 \begin{document}
 \title[Does Edge Feedback Help?]{Does Edge Feedback Help? A Controlled Study of a Slime-Mould--Inspired Constructor for Ordered Hamiltonian Grid Paths}
 \author*[1]{\fnm{Gabriel Mitelman} \sur{Tkacz}}\email{gabriel@gtka.cz}
@@ -18,7 +20,6 @@
 \abstract{Bio-inspired metaheuristics combine constructive search with adaptive state, obscuring which component produces performance. We study ZipMould, a stochastic constructor for ordered Hamiltonian paths on square grids. Its constraint-aware policy combines waypoint legality, residual-connectivity pruning, and local heuristics with a nonnegative edge state updated from rank-weighted populations. We compare the complete algorithm with the same constructor under one intervention: freezing the edge-state update at zero initialization. To avoid a ceiling in a legacy 245-puzzle corpus, we introduce Challenge v1, a guaranteed-solvable synthetic benchmark with planted Hamiltonian certificates, deceptive waypoints, and three topology families. Strata were selected using only feedback-frozen development performance. Before opening a cryptographically committed 150-puzzle test set, we froze the configuration, 30 paired seeds per puzzle, a budget of 3,392 constructed paths per run, the analysis, and a practical-effect band of \(\pm\)5 percentage points. Full feedback solved 2,039 of 4,500 runs (45.31\%); frozen feedback solved 1,981 (44.02\%). The mean difference was +1.29 percentage points, with a predeclared 95\% stratified puzzle-bootstrap interval of [\(-\)0.04, +2.64] points. The interval lies within the practical-effect band, yielding the predeclared practically equivalent outcome. This configured feedback package produced no practically important average improvement under the frozen benchmark and budget, while remaining compatible with a small positive effect. The contribution is a controlled mechanism study, a leakage-controlled benchmark, and reproducible near-null evidence.}
 \keywords{ordered Hamiltonian path, grid graph, slime mould algorithm, stochastic construction, mechanism ablation, practical equivalence}
 \maketitle
-\noindent\textbf{ORCIDs:} Gabriel Mitelman Tkacz: \url{https://orcid.org/0009-0004-3619-4561}; Leandro Augusto da Silva: \url{https://orcid.org/0000-0002-8671-3102}; Gustavo Scalabrini Sampaio: \url{https://orcid.org/0000-0003-1150-5584}.
 
 \section{Introduction}
 
@@ -298,6 +299,8 @@ ZipMould's edge-state feedback was tested against the same stochastic constructo
 \textbf{Acknowledgements:} This work was developed as part of the first author's Master of Engineering at Mackenzie Presbyterian University.
 
 \textbf{AI assistance:} OpenAI Codex assisted with manuscript assessment, statistical wording revisions, LaTeX conversion, and submission-package preparation. The underlying confirmatory results were retained, and the archived analysis was regenerated to check consistency.
+
+\orcidnote
 
 \bibliography{references}
 \end{document}
