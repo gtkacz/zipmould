@@ -62,11 +62,12 @@ Three points were confirmed from the publisher's own template package
 | A complete set of editable source files is required | flat LaTeX source ZIP |
 | Sections shown beside published articles include “Optimization” and “Application of soft computing”; the editorial board lists Raffaele Cerulli as Editor-in-Chief and Monica Gentili as Area Editor for Optimization | the cover letter proposes the Optimization section |
 | Plagiarism screening may be applied | no package action required |
+| Journal homepage: “Submission to first decision (median): 275 days” | no package action; plan the timeline accordingly |
 | Hybrid journal; open access chosen after acceptance | see “Open access under the CAPES agreement” in `../SUBMISSION.md` |
 
 | Not confirmed from the journal page | Choice made here |
 | --- | --- |
-| Page or word limit | none found in any extract after repeated searches; none applied (11 two-column pages) |
+| Page or word limit | none found in any extract after five separate searches of the instructions page; none applied (11 two-column pages) |
 | Mathematics Subject Classification | omitted; the class does not print `\pacs` in the two-column layout |
 | Submission system and its TeX Live version | package compiles with pdfLaTeX and BibTeX only; `xurl.sty` and `threeparttable.sty` are bundled, while `booktabs` and the class's own dependencies are expected from the system |
 | Name of the submission system | not needed to build the package; follow the “Submit manuscript” link |
