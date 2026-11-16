@@ -124,11 +124,11 @@ def figure(block: str) -> str:
         )
         return "\n".join(
             [
-                r"\begin{figure}[htbp]",
+                r"\begin{figure*}[htbp]",
                 r"\centering",
                 r"\includegraphics[width=\textwidth]{" + name + ".pdf}",
                 r"\caption{" + caption + r"}\label{" + label + "}",
-                r"\end{figure}",
+                r"\end{figure*}",
             ]
         )
     rows = []
@@ -142,7 +142,7 @@ def figure(block: str) -> str:
             r"\begin{table}[htbp]",
             r"\centering",
             r"\caption{" + caption + r"}\label{" + label + "}",
-            r"\begin{tabular}{" + columns + "}",
+            r"\begin{tabular}{@{}" + columns + "@{}}",
             r"\toprule",
             rows[0],
             r"\midrule",
