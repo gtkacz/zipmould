@@ -29,6 +29,9 @@ Computing package remains in Git history at commit `517e1a1`.
   includes a selected snapshot of the exact pre-test code.
 - Pinned the build date so that rebuilding leaves every tracked artifact
   byte-identical.
+- Added the publisher template's standard declaration headings (consent,
+  data, materials, and code availability). Author contribution is the only
+  standard heading still absent.
 
 Run `make paper-package` to regenerate and verify the manuscript, independently
 reanalyze all raw rows and returned paths, compile both formats, and create
@@ -40,7 +43,8 @@ Record these in `archive/author-inputs.json` and update the manuscript/metadata:
 
 1. CNPq process number (or an explicit statement that no identifier applies).
 2. CRediT contributions for each author. Roles have not been invented. Soft
-   Computing collects author contributions in the submission interface.
+   Computing collects author contributions in the submission interface; add
+   an “Author contribution” declaration to `main.typ` from the same roles.
 3. Any AI use before or after the 2026-10-01 session, including the Soft
    Computing retargeting, so the disclosure covers the full workflow. The
    current paragraph describes the 2026-10-01 session only.
@@ -52,8 +56,8 @@ Record these in `archive/author-inputs.json` and update the manuscript/metadata:
    including at any earlier target journal.
 7. Confirmation, in a browser, of the requirement rows in
    `soft-computing/COMPLIANCE.md`. The journal pages could not be opened
-   directly during preparation; length limit, declaration headings, and
-   the section list are the unconfirmed items.
+   directly during preparation; length limit, whether the standardised
+   declarations are mandatory, and the section list are the unconfirmed items.
 8. The section to select at submission. The cover letter proposes Optimization.
 
 ## Open access under the CAPES agreement

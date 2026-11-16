@@ -17,15 +17,36 @@ at commit `517e1a1`.
 
 The unmodified `threeparttable.sty` dependency is included from
 https://mirrors.ctan.org/macros/latex/contrib/threeparttable/threeparttable.sty
-(accessed 2026-10-01); its header permits redistribution.
+(accessed 2026-10-01); its header permits redistribution. The unmodified
+`xurl.sty` (v0.10, 2022-01-09, LaTeX Project Public License) is included from
+TeX Live 2026 so that the flat ZIP does not depend on the submission system's
+TeX Live release; it uses only LaTeX2e-era macros.
+
+Both publisher files were compared byte for byte with the template ZIP
+downloaded again on 2026-11-16 and are identical.
 
 ## How the requirements were read
 
 The journal pages on link.springer.com redirect automated clients to a
-sign-in bounce and could not be opened directly during preparation. The
-requirements below were read from search-engine extracts of those official
-pages on 2026-11-16. Open the instructions page in a browser and confirm each
-row before upload; the last table lists what could not be confirmed at all.
+sign-in bounce and could not be opened directly during preparation; reading
+an archived copy was also refused by the session's permission policy. The
+journal rows below were therefore read from search-engine extracts of those
+official pages on 2026-11-16. Open the instructions page in a browser and
+confirm each row before upload; the last table lists what could not be
+confirmed at all.
+
+Three points were confirmed from the publisher's own template package
+(`sn-article.tex` and `user-manual.pdf`, December 2024):
+
+- “Should you need to switch to double column layout to suit journal-level
+  submission requirements provide the [iicol] option”;
+- in that layout, figures span the columns only inside `figure*`;
+- where a journal wants standardised declarations, the headings are Funding,
+  Conflict of interest/Competing interests, Ethics approval and consent to
+  participate, Consent for publication, Data availability, Materials
+  availability, Code availability, and Author contribution, and “if any of
+  the sections are not relevant to your manuscript, please include the
+  heading and write ‘Not applicable’”.
 
 | Requirement (as extracted) | Status in this package |
 | --- | --- |
@@ -43,9 +64,9 @@ row before upload; the last table lists what could not be confirmed at all.
 | Not confirmed from the journal page | Choice made here |
 | --- | --- |
 | Page or word limit | none applied |
-| Exact declaration headings and which are mandatory | Ethics approval, Funding, Competing interests, Acknowledgements, AI assistance are present; Informed consent and Author contributions are not |
+| Whether the journal requires the standardised declarations | all template headings are present except Author contribution, which awaits the authors' roles |
 | Mathematics Subject Classification | omitted; the class does not print `\pacs` in the two-column layout |
-| Submission system and its TeX Live version | package compiles with pdfLaTeX and BibTeX only; `xurl` is the newest dependency |
+| Submission system and its TeX Live version | package compiles with pdfLaTeX and BibTeX only; `xurl.sty` and `threeparttable.sty` are bundled, while `booktabs` and the class's own dependencies are expected from the system |
 | Section to select at submission | Optimization is proposed in the cover letter; confirm in the submission form |
 
 `main.tex` is generated from `../main.typ` by `../scripts/export_soft_computing.py`.

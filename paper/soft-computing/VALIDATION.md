@@ -14,7 +14,7 @@ This record describes tool checks, not author approval or independent peer revie
   PDF, `main.tex`, all four figure files, and both ZIP files, and left the Git
   working tree clean.
 - The flat journal source ZIP compiled independently after extraction into an
-  empty directory. That PDF differs from the tracked one only in the trailer
+  empty directory, loading the bundled `xurl.sty`. That PDF differs from the tracked one only in the trailer
   identifier, which pdfTeX derives from the output path.
 - The final journal PDF contains 11 A4 pages in two columns; all 27 listed
   fonts are embedded. No unresolved citations/references, missing glyphs, or
@@ -24,9 +24,9 @@ This record describes tool checks, not author approval or independent peer revie
   column. Both figures were also rendered in grayscale and remain readable.
 - The shell commands in the reproducibility section print with their spaces
   (`make paper-verify`); the Natural Computing PDF printed `makepaper-verify`.
-- The official `sn-jnl.cls` and `sn-basic.bst` are unchanged from the
-  2026-10-01 package, which matched the downloaded publisher ZIP byte for byte.
-  Their source and version are in `COMPLIANCE.md`.
+- The official `sn-jnl.cls` and `sn-basic.bst` match the publisher ZIP
+  downloaded again on 2026-11-16 byte for byte. Their source and version are
+  in `COMPLIANCE.md`.
 - Ruff checks passed for the paper scripts.
 
 - Extracting the evidence ZIP into a fresh temporary directory and running
