@@ -58,6 +58,8 @@ VARIANTS: dict[str, tuple[dict[str, object], bool]] = {
     "frozen-tuned": (TUNED_WEIGHTS, True),
     "full-tuned": (TUNED_WEIGHTS, False),
     "full-tuned-z0-alpha1": ({**TUNED_WEIGHTS, "z": 0.0, "alpha": 1.0}, False),
+    # Best full-arm candidate of the equal-effort search (tune.py --arm full, out/tune-full/search.json).
+    "full-joint": ({**TUNED_WEIGHTS, "alpha": 1.166577996787761, "z": 0.3622409860901429}, False),
 }
 # Feedback against the re-tuned stateless constructor rather than its own frozen twin.
 EXTRA_COMPARISONS: tuple[tuple[str, str], ...] = (("full-z0-alpha1", "frozen-tuned"),)
@@ -70,7 +72,7 @@ def _reference(name: str) -> str:
     overrides, _ = VARIANTS[name]
     if "iter_cap" in overrides:
         return f"frozen-T{overrides['iter_cap']}"
-    return "frozen-tuned" if "-tuned" in name else "frozen"
+    return "frozen-tuned" if "-tuned" in name or name == "full-joint" else "frozen"
 
 
 def _run_one(corpus_path: str, config_path: str, puzzle_id: str, seed: int, variant: str) -> dict[str, object]:

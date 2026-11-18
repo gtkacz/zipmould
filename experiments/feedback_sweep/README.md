@@ -135,3 +135,21 @@ of the +20.63-point gain was feedback compensating for poorly weighted
 heuristics. On top of re-tuned weights, the recalibrated feedback values add
 +4.55 points, an interval that reaches past the band; α and z were not
 re-tuned for the new heuristic scale.
+
+## Equal-effort search for the full arm (dev), and a third plan
+
+`tune.py --arm full` gives the full arm the same 48 weight candidates, each
+with a random α (0.1–4, log scale) and z (0–0.5), on the same dev puzzles and
+seeds. Its best candidate (`out/tune-full/search.json`) reuses the weights of
+the frozen winner with α = 1.167 and z = 0.362, and solved 0.748 of dev runs
+against 0.698 for the frozen winner; the unchanged configuration solved 0.484.
+
+### Third held-out plan (fixed before the run)
+
+On the 200 train puzzles and seeds 0–29, run `full-joint` (that candidate) and
+compare it with `frozen-tuned`. Prediction: a positive point estimate whose
+interval is not wholly above +5 points (not *helpful*).
+
+```bash
+uv run python -m experiments.feedback_sweep.run --split train --variants full-joint
+```
