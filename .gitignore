@@ -234,3 +234,4 @@ benchmark/challenge/v1/scratch/
 viz-web/node_modules/
 viz-web/dist/
 src/zipmould/viz/static/
+experiments/feedback_sweep/out/*/results.parquet
