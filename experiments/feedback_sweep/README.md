@@ -153,3 +153,13 @@ interval is not wholly above +5 points (not *helpful*).
 ```bash
 uv run python -m experiments.feedback_sweep.run --split train --variants full-joint
 ```
+
+### Third held-out result (train)
+
+| Comparison | Full | Frozen | Difference, points (95% interval) | Classification |
+|---|---:|---:|---:|---|
+| full-joint vs frozen-tuned | 0.749 | 0.711 | +3.85 (+2.38, +5.42) | inconclusive |
+
+The prediction held. With equal search effort for both arms, feedback adds
+about four points, consistent with the +4.55 of the recalibrated values on
+re-tuned weights.
