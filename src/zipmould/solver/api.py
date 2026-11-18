@@ -187,7 +187,7 @@ def _build_trace(
     )
 
 
-def solve(  # noqa: PLR0915
+def solve(
     puzzle: Puzzle,
     config: SolverConfig,
     *,
@@ -324,9 +324,8 @@ def solve(  # noqa: PLR0915
         solution = None
         best_fitness = float(state.walker_fitness[best_idx])
 
-    iters_used = int(frame_t[max(n_frames - 1, 0)]) + 1 if n_frames > 0 else 0
-    if solved_bit and n_frames > 0:
-        iters_used = int(frame_t[n_frames - 1]) + 1
+    # Frames are sampled every frame_interval iterations, so only a solved run's last frame marks its final iteration.
+    iters_used = int(frame_t[n_frames - 1]) + 1 if solved_bit and n_frames > 0 else config.iter_cap
 
     max_f = _max_fitness(state.L, state.K, state.beta1, state.beta2, state.beta3)
     norm = best_fitness / max_f if max_f > 0 else 0.0
