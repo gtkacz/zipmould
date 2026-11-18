@@ -106,6 +106,7 @@ def _verify_sweep(manuscript: str) -> None:
             ("full-tuned", "frozen-tuned"),
             ("full-tuned-z0-alpha1", "frozen-tuned"),
             ("full-z0-alpha1", "frozen-tuned"),
+            ("full-joint", "frozen-tuned"),
         ),
     }
     for split, comparisons in quoted.items():
