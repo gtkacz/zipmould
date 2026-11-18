@@ -153,9 +153,10 @@ def budget_profile(
 def effect_dispersion(full_solved: np.ndarray, frozen_solved: np.ndarray) -> dict[str, object]:
     """Compare the spread of per-puzzle effects with seed-level noise alone.
 
-    Under the sharp null that feedback changes no run, the two arms of a seed
-    pair are exchangeable, so swapping them at random gives the spread that
-    sampling noise produces without any puzzle-specific effect.
+    Under the null that feedback leaves each run's distribution unchanged, the
+    two arms of a seed pair are approximately exchangeable (shared first
+    iteration, then offset segments of one random stream), so swapping them at
+    random gives the spread that sampling noise produces on its own.
     """
     differences = full_solved.astype(np.float64) - frozen_solved.astype(np.float64)
     observed = float(differences.mean(axis=1).std(ddof=1))

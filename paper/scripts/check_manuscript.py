@@ -98,15 +98,24 @@ def _verify_secondary(manuscript: str) -> None:
 
 
 def _verify_sweep(manuscript: str) -> None:
-    quoted = {"dev": ("full", "full-z0", "full-alpha1", "full-z0-alpha1"), "train": ("full", "full-z0-alpha1")}
-    for split, variants in quoted.items():
+    quoted = {
+        "dev": (("full", "frozen"), ("full-z0", "frozen"), ("full-alpha1", "frozen"), ("full-z0-alpha1", "frozen")),
+        "train": (
+            ("full", "frozen"),
+            ("full-z0-alpha1", "frozen"),
+            ("full-tuned", "frozen-tuned"),
+            ("full-tuned-z0-alpha1", "frozen-tuned"),
+            ("full-z0-alpha1", "frozen-tuned"),
+        ),
+    }
+    for split, comparisons in quoted.items():
         summary_path = ROOT / "experiments" / "feedback_sweep" / "out" / split / "summary.json"
         rows = {
-            str(row["variant"]): row
+            (str(row["variant"]), str(row["reference"])): row
             for row in cast("list[dict[str, float]]", json.loads(summary_path.read_text(encoding="utf-8")))
         }
-        for variant in variants:
-            row = rows[variant]
+        for comparison in comparisons:
+            row = rows[comparison]
             text = f"{_signed(row['delta'])} ({_signed(row['ci_lower'])}, {_signed(row['ci_upper'])})"
             _require(text in manuscript, f"manuscript is missing {split} sweep token: {text}")
 

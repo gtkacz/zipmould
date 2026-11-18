@@ -30,7 +30,7 @@ MATH = {
     "v_b(t)=tanh(1-t/T)": r"v_b(t)=\tanh(1-t/T)",
     "cal(N)(0, (tau_max/4)^2)": r"\mathcal{N}(0,(\tau_{\max}/4)^2)",
     "Delta = 1/150 sum_(p=1)^150 (s_F(p) - s_0(p)).": r"\Delta=\frac{1}{150}\sum_{p=1}^{150}\bigl(s_F(p)-s_0(p)\bigr).",
-    "(1-z) v_c(t) <= 0.61": r"(1-z)\,v_c(t)\le0.61",
+    "1 - z approx 0.61": r"1-z\approx0.61",
     "v_c(t) <= 0.25": r"v_c(t)\le0.25",
     "v_b(t) <= 0.25": r"v_b(t)\le0.25",
     "0 <= tau_e <= tau_max": r"0\le\tau_e\le\tau_{\max}",
@@ -152,6 +152,8 @@ def figure(block: str) -> str:
         [
             r"\begin{table}[htbp]",
             r"\centering",
+            # Default 6pt column gaps overflow the narrow iicol column for the widest interval tables.
+            r"\setlength{\tabcolsep}{4pt}",
             r"\caption{" + caption + r"}\label{" + label + "}",
             r"\begin{tabular}{@{}" + columns + "@{}}",
             r"\toprule",
