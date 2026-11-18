@@ -80,3 +80,7 @@ it is not registered with an external service.
 The prediction held: the recalibrated update is helpful on puzzles that played
 no part in choosing it, with little shrinkage from its dev estimate. The
 confirmatory configuration again lands inside the band.
+
+By stratum, the recalibrated gain ranged from +11.2 to +29.2 points on dev and
+from +12.3 to +28.3 points on train, positive in all five strata on both
+splits and larger where the frozen arm solved less often.
