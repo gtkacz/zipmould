@@ -31,7 +31,8 @@ def main() -> None:
         raise SystemExit("\\path drops spaces unless url is loaded with obeyspaces")
     if (JOURNAL / "references.bib").read_text() != bib:
         raise SystemExit("Exported bibliography is stale")
-    log = (JOURNAL / "build/main.log").read_text()
+    # pdfTeX echoes typeset text in its T1 font encoding, so the log is not UTF-8.
+    log = (JOURNAL / "build/main.log").read_text(encoding="latin-1")
     for marker in ("undefined", "Missing character", "Overfull \\hbox", "! LaTeX Error"):
         if marker in log:
             raise SystemExit(f"Inspect final LaTeX log: {marker}")
