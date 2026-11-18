@@ -62,6 +62,20 @@
   },
   "floor_puzzles": 13,
   "interval_half_width": 0.013444444444444443,
+  "interval_sensitivity": {
+    "basic_bootstrap": [
+      -0.0006666666666666557,
+      0.02622222222222223
+    ],
+    "bca_bootstrap": [
+      0.0004444444444444424,
+      0.02733333333333333
+    ],
+    "stratified_normal": [
+      -0.0007045841628163796,
+      0.026482361940594164
+    ]
+  },
   "matches_archived_replicates": true,
   "matches_frozen_interval": true,
   "nonsaturated_puzzles": 114,

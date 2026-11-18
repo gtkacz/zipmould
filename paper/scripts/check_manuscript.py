@@ -89,6 +89,10 @@ def _verify_secondary(manuscript: str) -> None:
         f"{dispersion['null_sd_mean'] * PERCENT:.{DISPLAY_DECIMALS}f} points",
         f"{dispersion['p_value'] * PERCENT:.1f}%",
     }
+    expected_text |= {
+        f"[{_signed(low)}, {_signed(high)}]"
+        for low, high in cast("dict[str, list[float]]", secondary["interval_sensitivity"]).values()
+    }
     for text in expected_text:
         _require(text in manuscript, f"manuscript is missing secondary-analysis token: {text}")
 

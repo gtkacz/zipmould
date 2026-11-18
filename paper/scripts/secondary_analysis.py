@@ -18,6 +18,7 @@ from __future__ import annotations
 import json
 import math
 from pathlib import Path
+from statistics import NormalDist
 from typing import cast
 
 import numpy as np
@@ -171,6 +172,39 @@ def effect_dispersion(full_solved: np.ndarray, frozen_solved: np.ndarray) -> dic
     }
 
 
+def interval_sensitivity(deltas: list[float], strata: list[str], replicates: list[float]) -> dict[str, list[float]]:
+    """Other common 95% intervals for the same estimate, to show the classification does not hinge on the procedure."""
+    values = np.asarray(deltas)
+    labels = np.asarray(strata)
+    groups = [values[labels == stratum] for stratum in sorted(set(strata))]
+    weights = [len(group) / len(values) for group in groups]
+    standard_error = math.sqrt(
+        sum(w * w * group.var(ddof=1) / len(group) for w, group in zip(weights, groups, strict=True))
+    )
+    estimate = float(values.mean())
+    normal = NormalDist()
+    z = normal.inv_cdf(1.0 - (1.0 - CONFIDENCE_LEVEL) / 2.0)
+    boot = np.asarray(replicates)
+    tail = (1.0 - CONFIDENCE_LEVEL) / 2.0
+    bias = normal.inv_cdf(float((boot < estimate).mean()))
+    jackknife = np.array([np.delete(values, index).mean() for index in range(len(values))])
+    spread = jackknife.mean() - jackknife
+    acceleration = float((spread**3).sum() / (6.0 * (spread**2).sum() ** 1.5))
+
+    def bca_level(level: float) -> float:
+        shifted = bias + normal.inv_cdf(level)
+        return normal.cdf(bias + shifted / (1.0 - acceleration * shifted))
+
+    return {
+        "stratified_normal": [estimate - z * standard_error, estimate + z * standard_error],
+        "basic_bootstrap": [
+            2.0 * estimate - float(np.quantile(boot, 1.0 - tail)),
+            2.0 * estimate - float(np.quantile(boot, tail)),
+        ],
+        "bca_bootstrap": [float(np.quantile(boot, bca_level(tail))), float(np.quantile(boot, bca_level(1.0 - tail)))],
+    }
+
+
 def main() -> int:
     report = json.loads((RESULTS / "report.json").read_text(encoding="utf-8"))
     primary = cast("dict[str, object]", report["primary"])
@@ -223,6 +257,9 @@ def main() -> int:
         raise SystemExit("full-budget profile does not reproduce the frozen interval")
     dispersion = effect_dispersion(full_at <= PROFILE_ITERATIONS[-1], frozen_at <= PROFILE_ITERATIONS[-1])
     # The update first runs after iteration 1, so both arms share every first-iteration outcome.
+    sensitivity = interval_sensitivity(
+        [delta for _, _, delta in deltas_by_puzzle], [stratum for _, stratum, _ in deltas_by_puzzle], replicates
+    )
     first_iteration_solves = {
         "full": int((full_at == 1).sum()),
         "frozen": int((frozen_at == 1).sum()),
@@ -248,6 +285,7 @@ def main() -> int:
         "budget_profile": profile,
         "effect_dispersion": dispersion,
         "first_iteration_solves": first_iteration_solves,
+        "interval_sensitivity": sensitivity,
     }
     GENERATED.mkdir(parents=True, exist_ok=True)
     (GENERATED / "secondary_analysis.json").write_text(
@@ -280,6 +318,8 @@ def main() -> int:
         f"{cast('float', dispersion['null_sd_mean']) * 100:.2f} pp from seed noise alone "
         f"(p={cast('float', dispersion['p_value']):.3f})"
     )
+    for name, (low, high) in sensitivity.items():
+        print(f"  {name:18s} [{low * 100:+.2f}, {high * 100:+.2f}] pp")
     return 0
 
 
