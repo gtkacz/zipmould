@@ -1,0 +1,25 @@
+[
+  {
+    "variant": "full",
+    "reference": "frozen",
+    "overrides": {},
+    "full_rate": 0.42283333333333334,
+    "frozen_rate": 0.4006666666666667,
+    "delta": 0.022166666666666668,
+    "ci_lower": 0.009833333333333331,
+    "ci_upper": 0.034833333333333334
+  },
+  {
+    "variant": "full-z0-alpha1",
+    "reference": "frozen",
+    "overrides": {
+      "z": 0.0,
+      "alpha": 1.0
+    },
+    "full_rate": 0.607,
+    "frozen_rate": 0.4006666666666667,
+    "delta": 0.20633333333333334,
+    "ci_lower": 0.1745,
+    "ci_upper": 0.24
+  }
+]

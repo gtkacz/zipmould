@@ -67,3 +67,16 @@ uv run python -m experiments.feedback_sweep.run --split train --variants frozen 
 
 This plan is committed to Git before the run; like the confirmatory protocol,
 it is not registered with an external service.
+
+## Held-out replication result (train, 200 puzzles × 30 seeds)
+
+`out/train/summary.json`.
+
+| Variant | Full | Frozen | Difference, points (95% interval) | Classification |
+|---|---:|---:|---:|---|
+| full-z0-alpha1 | 0.607 | 0.401 | +20.63 (+17.45, +24.00) | helpful |
+| full | 0.423 | 0.401 | +2.22 (+0.98, +3.48) | practically equivalent |
+
+The prediction held: the recalibrated update is helpful on puzzles that played
+no part in choosing it, with little shrinkage from its dev estimate. The
+confirmatory configuration again lands inside the band.
