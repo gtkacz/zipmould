@@ -362,6 +362,6 @@ ZipMould's edge-state feedback was tested against the same stochastic constructo
 
 *Acknowledgements:* This work was developed as part of the first author's Master of Engineering at Mackenzie Presbyterian University.
 
-*AI assistance:* OpenAI Codex assisted with manuscript assessment, statistical wording revisions, LaTeX conversion, and submission-package preparation. The underlying confirmatory results were retained, and the archived analysis was regenerated to check consistency. Anthropic Claude assisted with retargeting the LaTeX package, the declaration headings, and the submission documents.
+*AI assistance:* OpenAI Codex assisted with manuscript assessment, statistical wording revisions, LaTeX conversion, and submission-package preparation. The underlying confirmatory results were retained, and the archived analysis was regenerated to check consistency. Anthropic Claude assisted with retargeting the LaTeX package, the declaration headings, and the submission documents, and with the post hoc secondary analyses, the exploratory recalibration runs, reference verification, and the corresponding manuscript revisions.
 
 #bibliography("references.bib", style: "springer-basic-author-date", title: "References")
