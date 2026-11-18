@@ -73,7 +73,13 @@ def text(value: str) -> str:
             return hold(kind + r"~\ref{" + key + "}")
         return hold(r"\citep{" + key + "}")
 
-    value = re.sub(r"@([A-Za-z][A-Za-z0-9_-]+)", cite, value)
+    # Typst groups adjacent citations into one parenthetical; natbib needs them in one \citep.
+    value = re.sub(
+        r"@(?!tab-|fig-)[A-Za-z][A-Za-z0-9_-]+(?:\s+@(?!tab-|fig-)[A-Za-z][A-Za-z0-9_-]+)+",
+        lambda m: "@" + ",".join(key.lstrip("@") for key in m[0].split()),
+        value,
+    )
+    value = re.sub(r"@([A-Za-z][A-Za-z0-9_-]*(?:,[A-Za-z][A-Za-z0-9_-]*)*)", cite, value)
     for old, new in {
         "%": r"\%",
         "&": r"\&",

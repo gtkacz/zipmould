@@ -17,7 +17,7 @@ def main() -> None:
     _verify_claims(normalized)
     bib = (PAPER / "references.bib").read_text()
     keys = set(re.findall(r"^@\w+\{([^,]+),", bib, re.M))
-    cited = set(re.findall(r"\\citep\{([^}]+)\}", source))
+    cited = {key for group in re.findall(r"\\citep\{([^}]+)\}", source) for key in group.split(",")}
     if keys != cited:
         raise SystemExit(f"Bibliography mismatch: missing={keys-cited}; unknown={cited-keys}")
     labels = re.findall(r"\\label\{([^}]+)\}", source)
