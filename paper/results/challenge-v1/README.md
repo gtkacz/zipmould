@@ -29,6 +29,12 @@ is **practically equivalent** because the entire interval is within the
   unlock audit marker;
 - `checksums.sha256`: byte-level checksums for the evidence files.
 
+In `results.parquet`, `iters` is exact only for solved rows: the iteration in
+which the first valid path was built. Every unsolved row reads `61` although
+its run executed all 64 iterations, because the release derived the count from
+trace frames sampled every fifth iteration. Unsolved runs therefore consumed
+the full 3,392-path budget. Later solver versions report the cap directly.
+
 The raw result table has SHA-256
 `a899646ef363ad2fd295e704b35f73b22efeb08ad10ebd5dc6429e1d32b1976a`.
 The test corpus's *canonical* commitment remains
