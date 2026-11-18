@@ -26,7 +26,7 @@ from zipmould.config import SolverConfig
 from zipmould.io.puzzles import load_corpus, load_split
 from zipmould.solver.api import solve
 
-# Best of 48 random heuristic weightings for the frozen arm on dev (tune_frozen.py, out/tune-frozen/search.json).
+# Best of 48 random heuristic weightings for the frozen arm on dev (tune.py, out/tune-frozen/search.json).
 TUNED_WEIGHTS: dict[str, object] = {
     "beta": 2.7561635750871565,
     "gamma_man": 0.19462968620619914,

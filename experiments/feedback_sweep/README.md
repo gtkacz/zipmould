@@ -89,13 +89,13 @@ splits and larger where the frozen arm solved less often.
 
 The recalibration above changed only values the frozen arm ignores, so its
 gain is measured against a stateless constructor whose heuristic weights were
-inherited from legacy full-feedback tuning. `tune_frozen.py` re-tunes that
+inherited from legacy full-feedback tuning. `tune.py` re-tunes that
 rival on dev: 48 weightings of β, γ_man, γ_warns and γ_par (legacy ranges;
 γ_art cancels for surviving moves), the unchanged weights included, each run
 frozen on 100 dev puzzles × 5 seeds at the same 3,392-path budget.
 
 ```bash
-uv run python -m experiments.feedback_sweep.tune_frozen
+uv run python -m experiments.feedback_sweep.tune --arm frozen
 ```
 
 The best weighting (`out/tune-frozen/search.json`, candidate 7: β = 2.756,
