@@ -81,6 +81,9 @@ def main() -> None:
     selected.extend((ROOT / "benchmark/challenge/v1").glob("*.json"))
     selected.extend((ROOT / "benchmark/challenge/v1").glob("*.md"))
     selected.append(ROOT / "benchmark/scripts/challenge.py")
+    sweep = ROOT / "experiments/feedback_sweep"
+    # Raw sweep rows are untracked and regenerable, so only tracked files keep the ZIP reproducible.
+    selected.extend([*sweep.glob("*.py"), *sweep.glob("*.md"), *sweep.glob("out/*/summary.json")])
     selected.extend(PAPER.glob("*.md"))
     selected.extend(PAPER.glob("*.typ"))
     selected.extend(PAPER.glob("*.bib"))

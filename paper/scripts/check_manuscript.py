@@ -97,6 +97,20 @@ def _verify_secondary(manuscript: str) -> None:
         _require(text in manuscript, f"manuscript is missing secondary-analysis token: {text}")
 
 
+def _verify_sweep(manuscript: str) -> None:
+    quoted = {"dev": ("full", "full-z0", "full-alpha1", "full-z0-alpha1"), "train": ("full", "full-z0-alpha1")}
+    for split, variants in quoted.items():
+        summary_path = ROOT / "experiments" / "feedback_sweep" / "out" / split / "summary.json"
+        rows = {
+            str(row["variant"]): row
+            for row in cast("list[dict[str, float]]", json.loads(summary_path.read_text(encoding="utf-8")))
+        }
+        for variant in variants:
+            row = rows[variant]
+            text = f"{_signed(row['delta'])} ({_signed(row['ci_lower'])}, {_signed(row['ci_upper'])})"
+            _require(text in manuscript, f"manuscript is missing {split} sweep token: {text}")
+
+
 def _verify_citations_and_figures(manuscript: str) -> None:
     bibliography = (PAPER / "references.bib").read_text(encoding="utf-8")
     bib_keys = set(re.findall(r"^@\w+\{([^,]+),", bibliography, flags=re.MULTILINE))
@@ -119,6 +133,7 @@ def main() -> None:
     _verify_checksums()
     _verify_claims(manuscript)
     _verify_secondary(manuscript)
+    _verify_sweep(manuscript)
     _verify_citations_and_figures(manuscript)
 
 
