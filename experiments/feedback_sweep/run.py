@@ -26,6 +26,13 @@ from zipmould.config import SolverConfig
 from zipmould.io.puzzles import load_corpus, load_split
 from zipmould.solver.api import solve
 
+# Best of 48 random heuristic weightings for the frozen arm on dev (tune_frozen.py, out/tune-frozen/search.json).
+TUNED_WEIGHTS: dict[str, object] = {
+    "beta": 2.7561635750871565,
+    "gamma_man": 0.19462968620619914,
+    "gamma_warns": 2.059311258120656,
+    "gamma_par": 1.1202530451930357,
+}
 # Overrides of the frozen confirmatory configuration; `frozen` variants skip the update.
 VARIANTS: dict[str, tuple[dict[str, object], bool]] = {
     "frozen": ({}, True),
@@ -48,7 +55,12 @@ VARIANTS: dict[str, tuple[dict[str, object], bool]] = {
     "full-T128": ({"iter_cap": 128}, False),
     "frozen-T256": ({"iter_cap": 256}, True),
     "full-T256": ({"iter_cap": 256}, False),
+    "frozen-tuned": (TUNED_WEIGHTS, True),
+    "full-tuned": (TUNED_WEIGHTS, False),
+    "full-tuned-z0-alpha1": ({**TUNED_WEIGHTS, "z": 0.0, "alpha": 1.0}, False),
 }
+# Feedback against the re-tuned stateless constructor rather than its own frozen twin.
+EXTRA_COMPARISONS: tuple[tuple[str, str], ...] = (("full-z0-alpha1", "frozen-tuned"),)
 BOOTSTRAP_REPLICATES = 10000
 BOOTSTRAP_SEED = 20260716
 CONFIDENCE_LEVEL = 0.95
@@ -56,7 +68,9 @@ CONFIDENCE_LEVEL = 0.95
 
 def _reference(name: str) -> str:
     overrides, _ = VARIANTS[name]
-    return "frozen" if "iter_cap" not in overrides else f"frozen-T{overrides['iter_cap']}"
+    if "iter_cap" in overrides:
+        return f"frozen-T{overrides['iter_cap']}"
+    return "frozen-tuned" if "-tuned" in name else "frozen"
 
 
 def _run_one(corpus_path: str, config_path: str, puzzle_id: str, seed: int, variant: str) -> dict[str, object]:
@@ -91,10 +105,10 @@ def summarize(rows: pl.DataFrame, strata: dict[str, tuple[str, int]]) -> list[di
     seeds = int(cast("int", counts["seeds"].max()))
     puzzles = sorted(rows["puzzle_id"].unique().to_list())
     summary: list[dict[str, object]] = []
-    for variant, (_, freeze) in VARIANTS.items():
-        if freeze or (puzzles[0], variant) not in solved:
+    comparisons = [(name, _reference(name)) for name, (_, freeze) in VARIANTS.items() if not freeze]
+    for variant, reference in [*comparisons, *EXTRA_COMPARISONS]:
+        if (puzzles[0], variant) not in solved or (puzzles[0], reference) not in solved:
             continue
-        reference = _reference(variant)
         effects = [
             PuzzleEffect(
                 puzzle_id=pid,

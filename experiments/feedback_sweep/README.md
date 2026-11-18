@@ -84,3 +84,39 @@ confirmatory configuration again lands inside the band.
 By stratum, the recalibrated gain ranged from +11.2 to +29.2 points on dev and
 from +12.3 to +28.3 points on train, positive in all five strata on both
 splits and larger where the frozen arm solved less often.
+
+## Re-tuned stateless constructor (dev search, then a second plan)
+
+The recalibration above changed only values the frozen arm ignores, so its
+gain is measured against a stateless constructor whose heuristic weights were
+inherited from legacy full-feedback tuning. `tune_frozen.py` re-tunes that
+rival on dev: 48 weightings of β, γ_man, γ_warns and γ_par (legacy ranges;
+γ_art cancels for surviving moves), the unchanged weights included, each run
+frozen on 100 dev puzzles × 5 seeds at the same 3,392-path budget.
+
+```bash
+uv run python -m experiments.feedback_sweep.tune_frozen
+```
+
+The best weighting (`out/tune-frozen/search.json`, candidate 7: β = 2.756,
+γ_man = 0.195, γ_warns = 2.059, γ_par = 1.120) solved 0.698 of dev runs against
+0.458 for the unchanged weights, which is more than the recalibrated feedback
+variant reached on dev (0.659 at 30 seeds). It was the best of 48 on five
+seeds, so this is an optimistic estimate.
+
+### Second held-out plan (fixed before the run)
+
+On the same 200 train puzzles and seeds 0–29, run `frozen-tuned` (weights
+above, update frozen), `full-tuned` (same weights, confirmatory feedback
+values) and `full-tuned-z0-alpha1` (same weights, z = 0, α = 1), and report:
+
+- A: `full-z0-alpha1` (inherited weights) against `frozen-tuned`. Prediction:
+  not *helpful*; the re-tuned stateless constructor matches or beats the
+  recalibrated feedback variant.
+- B: `full-tuned-z0-alpha1` against `frozen-tuned`. No directional
+  prediction: α = 1 was chosen against β = 0.735, and the tuned β is larger.
+- C: `full-tuned` against `frozen-tuned`. Prediction: practically equivalent.
+
+```bash
+uv run python -m experiments.feedback_sweep.run --split train --variants frozen-tuned full-tuned full-tuned-z0-alpha1
+```
