@@ -29,6 +29,14 @@ Computing package remains in Git history at commit `517e1a1`.
   includes a selected snapshot of the exact pre-test code.
 - Pinned the build date so that rebuilding leaves every tracked artifact
   byte-identical.
+- Added post hoc secondary analyses of the archived runs (solve rate by
+  truncated budget, a randomization check of per-puzzle dispersion, and other
+  interval procedures), bounds on the edge state's memory and influence, and
+  25 Crossref-verified references (2026-11-18).
+- Added an exploratory recalibration of the feedback values on public
+  puzzles, replicated on the untouched train split under a plan committed
+  before the run (`experiments/feedback_sweep/`). It is labelled post hoc
+  and exploratory throughout and does not alter the confirmatory result.
 - Added the publisher template's standard declaration headings (consent,
   data, materials, and code availability). Author contribution is the only
   standard heading still absent.
@@ -52,6 +60,11 @@ The corresponding author supplied these inputs on 2026-11-16, now recorded in
   consideration elsewhere.
 
 Still open:
+
+Before anything below, review the 2026-11-18 additions, above all the
+exploratory recalibration in the abstract, contributions, Discussion
+(Table 5) and Conclusion, and keep or drop them. The cover letter and the AI
+assistance statement mention them too.
 
 1. Archive record URL and DOI. A local ZIP is not a durable public deposit.
    The corresponding author will publish the deposit; record the DOI in

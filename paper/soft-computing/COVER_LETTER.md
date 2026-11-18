@@ -15,8 +15,12 @@ Across 150 puzzles and 30 paired seeds per condition, the mean solve-probability
 difference was +1.29 percentage points, with a 95% stratified puzzle-bootstrap
 interval of [−0.04, +2.64] points. Its containment within the predeclared ±5-point
 band yields a practically equivalent result for this implementation,
-configuration, benchmark, and budget. The paper makes no claim of universal
-equivalence or state-of-the-art solver performance.
+configuration, benchmark, and budget. Post hoc exploratory runs on public
+puzzles, replicated on puzzles held out from that selection, indicate that the
+configured update is miscalibrated rather than inert: without edge replacement
+noise and with a larger feedback weight, feedback raised solve probability by
+about 21 points. The paper makes no claim of universal equivalence or
+state-of-the-art solver performance.
 
 We believe the study fits Soft Computing's coverage of metaheuristic
 optimization methodologies by providing controlled evidence about a
