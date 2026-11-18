@@ -1,7 +1,65 @@
 {
+  "budget_profile": [
+    {
+      "ci_lower": -0.009111111111111111,
+      "ci_upper": 0.012888888888888887,
+      "delta": 0.0017777777777777766,
+      "frozen_rate": 0.16133333333333333,
+      "full_rate": 0.16311111111111112,
+      "iterations": 8,
+      "paths": 424
+    },
+    {
+      "ci_lower": -0.005555555555555558,
+      "ci_upper": 0.019333333333333324,
+      "delta": 0.006666666666666664,
+      "frozen_rate": 0.242,
+      "full_rate": 0.24866666666666667,
+      "iterations": 16,
+      "paths": 848
+    },
+    {
+      "ci_lower": 0.002222222222222229,
+      "ci_upper": 0.027777777777777787,
+      "delta": 0.015111111111111113,
+      "frozen_rate": 0.3322222222222222,
+      "full_rate": 0.3473333333333333,
+      "iterations": 32,
+      "paths": 1696
+    },
+    {
+      "ci_lower": 0.004000000000000005,
+      "ci_upper": 0.031111111111111114,
+      "delta": 0.01777777777777778,
+      "frozen_rate": 0.39466666666666667,
+      "full_rate": 0.41244444444444445,
+      "iterations": 48,
+      "paths": 2544
+    },
+    {
+      "ci_lower": -0.0004444444444444453,
+      "ci_upper": 0.02644444444444444,
+      "delta": 0.012888888888888892,
+      "frozen_rate": 0.44022222222222224,
+      "full_rate": 0.45311111111111113,
+      "iterations": 64,
+      "paths": 3392
+    }
+  ],
   "ceiling_puzzles": 23,
+  "effect_dispersion": {
+    "null_sd_mean": 0.08011399438515225,
+    "observed_sd": 0.08546810758911495,
+    "p_value": 0.1903,
+    "replicates": 20000
+  },
   "estimate": 0.01288888888888889,
   "estimate_over_nonsaturated_puzzles": 0.016959064327485382,
+  "first_iteration_solves": {
+    "both": 138,
+    "frozen": 138,
+    "full": 138
+  },
   "floor_puzzles": 13,
   "interval_half_width": 0.013444444444444443,
   "matches_archived_replicates": true,

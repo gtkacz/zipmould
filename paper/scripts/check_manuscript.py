@@ -73,6 +73,26 @@ def _verify_claims(manuscript: str) -> None:
     _require(raw_hash in manuscript, "manuscript is missing the raw-result checksum")
 
 
+def _signed(value: float) -> str:
+    return f"{value * PERCENT:+.{DISPLAY_DECIMALS}f}".replace("-", "\N{MINUS SIGN}")
+
+
+def _verify_secondary(manuscript: str) -> None:
+    secondary = _load_json(PAPER / "generated" / "secondary_analysis.json")
+    expected_text = {
+        f"{_signed(float(row['delta']))} ({_signed(float(row['ci_lower']))}, {_signed(float(row['ci_upper']))})"
+        for row in cast("list[dict[str, float]]", secondary["budget_profile"])
+    }
+    dispersion = cast("dict[str, float]", secondary["effect_dispersion"])
+    expected_text |= {
+        f"{dispersion['observed_sd'] * PERCENT:.{DISPLAY_DECIMALS}f} points",
+        f"{dispersion['null_sd_mean'] * PERCENT:.{DISPLAY_DECIMALS}f} points",
+        f"{dispersion['p_value'] * PERCENT:.1f}%",
+    }
+    for text in expected_text:
+        _require(text in manuscript, f"manuscript is missing secondary-analysis token: {text}")
+
+
 def _verify_citations_and_figures(manuscript: str) -> None:
     bibliography = (PAPER / "references.bib").read_text(encoding="utf-8")
     bib_keys = set(re.findall(r"^@\w+\{([^,]+),", bibliography, flags=re.MULTILINE))
@@ -94,6 +114,7 @@ def main() -> None:
     manuscript = manuscript_path.read_text(encoding="utf-8")
     _verify_checksums()
     _verify_claims(manuscript)
+    _verify_secondary(manuscript)
     _verify_citations_and_figures(manuscript)
 
 

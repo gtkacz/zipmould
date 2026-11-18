@@ -257,12 +257,28 @@ The five descriptive stratum effects ranged from −1.67 points for open 16×16 
   caption: [Predeclared descriptive results by generator stratum. Each row contains 30 puzzles, 30 seeds per puzzle, and 900 trials per condition.],
 ) <tab-strata>
 
-Across the 4,500 paired puzzle-seed combinations, both arms solved 1,574, only full feedback solved 465, only frozen feedback solved 407, and neither solved 2,054. At puzzle level, full feedback had a higher seed solve rate on 57 puzzles, the arms tied on 48, and frozen feedback was higher on 45. The distribution of per-puzzle effects is heterogeneous but centered near zero (@fig-puzzles); the secondary displays do not alter the primary classification. Thirty-six of the 150 puzzles were solved identically by both arms on every seed (13 by neither arm and 23 by both), so their observed per-puzzle differences are zero. They remain part of the 150-puzzle target population and contribute to its denominator and bootstrap uncertainty. Excluding these puzzles gives a mean difference of +1.70 percentage points across the remaining 114 puzzles, but selects a subset using observed outcomes and changes the target population. This post-hoc descriptive calculation has no accompanying interval and does not establish equivalence for that subset; the confirmatory estimate retains all 150 puzzles.
+Across the 4,500 paired puzzle-seed combinations, both arms solved 1,574, only full feedback solved 465, only frozen feedback solved 407, and neither solved 2,054. At puzzle level, full feedback had a higher seed solve rate on 57 puzzles, the arms tied on 48, and frozen feedback was higher on 45. The per-puzzle effects are centered near zero but widely dispersed, with a standard deviation of 8.55 points (@fig-puzzles). Most of that spread is what 30 seeds per arm produce on their own. Under the sharp null that feedback changes no run, the two arms of a seed pair are exchangeable; exchanging them at random gave a mean standard deviation of 8.01 points, and 19.0% of 20,000 such exchanges were at least as dispersed as the observed effects. The figure therefore offers little evidence that feedback helps some puzzles and harms others, and the secondary displays do not alter the primary classification. Thirty-six of the 150 puzzles were solved identically by both arms on every seed (13 by neither arm and 23 by both), so their observed per-puzzle differences are zero. They remain part of the 150-puzzle target population and contribute to its denominator and bootstrap uncertainty. Excluding these puzzles gives a mean difference of +1.70 percentage points across the remaining 114 puzzles, but selects a subset using observed outcomes and changes the target population. This post-hoc descriptive calculation has no accompanying interval and does not establish equivalence for that subset; the confirmatory estimate retains all 150 puzzles.
 
 #figure(
   image("figures/challenge-puzzle-effects.svg", width: 100%),
   caption: [All 150 per-puzzle differences, sorted within stratum. Positive values favor full feedback, negative values favor frozen feedback, and zero denotes a tie; position relative to zero conveys direction independently of color. This plot is descriptive.],
 ) <fig-puzzles>
+
+Because every solved row records the iteration in which its first valid path was built, the archived runs also describe solve probability at smaller budgets (@tab-budget). The update first executes after iteration 1, so both arms share every first-iteration outcome: 138 runs in each arm were solved there, by the same seeds. The full-minus-frozen difference grew from +0.18 points at 424 paths to +1.78 points at 2,544 paths and returned to the primary +1.29 points at the full budget. This post hoc profile truncates runs designed for 64 iterations. Because the update coefficients depend on the iteration cap, it is not the result of running either arm with a smaller cap. Its pointwise intervals are not adjusted for the five budgets examined, and every one lies inside the ±5-point band.
+
+#figure(
+  table(
+    columns: (1.9fr, 0.8fr, 0.8fr, 2fr),
+    align: (left, right, right, right),
+    table.header([Paths (iter.)], [Full], [Frozen], [Difference (95% CI)]),
+    [424 (8)], [0.163], [0.161], [+0.18 (−0.91, +1.29)],
+    [848 (16)], [0.249], [0.242], [+0.67 (−0.56, +1.93)],
+    [1,696 (32)], [0.347], [0.332], [+1.51 (+0.22, +2.78)],
+    [2,544 (48)], [0.412], [0.395], [+1.78 (+0.40, +3.11)],
+    [3,392 (64)], [0.453], [0.440], [+1.29 (−0.04, +2.64)],
+  ),
+  caption: [Post hoc solve rates with each archived run truncated at a smaller construction budget, given in constructed paths with iterations of 53 paths in parentheses. Differences are full minus frozen in percentage points, with pointwise stratified puzzle-bootstrap intervals; the last row reproduces the primary analysis.],
+) <tab-budget>
 
 = Discussion
 
@@ -276,7 +292,7 @@ Methodologically, the study illustrates why mechanism ablations should preserve 
 
 The practical-equivalence band is a scientific judgment rather than a fact supplied by the data. Five percentage points was chosen before unlock as the smallest average solve-probability gain that would justify retaining the update's machinery (signed rank deposition, temporal decay, and per-edge stochastic replacement, together with the extra hyperparameters ($alpha$, $z$, $tau_max$) and the per-iteration rank sort and whole-edge-set deposit they impose) over the simpler stateless constructor; a smaller average gain would not, in our judgment, warrant that added complexity and tuning burden for this endpoint. Readers who prefer a narrower threshold can still use the reported interval: it rules out average improvements above 2.64 points at the chosen confidence level but does not establish equivalence inside, for example, ±1 point. Reporting the estimate and interval keeps that sensitivity visible.
 
-The outcome does not imply that shared edge memory has no research value. Heterogeneous effects and the mechanistic structure motivate new, explicitly exploratory work: separately remove rank-negative deposits, decay, and edge replacement; vary the construction budget; learn state per waypoint segment; or identify instance features that modify the effect. Such studies should use new development data and a newly locked confirmatory split. They should not repurpose the released Challenge v1 test set for another confirmatory claim.
+The outcome does not imply that shared edge memory has no research value. The mechanistic structure motivates new, explicitly exploratory work: separately remove rank-negative deposits, decay, and edge replacement; vary the construction budget; learn state per waypoint segment; or identify instance features that modify the effect. Such studies should use new development data and a newly locked confirmatory split. They should not repurpose the released Challenge v1 test set for another confirmatory claim.
 
 = Limitations and threats to validity
 

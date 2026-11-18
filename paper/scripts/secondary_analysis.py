@@ -20,6 +20,7 @@ import math
 from pathlib import Path
 from typing import cast
 
+import numpy as np
 import polars as pl
 
 PAPER = Path(__file__).resolve().parents[1]
@@ -34,6 +35,9 @@ CONFIDENCE_LEVEL = 0.95
 PRACTICAL_EFFECT = 0.05
 SEEDS_PER_PUZZLE = 30
 TOLERANCE = 1e-12
+POPULATION = 53
+PROFILE_ITERATIONS = (8, 16, 32, 48, 64)
+SIGN_FLIP_REPLICATES = 20000
 
 
 class BootstrapRng:
@@ -99,6 +103,74 @@ def percentile_interval(values: list[float], confidence_level: float) -> tuple[f
     return (ordered[lower_index], ordered[upper_index])
 
 
+def _paired_seed_outcomes(results: pl.DataFrame, puzzle_ids: list[str]) -> tuple[np.ndarray, np.ndarray]:
+    """Iteration of first solve per (puzzle, seed) for each arm; unsolved runs never solve."""
+    unsolved = np.iinfo(np.int64).max
+    wide = (
+        results.with_columns(pl.when(pl.col("solved")).then(pl.col("iters")).otherwise(unsolved).alias("solved_at"))
+        .pivot(on="condition", index=["puzzle_id", "seed"], values="solved_at")
+        .sort("puzzle_id", "seed")
+    )
+    shape = (len(puzzle_ids), SEEDS_PER_PUZZLE)
+    if wide["puzzle_id"].unique(maintain_order=True).to_list() != puzzle_ids:
+        raise SystemExit("raw rows and per-puzzle effects disagree on the puzzle set")
+    return (
+        wide["full-feedback"].to_numpy().reshape(shape),
+        wide["feedback-frozen"].to_numpy().reshape(shape),
+    )
+
+
+def budget_profile(
+    full_at: np.ndarray, frozen_at: np.ndarray, puzzle_ids: list[str], strata: list[str]
+) -> list[dict[str, object]]:
+    """Solve probability by construction budget, truncating each archived run.
+
+    A truncated run is not a run with a smaller iteration cap: the feedback
+    schedule depends on the cap, so this describes the frozen design only.
+    """
+    profile: list[dict[str, object]] = []
+    for iterations in PROFILE_ITERATIONS:
+        deltas = ((full_at <= iterations).mean(axis=1) - (frozen_at <= iterations).mean(axis=1)).tolist()
+        replicates = stratified_cluster_bootstrap(
+            list(zip(puzzle_ids, strata, deltas, strict=True)), replicates=BOOTSTRAP_REPLICATES, seed=BOOTSTRAP_SEED
+        )
+        lower, upper = percentile_interval(replicates, CONFIDENCE_LEVEL)
+        profile.append(
+            {
+                "iterations": iterations,
+                "paths": iterations * POPULATION,
+                "full_rate": float((full_at <= iterations).mean()),
+                "frozen_rate": float((frozen_at <= iterations).mean()),
+                "delta": float(np.mean(deltas)),
+                "ci_lower": lower,
+                "ci_upper": upper,
+            }
+        )
+    return profile
+
+
+def effect_dispersion(full_solved: np.ndarray, frozen_solved: np.ndarray) -> dict[str, object]:
+    """Compare the spread of per-puzzle effects with seed-level noise alone.
+
+    Under the sharp null that feedback changes no run, the two arms of a seed
+    pair are exchangeable, so swapping them at random gives the spread that
+    sampling noise produces without any puzzle-specific effect.
+    """
+    differences = full_solved.astype(np.float64) - frozen_solved.astype(np.float64)
+    observed = float(differences.mean(axis=1).std(ddof=1))
+    rng = np.random.default_rng(BOOTSTRAP_SEED)
+    null = np.empty(SIGN_FLIP_REPLICATES)
+    for index in range(SIGN_FLIP_REPLICATES):
+        signs = rng.choice((-1.0, 1.0), size=differences.shape)
+        null[index] = (differences * signs).mean(axis=1).std(ddof=1)
+    return {
+        "observed_sd": observed,
+        "null_sd_mean": float(null.mean()),
+        "p_value": float((null >= observed).mean()),
+        "replicates": SIGN_FLIP_REPLICATES,
+    }
+
+
 def main() -> int:
     report = json.loads((RESULTS / "report.json").read_text(encoding="utf-8"))
     primary = cast("dict[str, object]", report["primary"])
@@ -144,6 +216,19 @@ def main() -> int:
         .sort("base_rate")
     )
 
+    puzzle_ids = effects["puzzle_id"].to_list()
+    full_at, frozen_at = _paired_seed_outcomes(pl.read_parquet(RESULTS / "results.parquet"), puzzle_ids)
+    profile = budget_profile(full_at, frozen_at, puzzle_ids, effects["stratum"].to_list())
+    if (profile[-1]["ci_lower"], profile[-1]["ci_upper"]) != (lower, upper):
+        raise SystemExit("full-budget profile does not reproduce the frozen interval")
+    dispersion = effect_dispersion(full_at <= PROFILE_ITERATIONS[-1], frozen_at <= PROFILE_ITERATIONS[-1])
+    # The update first runs after iteration 1, so both arms share every first-iteration outcome.
+    first_iteration_solves = {
+        "full": int((full_at == 1).sum()),
+        "frozen": int((frozen_at == 1).sum()),
+        "both": int(((full_at == 1) & (frozen_at == 1)).sum()),
+    }
+
     summary: dict[str, object] = {
         "regenerated_interval": [lower, upper],
         "matches_frozen_interval": True,
@@ -160,6 +245,9 @@ def main() -> int:
             "Outcome-selected descriptive subset; changes target population; no equivalence inference."
         ),
         "stratum_base_rate_vs_delta": strata.to_dicts(),
+        "budget_profile": profile,
+        "effect_dispersion": dispersion,
+        "first_iteration_solves": first_iteration_solves,
     }
     GENERATED.mkdir(parents=True, exist_ok=True)
     (GENERATED / "secondary_analysis.json").write_text(
@@ -182,6 +270,16 @@ def main() -> int:
             f"  {row['stratum']!s:26s} base={float(cast('float', row['base_rate'])) * 100:5.1f}%  "
             f"delta={float(cast('float', row['delta'])) * 100:+.2f} pp"
         )
+    for row in profile:
+        print(
+            f"  budget {cast('int', row['paths']):5d} paths: delta={cast('float', row['delta']) * 100:+.2f} pp "
+            f"[{cast('float', row['ci_lower']) * 100:+.2f}, {cast('float', row['ci_upper']) * 100:+.2f}]"
+        )
+    print(
+        f"per-puzzle effect SD {cast('float', dispersion['observed_sd']) * 100:.2f} pp vs "
+        f"{cast('float', dispersion['null_sd_mean']) * 100:.2f} pp from seed noise alone "
+        f"(p={cast('float', dispersion['p_value']):.3f})"
+    )
     return 0
 
 
