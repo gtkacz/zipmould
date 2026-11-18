@@ -120,3 +120,18 @@ values) and `full-tuned-z0-alpha1` (same weights, z = 0, α = 1), and report:
 ```bash
 uv run python -m experiments.feedback_sweep.run --split train --variants frozen-tuned full-tuned full-tuned-z0-alpha1
 ```
+
+### Second held-out result (train, 200 puzzles × 30 seeds)
+
+| Comparison | Full | Frozen | Difference, points (95% interval) | Classification |
+|---|---:|---:|---:|---|
+| A: full-z0-alpha1 vs frozen-tuned | 0.607 | 0.711 | −10.37 (−14.08, −6.47) | harmful |
+| B: full-tuned-z0-alpha1 vs frozen-tuned | 0.756 | 0.711 | +4.55 (+2.15, +7.12) | inconclusive |
+| C: full-tuned vs frozen-tuned | 0.727 | 0.711 | +1.67 (+0.75, +2.65) | practically equivalent |
+
+Predictions A and C held. The re-tuned stateless constructor solves more
+often than the recalibrated feedback variant with inherited weights, so most
+of the +20.63-point gain was feedback compensating for poorly weighted
+heuristics. On top of re-tuned weights, the recalibrated feedback values add
++4.55 points, an interval that reaches past the band; α and z were not
+re-tuned for the new heuristic scale.

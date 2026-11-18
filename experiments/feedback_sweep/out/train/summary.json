@@ -21,5 +21,50 @@
     "delta": 0.20633333333333334,
     "ci_lower": 0.1745,
     "ci_upper": 0.24
+  },
+  {
+    "variant": "full-tuned",
+    "reference": "frozen-tuned",
+    "overrides": {
+      "beta": 2.7561635750871565,
+      "gamma_man": 0.19462968620619914,
+      "gamma_warns": 2.059311258120656,
+      "gamma_par": 1.1202530451930357
+    },
+    "full_rate": 0.7273333333333334,
+    "frozen_rate": 0.7106666666666667,
+    "delta": 0.016666666666666666,
+    "ci_lower": 0.007499999999999999,
+    "ci_upper": 0.0265
+  },
+  {
+    "variant": "full-tuned-z0-alpha1",
+    "reference": "frozen-tuned",
+    "overrides": {
+      "beta": 2.7561635750871565,
+      "gamma_man": 0.19462968620619914,
+      "gamma_warns": 2.059311258120656,
+      "gamma_par": 1.1202530451930357,
+      "z": 0.0,
+      "alpha": 1.0
+    },
+    "full_rate": 0.7561666666666667,
+    "frozen_rate": 0.7106666666666667,
+    "delta": 0.045500000000000006,
+    "ci_lower": 0.0215,
+    "ci_upper": 0.07116666666666667
+  },
+  {
+    "variant": "full-z0-alpha1",
+    "reference": "frozen-tuned",
+    "overrides": {
+      "z": 0.0,
+      "alpha": 1.0
+    },
+    "full_rate": 0.607,
+    "frozen_rate": 0.7106666666666667,
+    "delta": -0.10366666666666667,
+    "ci_lower": -0.1408333333333333,
+    "ci_upper": -0.06466666666666666
   }
 ]
